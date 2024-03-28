@@ -10,22 +10,22 @@ import org.json.JSONObject;
  *
  */
 public class TestAPI {
-	
-	public static JSONObject apiContribuicoes() {
-		
-		JSONObject json = new JSONObject();
-		
-		try {
-			json.put("cpf", "12345678910");
-			json.put("categoria", "Empregado");
-			json.put("tempoContribuicaoMeses", 50);
-			json.put("totalContribuidoAjustado", 4754.97);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		
-		return json;
-		
-	}
+
+    public static JSONObject apiContribuicoes() {
+
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("cpf", "12345678910");
+            json.put("categoria", "Empregado");
+            json.put("tempoContribuicaoMeses", 50);
+            json.put("totalContribuidoAjustado", 4754.97);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return json;
+
+    }
 
 }

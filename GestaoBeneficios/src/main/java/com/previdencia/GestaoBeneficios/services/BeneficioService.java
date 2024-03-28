@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.previdencia.GestaoBeneficios.models.Beneficios;
+import com.previdencia.GestaoBeneficios.models.Beneficio;
 import com.previdencia.GestaoBeneficios.repository.BeneficioRepository;
 
 /**
@@ -16,34 +16,33 @@ import com.previdencia.GestaoBeneficios.repository.BeneficioRepository;
  */
 @Service
 public class BeneficioService {
+    @Autowired
+    private final BeneficioRepository beneficioRepository;
 
-	@Autowired
-	private final BeneficioRepository beneficioRepository;
-	
-	public BeneficioService(BeneficioRepository beneficioRepository) {
+    public BeneficioService(BeneficioRepository beneficioRepository) {
         this.beneficioRepository = beneficioRepository;
     }
-	
-	/**
-	 * Metodo que recebe o beneficio e o insere no banco de dados
-	 * @param beneficio
-	 * @return Http status 201
-	 */
-    public ResponseEntity<Object> adicionar(Beneficios beneficio) {
-    	beneficioRepository.save(beneficio);
-    	return new ResponseEntity<>(HttpStatus.CREATED);
+
+    /**
+     * Metodo que recebe o beneficio e o insere no banco de dados
+     * @param beneficio
+     * @return Http status 201
+     */
+    public ResponseEntity<Object> adicionar(Beneficio beneficio) {
+        beneficioRepository.save(beneficio);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    
+
     /**
      * Metodo que recebe um beneficio a ser excluido do banco de dados
      * @param id
      * @return Http status 201
      */
     public ResponseEntity<Object> remover(Long id) {
-    	beneficioRepository.deleteById(id);
-    	return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        beneficioRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
-    
+
     /**
      * Metodo que altera um beneficio ja inserido no banco de dados
      * @param id
@@ -51,16 +50,16 @@ public class BeneficioService {
      * @return Http status 201
      * @return Http status 404
      */
-    public ResponseEntity<Object> alterar(Long id, Beneficios newBeneficio) {
-    	if (beneficioRepository.existsById(id)) {
-    		Beneficios oldBeneficio = beneficioRepository.getReferenceById(id);
-    		oldBeneficio.setNome(newBeneficio.getNome());
-    		oldBeneficio.setValor(newBeneficio.getValor());
-    		oldBeneficio.setRequisitos(newBeneficio.getRequisitos());
-    		oldBeneficio.setIndividual(newBeneficio.isIndividual());
-    		beneficioRepository.saveAndFlush(oldBeneficio);
-    		return new ResponseEntity<>(HttpStatus.ACCEPTED);
-    	}
-    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Object> alterar(Long id, Beneficio newBeneficio) {
+        if (beneficioRepository.existsById(id)) {
+            Beneficio oldBeneficio = beneficioRepository.getReferenceById(id);
+            oldBeneficio.setNome(newBeneficio.getNome());
+            oldBeneficio.setValor(newBeneficio.getValor());
+            oldBeneficio.setRequisitos(newBeneficio.getRequisitos());
+            oldBeneficio.setIndividual(newBeneficio.isIndividual());
+            beneficioRepository.saveAndFlush(oldBeneficio);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

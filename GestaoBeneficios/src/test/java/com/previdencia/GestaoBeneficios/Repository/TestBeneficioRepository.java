@@ -1,4 +1,4 @@
-package com.previdencia.GestaoBeneficios.repository;
+package com.previdencia.GestaoBeneficios.Repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,25 +9,25 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.previdencia.GestaoBeneficios.models.Beneficios;
+import com.previdencia.GestaoBeneficios.models.Beneficio;
+import com.previdencia.GestaoBeneficios.repository.BeneficioRepository;
 
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @DataJpaTest
-public class BeneficiosRepositoryTest {
-	
-	@Autowired
+public class TestBeneficioRepository {
+    @Autowired
     private BeneficioRepository beneficioRepository;
 
-	
-	@Test
-	public void testCreateBeneficio() {
-		
-		Beneficios beneficio = new Beneficios("Auxilio", 10, 3, true);
-		
-		Beneficios beneficioSalvo = beneficioRepository.save(beneficio);
-		
-		assertThat(beneficioSalvo).isNotNull();
-		assertThat(beneficioSalvo.getId()).isGreaterThan(0);
-	}
+
+    @Test
+    public void testCreateBeneficio() {
+
+        Beneficio beneficio = new Beneficio("Auxilio", 10, 3, true);
+
+        Beneficio beneficioSalvo = beneficioRepository.save(beneficio);
+
+        assertThat(beneficioSalvo).isNotNull();
+        assertThat(beneficioSalvo.getId()).isGreaterThan(0);
+    }
 
 }

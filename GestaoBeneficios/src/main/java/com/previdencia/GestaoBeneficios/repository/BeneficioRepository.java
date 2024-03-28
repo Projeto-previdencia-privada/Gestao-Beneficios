@@ -1,8 +1,9 @@
+
 package com.previdencia.GestaoBeneficios.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.previdencia.GestaoBeneficios.models.Beneficios;
+import com.previdencia.GestaoBeneficios.models.Beneficio;
 
 /**
  * Repositorio de Beneficios
@@ -10,7 +11,7 @@ import com.previdencia.GestaoBeneficios.models.Beneficios;
  * @version 1.0
  *
  */
-public interface BeneficioRepository extends JpaRepository<Beneficios, Long> {
+public interface BeneficioRepository extends JpaRepository<Beneficio, Long> {
 
-	Beneficios findFirstByNome(String nome);
+    Beneficio findFirstByNome(String nome);
 }
