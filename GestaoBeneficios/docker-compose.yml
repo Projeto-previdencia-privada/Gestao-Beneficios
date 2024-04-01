@@ -1,0 +1,36 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      SPRING_APPLICATION_NAME: Beneficios
+      SPRING_JPA_HIBERNATE.DDL_AUTO: update
+      SPRING_DATASOURCE_URL: jdbc:postgresql://psql:5430/GerenciaBeneficios
+      SPRING_DATASOURCE_USERNAME: UserPrev
+      SPRING_DATASOURCE_PASSWORD: previdencia
+
+    ports:
+      - 9000:8080
+
+  psql:
+    image: postgres:alpine3.18
+    volumes:
+      - ./src/main/java/scripts/script.sql:/docker-entrypoint-initdb.d/script.sql
+    environment:
+      POSTGRES_USER: UserPrev
+      POSTGRES_PASSWORD: previdencia
+      POSTGRES_DB: GerenciaBeneficios
+      PGPORT: 5430
+    ports:
+      - 5600:5430
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
+      PGADMIN_DEFAULT_PASSWORD: strong-password
