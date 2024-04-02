@@ -10,9 +10,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://psql:${PGPORT}/GerenciaBeneficios
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
-
     ports:
-      - 8080:8082
+      - 8082:8080
     env_file:
       - ./.env
 

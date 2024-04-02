@@ -1,0 +1,3 @@
+com\previdencia\GestaoBeneficios\Repository\TestBeneficioRepository.class
+com\previdencia\GestaoBeneficios\Service\TestBeneficioService.class
+com\previdencia\GestaoBeneficios\GestaoBeneficiosApplicationTests.class
