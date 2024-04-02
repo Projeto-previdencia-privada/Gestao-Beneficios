@@ -14,8 +14,9 @@ import jakarta.persistence.Table;
 
 /**
  * Classe para a criacao da tabela Beneficios e seus atributos
- * @author Leonardo Fachinello Bonetti
+ *
  * @version 1.0
+ * @since 1.0
  *
  */
 

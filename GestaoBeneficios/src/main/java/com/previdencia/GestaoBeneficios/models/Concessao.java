@@ -17,9 +17,9 @@ import jakarta.persistence.Table;
 
 /**
  * Classe para a criacao da tabela Concessoes e seus atributos
- * @author Leonardo Fachinello Bonetti
- * @version 1.0
  *
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 @Table(name="Concessao")

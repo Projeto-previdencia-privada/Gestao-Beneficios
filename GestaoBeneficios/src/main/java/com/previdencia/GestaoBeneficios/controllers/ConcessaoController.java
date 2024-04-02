@@ -25,12 +25,12 @@ public class ConcessaoController {
     }
 
     @PostMapping("/individual")
-    public ResponseEntity<Object> BeneficioPost(@RequestParam Long cpf,
+    public ResponseEntity<Object> ConcessaoPost(@RequestParam Long cpf,
                                                 @RequestParam Long beneficio_id){
         return concessaoService.concederIndividual(cpf, beneficio_id);
     }
     @PostMapping
-    public ResponseEntity<Object> BeneficioPost(@RequestParam Long cpfRequisitante,
+    public ResponseEntity<Object> ConcessaoPost(@RequestParam Long cpfRequisitante,
                                                 @RequestParam Long beneficio_id, @RequestParam  Long cpfBeneficiado){
         return concessaoService.conceder(cpfRequisitante, beneficio_id, cpfBeneficiado);
     }
