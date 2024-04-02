@@ -5,15 +5,16 @@ import com.previdencia.GestaoBeneficios.repository.BeneficioRepository;
 import com.previdencia.GestaoBeneficios.repository.ConcessaoRepository;
 import com.previdencia.GestaoBeneficios.services.BeneficioService;
 import com.previdencia.GestaoBeneficios.services.ConcessaoService;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.testcontainers.containers.PostgreSQLContainer;
+
+import java.awt.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,7 +35,18 @@ public class TestConcessaoController {
     private ConcessaoService concessaoService;
     @Autowired
     private ConcessaoRepository concessaoRepository;
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
+            "postgres:15-alpine");
 
+    @BeforeAll
+    static void beforeAll(){
+        postgres.start();
+
+    }
+    @AfterAll
+    static void afterAll() {
+        postgres.stop();
+    }
     @AfterEach
     void afterEach(){
         concessaoRepository.deleteAllInBatch();

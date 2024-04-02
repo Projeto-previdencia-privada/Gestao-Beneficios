@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.previdencia.GestaoBeneficios.controllers.BeneficioController;
 import com.previdencia.GestaoBeneficios.services.BeneficioService;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.testcontainers.containers.PostgreSQLContainer;
 
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @AutoConfigureMockMvc
@@ -30,6 +33,17 @@ public class TestBeneficioController {
     @Autowired
     private BeneficioController beneficioController;
 
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
+            "postgres:15-alpine");
+
+    @BeforeAll
+    static void beforeAll(){
+        postgres.start();
+    }
+    @AfterAll
+    static void afterAll() {
+        postgres.stop();
+    }
 
     @Test
     public void testPostBeneficio() {
