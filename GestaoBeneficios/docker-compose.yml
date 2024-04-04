@@ -14,12 +14,13 @@ services:
       - 8082:8080
     env_file:
       - ./.env
+    depends_on:
+    - psql
 
   psql:
     container_name: postgres_container
     image: postgres:alpine3.18
     volumes:
-      - ./src/main/java/scripts/script.sql:/docker-entrypoint-initdb.d/script.sql
       - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -31,16 +32,5 @@ services:
     env_file:
       - ./.env
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin4_container
-    restart: always
-    ports:
-      - "8888:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-    env_file:
-      - ./.env
 volumes:
   db_data:

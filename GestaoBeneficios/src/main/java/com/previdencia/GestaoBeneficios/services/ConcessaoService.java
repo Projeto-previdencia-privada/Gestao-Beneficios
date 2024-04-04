@@ -75,11 +75,10 @@ public class ConcessaoService {
         double contribuicao = 0;
         if(beneficioRepository.existsById(id) &&
                 beneficioRepository.getReferenceById(id).isIndividual()==true){
-	        /*String url="https://localhost:8080/contribuintes/consultar/"+id+"";
+	        String url="https://192.168.37.7:8080/contribuintes/consultar/"+id+"";
 	        RestTemplate restTemplate = new RestTemplate();
 	        JSONObject json = restTemplate.getForObject(url, JSONObject.class);
-	        */
-            JSONObject json = TestAPI.apiContribuicoes();
+
             try {
                 tempo = json.getInt("tempoContribuicaoMeses");
                 contribuicao = json.getInt("totalContribuidoAjustado");
@@ -118,11 +117,9 @@ public class ConcessaoService {
         double contribuicao = 0;
         if(beneficioRepository.existsById(id) &&
                 beneficioRepository.getReferenceById(id).isIndividual()==false){
-	        /*String url="https://localhost:8080/contribuintes/consultar/"+id+"";
+	        String url="https://192.168.37.7:8080/contribuintes/consultar/"+id+"";
 	        RestTemplate restTemplate = new RestTemplate();
 	        JSONObject json = restTemplate.getForObject(url, JSONObject.class);
-	        */
-            JSONObject json = TestAPI.apiContribuicoes();
             try {
                 tempo = json.getInt("tempoContribuicaoMeses");
                 contribuicao = json.getInt("totalContribuidoAjustado");
