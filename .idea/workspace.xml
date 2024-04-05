@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3e69b27c-bf71-46c2-8c07-1ccc281db087" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/TestAPI/TestAPI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/scripts/script.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Beneficio.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Beneficio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Concessao.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Concessao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,18 +29,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.GestaoBeneficiosApplication.executor": "Run",
-    "Docker.GestaoBeneficios.psql: Compose Deployment.executor": "Run",
-    "Docker.GestaoBeneficios: Compose Deployment.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/leona/Desktop/Previdencia Privada/Gestao-Beneficios"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.GestaoBeneficiosApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.GestaoBeneficios.psql: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.GestaoBeneficios: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/leona/Desktop/Previdencia Privada/Gestao-Beneficios&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\leona\Desktop\Previdencia Privada\Gestao-Beneficios\GestaoBeneficios" />
@@ -72,7 +70,9 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
-      <deployment type="docker-compose.yml" />
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <recent_temporary>

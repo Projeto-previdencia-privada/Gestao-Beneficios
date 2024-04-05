@@ -75,7 +75,7 @@ public class ConcessaoService {
         double contribuicao = 0;
         if(beneficioRepository.existsById(id) &&
                 beneficioRepository.getReferenceById(id).isIndividual()==true){
-	        String url="https://192.168.37.7:8080/contribuintes/consultar/"+id+"";
+	        String url="https://192.168.37.10:8080/contribuintes/consultar/"+id+"";
 	        RestTemplate restTemplate = new RestTemplate();
 	        JSONObject json = restTemplate.getForObject(url, JSONObject.class);
 
@@ -117,7 +117,7 @@ public class ConcessaoService {
         double contribuicao = 0;
         if(beneficioRepository.existsById(id) &&
                 beneficioRepository.getReferenceById(id).isIndividual()==false){
-	        String url="https://192.168.37.7:8080/contribuintes/consultar/"+id+"";
+	        String url="https://192.168.37.10:8080/contribuintes/consultar/"+id+"";
 	        RestTemplate restTemplate = new RestTemplate();
 	        JSONObject json = restTemplate.getForObject(url, JSONObject.class);
             try {
