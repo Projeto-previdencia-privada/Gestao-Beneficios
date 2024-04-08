@@ -8,12 +8,22 @@ A gestão de beneficios é uma API REST de uma sistema de gerenciamento de benef
 2. PostgreSQL
 3. Docker-compose
 
+## Criação do .env
+
+O projeto precisa de um arquivo criado com o nome de .env na raiz do projeto com a seguinte estrutura:
+```
+POSTGRES_USER=<usuario_postgres>
+POSTGRES_PASSWORD=<senha_user>
+PGPORT=<porta_postgres>
+```
+Atente-se ao fato que pode-se mudar a porta do banco de dados para uma a sua escolha, caso não tenha interesse coloque em PGPORT a porta 5432 sendo a mesma a padrão do postgres. 
+
 ## Execução do projeto
 
 Utilize o seguinte na raiz do projeto comando para subir o docker-compose com todos os projetos
 
 ```
-docker-compose up
+docker compose up -d
 ```
 
 ## Chamadas API
