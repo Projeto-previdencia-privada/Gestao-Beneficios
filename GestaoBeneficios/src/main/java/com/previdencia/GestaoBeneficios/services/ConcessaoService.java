@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import java.net.*;
 import java.time.LocalDate;
@@ -16,7 +17,6 @@ import java.time.LocalDate;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.previdencia.GestaoBeneficios.TestAPI.TestAPI;
 import com.previdencia.GestaoBeneficios.models.Beneficio;
 import com.previdencia.GestaoBeneficios.models.Concessao;
 import com.previdencia.GestaoBeneficios.repository.BeneficioRepository;
@@ -73,33 +73,42 @@ public class ConcessaoService {
         int tempo = 0;
         double valor = 0;
         double contribuicao = 0;
-        if(beneficioRepository.existsById(id) &&
-                beneficioRepository.getReferenceById(id).isIndividual()==true){
-	        String url="https://192.168.37.10:8080/contribuintes/consultar/"+id+"";
-	        RestTemplate restTemplate = new RestTemplate();
-	        JSONObject json = restTemplate.getForObject(url, JSONObject.class);
+        Beneficio beneficio = beneficioRepository.getReferenceById(id);
 
-            try {
-                tempo = json.getInt("tempoContribuicaoMeses");
-                contribuicao = json.getInt("totalContribuidoAjustado");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            Beneficio beneficio = beneficioRepository.getReferenceById(id);
-            if(beneficio.getRequisitos() <= tempo) {
-                valor = ((contribuicao * beneficio.getValor())/100);
-                Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(), cpf, cpf,
-                        LocalDate.now(), valor, true, beneficio);
-                concessaoRepository.save(concessaoAutorizada);
-                return new ResponseEntity<>(HttpStatus.ACCEPTED);
-            }
-            else {
-                return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
-            }
-
+        ResponseEntity<Object> status= verificaBeneficio(1, id, beneficio);
+        if(!status.equals(HttpStatus.CONTINUE)) {
+            return new ResponseEntity<>(status.getStatusCode());
         }
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        String url="http://127.0.0.1:8080/contribuintes/consultar/{id}";
+        RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            JSONObject json = restTemplate.getForObject(url, JSONObject.class, id);
+            tempo = json.getInt("tempoContribuicaoMeses");
+            contribuicao = json.getInt("totalContribuidoAjustado");
+        }
+        catch(RestClientException e){
+            System.out.println("\n\n\n\nAPI NAO RESPONDEU:\n");
+            e.printStackTrace();
+        }
+        catch (JSONException e) {
+            System.out.println("\n\n\n\nJSON NAO GERADO:\n");
+            e.printStackTrace();
+        }
+
+        if(beneficio.getRequisitos() > tempo){
+            System.out.println("\n\n\n\nTEMPO MINIMO NAO CUMPRIDO\n\n\n\n");
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        }
+
+
+        valor = ((contribuicao * beneficio.getValor())/100);
+        Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(), cpf, cpf,
+                LocalDate.now(), valor, true, beneficio);
+        concessaoRepository.save(concessaoAutorizada);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+
     }
 
     /**
@@ -115,32 +124,46 @@ public class ConcessaoService {
         int tempo = 0;
         double valor = 0;
         double contribuicao = 0;
-        if(beneficioRepository.existsById(id) &&
-                beneficioRepository.getReferenceById(id).isIndividual()==false){
-	        String url="https://192.168.37.10:8080/contribuintes/consultar/"+id+"";
-	        RestTemplate restTemplate = new RestTemplate();
-	        JSONObject json = restTemplate.getForObject(url, JSONObject.class);
-            try {
-                tempo = json.getInt("tempoContribuicaoMeses");
-                contribuicao = json.getInt("totalContribuidoAjustado");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            Beneficio beneficio = beneficioRepository.getReferenceById(id);
-            if(beneficio.getRequisitos() <= tempo) {
-                valor = ((contribuicao * beneficio.getValor())/100);
-                Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(),
-                        cpfRequisitante, cpfBeneficiado,
-                        LocalDate.now(), valor, true, beneficio);
-                concessaoRepository.save(concessaoAutorizada);
-                return new ResponseEntity<>(HttpStatus.ACCEPTED);
-            }
-            else {
-                return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
-            }
+        Beneficio beneficio = beneficioRepository.getReferenceById(id);
+
+        ResponseEntity<Object> status= verificaBeneficio(2, id, beneficio);
+        if(!status.equals(HttpStatus.CONTINUE)) {
+            return new ResponseEntity<>(status.getStatusCode());
         }
-        else {
+
+        String url="http://127.0.0.1:8080/contribuintes/consultar/{id}";
+        RestTemplate restTemplate = new RestTemplate();
+        JSONObject json = restTemplate.getForObject(url, JSONObject.class, id);
+        try {
+            tempo = json.getInt("tempoContribuicaoMeses");
+            contribuicao = json.getInt("totalContribuidoAjustado");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if(beneficio.getRequisitos() > tempo){
+            System.out.println("\n\n\n\nTEMPO MINIMO NAO CUMPRIDO\n\n\n\n");
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        }
+
+        valor = ((contribuicao * beneficio.getValor())/100);
+        Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(),
+                cpfRequisitante, cpfBeneficiado,
+                LocalDate.now(), valor, true, beneficio);
+        concessaoRepository.save(concessaoAutorizada);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    public ResponseEntity<Object> verificaBeneficio(int options, Long id, Beneficio beneficio){
+        if(!beneficioRepository.existsById(id)){
+            System.out.println("\n\n\n\nBENEFICIO NAO LOCALIZADO\n\n\n\n");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        if ((beneficio.isIndividual() && options==2) || !beneficio.isIndividual() && options==1){
+            System.out.println("\n\n\n\nBENEFICIO INCORRETO PARA A CHAMADA\n\n\n\n");
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        }
+        return new ResponseEntity<>(HttpStatus.CONTINUE);
     }
+
 }
