@@ -80,17 +80,14 @@ public class ConcessaoService {
             return new ResponseEntity<>(status.getStatusCode());
         }
 
-        String url="http://127.0.0.1:8080/contribuintes/consultar/{id}";
+        String url="http://192.168.37.10:8080/contribuintes/consultar/" + cpf;
         RestTemplate restTemplate = new RestTemplate();
 
+        JSONObject json = restTemplate.getForObject(url, JSONObject.class);
+
         try {
-            JSONObject json = restTemplate.getForObject(url, JSONObject.class, id);
             tempo = json.getInt("tempoContribuicaoMeses");
             contribuicao = json.getInt("totalContribuidoAjustado");
-        }
-        catch(RestClientException e){
-            System.out.println("\n\n\n\nAPI NAO RESPONDEU:\n");
-            e.printStackTrace();
         }
         catch (JSONException e) {
             System.out.println("\n\n\n\nJSON NAO GERADO:\n");
@@ -131,13 +128,15 @@ public class ConcessaoService {
             return new ResponseEntity<>(status.getStatusCode());
         }
 
-        String url="http://127.0.0.1:8080/contribuintes/consultar/{id}";
+        String url="http://192.168.37.10:8080/contribuintes/consultar"+ cpf;
         RestTemplate restTemplate = new RestTemplate();
-        JSONObject json = restTemplate.getForObject(url, JSONObject.class, id);
+        JSONObject json = restTemplate.getForObject(url, JSONObject.class);
+
         try {
             tempo = json.getInt("tempoContribuicaoMeses");
             contribuicao = json.getInt("totalContribuidoAjustado");
         } catch (JSONException e) {
+            System.out.println("\n\n\n\nJSON NAO GERADO:\n");
             e.printStackTrace();
         }
 
@@ -162,6 +161,8 @@ public class ConcessaoService {
         if ((beneficio.isIndividual() && options==2) || !beneficio.isIndividual() && options==1){
             System.out.println("\n\n\n\nBENEFICIO INCORRETO PARA A CHAMADA\n\n\n\n");
             return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        }
+
         }
         return new ResponseEntity<>(HttpStatus.CONTINUE);
     }
