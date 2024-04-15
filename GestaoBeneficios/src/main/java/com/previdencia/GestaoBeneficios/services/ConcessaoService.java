@@ -1,5 +1,6 @@
 package com.previdencia.GestaoBeneficios.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -7,6 +8,7 @@ import java.util.UUID;
 import com.previdencia.GestaoBeneficios.models.Concessao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -70,15 +72,17 @@ public class ConcessaoService {
      *  	Http status 405 -> Id nao aceito
      */
     public ResponseEntity<Object> concederIndividual(Long cpf, Long id) {
-        int tempo = 0;
-        double valor = 0;
-        double contribuicao = 0;
+        long tempo = 0;
+        double valor;
+        BigDecimal contribuicao = BigDecimal.valueOf(0);
         Beneficio beneficio = beneficioRepository.getReferenceById(id);
 
-        ResponseEntity<Object> status= verificaBeneficio(1, id, beneficio);
-        if(!status.equals(HttpStatus.CONTINUE)) {
-            return new ResponseEntity<>(status.getStatusCode());
+        Boolean status= verificaBeneficio(1, id, beneficio);
+        if(!status) {
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
         }
+
+        System.out.println("\n\n\n\nCHECKPOINT\n\n\n\n");
 
         String url="http://192.168.37.10:8080/contribuintes/consultar/" + cpf;
         RestTemplate restTemplate = new RestTemplate();
@@ -86,8 +90,8 @@ public class ConcessaoService {
         JSONObject json = restTemplate.getForObject(url, JSONObject.class);
 
         try {
-            tempo = json.getInt("tempoContribuicaoMeses");
-            contribuicao = json.getInt("totalContribuidoAjustado");
+            tempo = json.getLong("tempoContribuicaoMeses");
+            contribuicao = json.getBigDecimal("totalContribuidoAjustado");
         }
         catch (JSONException e) {
             System.out.println("\n\n\n\nJSON NAO GERADO:\n");
@@ -100,7 +104,7 @@ public class ConcessaoService {
         }
 
 
-        valor = ((contribuicao * beneficio.getValor())/100);
+        valor = (contribuicao.multiply(BigDecimal.valueOf(beneficio.getValor())).divide(BigDecimal.valueOf(100))).doubleValue();
         Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(), cpf, cpf,
                 LocalDate.now(), valor, true, beneficio);
         concessaoRepository.save(concessaoAutorizada);
@@ -123,12 +127,12 @@ public class ConcessaoService {
         double contribuicao = 0;
         Beneficio beneficio = beneficioRepository.getReferenceById(id);
 
-        ResponseEntity<Object> status= verificaBeneficio(2, id, beneficio);
-        if(!status.equals(HttpStatus.CONTINUE)) {
-            return new ResponseEntity<>(status.getStatusCode());
+        Boolean status= verificaBeneficio(2, id, beneficio);
+        if(!status) {
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
         }
 
-        String url="http://192.168.37.10:8080/contribuintes/consultar"+ cpf;
+        String url="http://192.168.37.10:8080/contribuintes/consultar"+ cpfRequisitante;
         RestTemplate restTemplate = new RestTemplate();
         JSONObject json = restTemplate.getForObject(url, JSONObject.class);
 
@@ -153,18 +157,15 @@ public class ConcessaoService {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    public ResponseEntity<Object> verificaBeneficio(int options, Long id, Beneficio beneficio){
-        if(!beneficioRepository.existsById(id)){
+    public boolean verificaBeneficio(int options, Long id, Beneficio beneficio) {
+        if (!beneficioRepository.existsById(id)) {
             System.out.println("\n\n\n\nBENEFICIO NAO LOCALIZADO\n\n\n\n");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return false;
         }
-        if ((beneficio.isIndividual() && options==2) || !beneficio.isIndividual() && options==1){
+        if ((beneficio.isIndividual() && options == 2) || !beneficio.isIndividual() && options == 1) {
             System.out.println("\n\n\n\nBENEFICIO INCORRETO PARA A CHAMADA\n\n\n\n");
-            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+            return false;
         }
-
-        }
-        return new ResponseEntity<>(HttpStatus.CONTINUE);
+        return true;
     }
-
 }
