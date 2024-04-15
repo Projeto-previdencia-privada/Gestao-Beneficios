@@ -1,0 +1,9 @@
+com\previdencia\GestaoBeneficios\controllers\BeneficioController.class
+com\previdencia\GestaoBeneficios\services\ConcessaoService.class
+com\previdencia\GestaoBeneficios\models\Concessao.class
+com\previdencia\GestaoBeneficios\repository\ConcessaoRepository.class
+com\previdencia\GestaoBeneficios\models\Beneficio.class
+com\previdencia\GestaoBeneficios\repository\BeneficioRepository.class
+com\previdencia\GestaoBeneficios\services\BeneficioService.class
+com\previdencia\GestaoBeneficios\controllers\ConcessaoController.class
+com\previdencia\GestaoBeneficios\GestaoBeneficiosApplication.class
