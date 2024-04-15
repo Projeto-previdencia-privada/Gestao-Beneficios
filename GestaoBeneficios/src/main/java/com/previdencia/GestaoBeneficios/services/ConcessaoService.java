@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
 import com.previdencia.GestaoBeneficios.models.Concessao;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -74,7 +78,7 @@ public class ConcessaoService {
     public ResponseEntity<Object> concederIndividual(Long cpf, Long id) {
         long tempo = 0;
         double valor;
-        BigDecimal contribuicao = BigDecimal.valueOf(0);
+        double contribuicao = 0;
         Beneficio beneficio = beneficioRepository.getReferenceById(id);
 
         Boolean status= verificaBeneficio(1, id, beneficio);
@@ -85,13 +89,16 @@ public class ConcessaoService {
         String url="http://192.168.37.10:8080/contribuintes/consultar/" + cpf;
         RestTemplate restTemplate = new RestTemplate();
 
-        JSONObject json = restTemplate.getForObject(url, JSONObject.class);
+
+        String string = restTemplate.getForObject(url, String.class);
+        JsonObject json = new Gson().fromJson(string, JsonObject.class);
+
 
         try {
-            tempo = json.getLong("tempoContribuicaoMeses");
-            contribuicao = json.getBigDecimal("totalContribuidoAjustado");
+            tempo = json.get("tempoContribuicaoMeses").getAsLong();
+            contribuicao = json.get("totalContribuidoAjustado").getAsDouble();
         }
-        catch (JSONException e) {
+        catch (Exception e) {
             System.out.println("\n\n\n\nJSON NAO GERADO:" +
                     "tempo:"+tempo+"\n" +
                     "contribuicao:"+contribuicao+"\n");
@@ -105,7 +112,7 @@ public class ConcessaoService {
         }
 
 
-        valor = (contribuicao.multiply(BigDecimal.valueOf(beneficio.getValor())).divide(BigDecimal.valueOf(100))).doubleValue();
+        valor = (contribuicao * beneficio.getValor())/100;
         Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(), cpf, cpf,
                 LocalDate.now(), valor, true, beneficio);
         concessaoRepository.save(concessaoAutorizada);
@@ -135,12 +142,14 @@ public class ConcessaoService {
 
         String url="http://192.168.37.10:8080/contribuintes/consultar"+ cpfRequisitante;
         RestTemplate restTemplate = new RestTemplate();
-        JSONObject json = restTemplate.getForObject(url, JSONObject.class);
+
+        String string = restTemplate.getForObject(url, String.class);
+        JsonObject json = new Gson().fromJson(string, JsonObject.class);
 
         try {
-            tempo = json.getLong("tempoContribuicaoMeses");
-            contribuicao = json.getInt("totalContribuidoAjustado");
-        } catch (JSONException e) {
+            tempo = json.get("tempoContribuicaoMeses").getAsLong();
+            contribuicao = json.get("totalContribuidoAjustado").getAsDouble();
+        } catch (Exception e) {
             System.out.println("\n\n\n\nJSON NAO GERADO:" +
                     "tempo:"+tempo+"\n" +
                     "contribuicao:"+contribuicao+"\n");
