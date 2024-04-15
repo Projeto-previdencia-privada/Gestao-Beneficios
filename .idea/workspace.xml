@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e69b27c-bf71-46c2-8c07-1ccc281db087" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" afterDir="false" />
-    </list>
+    <list default="true" id="3e69b27c-bf71-46c2-8c07-1ccc281db087" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -146,7 +143,7 @@
       <workItem from="1712870455110" duration="2364000" />
       <workItem from="1712938589792" duration="17967000" />
       <workItem from="1713197738411" duration="2065000" />
-      <workItem from="1713200479392" duration="2858000" />
+      <workItem from="1713200479392" duration="3463000" />
     </task>
     <servers />
   </component>
