@@ -82,8 +82,6 @@ public class ConcessaoService {
             return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
         }
 
-        System.out.println("\n\n\n\nCHECKPOINT\n\n\n\n");
-
         String url="http://192.168.37.10:8080/contribuintes/consultar/" + cpf;
         RestTemplate restTemplate = new RestTemplate();
 
@@ -94,13 +92,16 @@ public class ConcessaoService {
             contribuicao = json.getBigDecimal("totalContribuidoAjustado");
         }
         catch (JSONException e) {
-            System.out.println("\n\n\n\nJSON NAO GERADO:\n");
+            System.out.println("\n\n\n\nJSON NAO GERADO:" +
+                    "tempo:"+tempo+"\n" +
+                    "contribuicao:"+contribuicao+"\n");
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
         if(beneficio.getRequisitos() > tempo){
             System.out.println("\n\n\n\nTEMPO MINIMO NAO CUMPRIDO\n\n\n\n");
-            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
 
 
@@ -122,7 +123,7 @@ public class ConcessaoService {
      *
      */
     public ResponseEntity<Object> conceder(Long cpfRequisitante, Long id, Long cpfBeneficiado) {
-        int tempo = 0;
+        long tempo = 0;
         double valor = 0;
         double contribuicao = 0;
         Beneficio beneficio = beneficioRepository.getReferenceById(id);
@@ -137,16 +138,19 @@ public class ConcessaoService {
         JSONObject json = restTemplate.getForObject(url, JSONObject.class);
 
         try {
-            tempo = json.getInt("tempoContribuicaoMeses");
+            tempo = json.getLong("tempoContribuicaoMeses");
             contribuicao = json.getInt("totalContribuidoAjustado");
         } catch (JSONException e) {
-            System.out.println("\n\n\n\nJSON NAO GERADO:\n");
+            System.out.println("\n\n\n\nJSON NAO GERADO:" +
+                    "tempo:"+tempo+"\n" +
+                    "contribuicao:"+contribuicao+"\n");
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
         if(beneficio.getRequisitos() > tempo){
             System.out.println("\n\n\n\nTEMPO MINIMO NAO CUMPRIDO\n\n\n\n");
-            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
 
         valor = ((contribuicao * beneficio.getValor())/100);
