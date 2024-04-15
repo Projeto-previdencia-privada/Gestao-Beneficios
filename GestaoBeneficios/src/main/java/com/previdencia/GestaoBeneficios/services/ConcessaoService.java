@@ -130,7 +130,7 @@ public class ConcessaoService {
             return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
         }
 
-        String url="http://192.168.37.10:8080/contribuintes/consultar"+ cpfRequisitante;
+        String url="http://192.168.37.10:8080/contribuintes/consultar/"+ cpfRequisitante;
         RestTemplate restTemplate = new RestTemplate();
 
         String string = restTemplate.getForObject(url, String.class);

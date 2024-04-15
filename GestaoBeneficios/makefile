@@ -31,7 +31,7 @@ post:
 	  http://localhost:8082/beneficios
 	curl --header "Content-Type: application/json" \
 	  --request POST \
-	  --data '{"nome": "Pensao por morte","valor_percentual": 25,"contribuicao_minima": 36,"individual": false}' \
+	  --data '{"nome": "Auxilio Familia","valor_percentual": 25,"contribuicao_minima": 36,"individual": false}' \
 	  http://localhost:8082/beneficios
 get:
 	curl -d "cpf=99999999994&beneficio_id=1" -i http://localhost:8082/concessao/individual
@@ -39,6 +39,7 @@ get:
 	curl -d "cpfRequisitante=99999999994&beneficio_id=4&cpfBeneficiado=99999999993" -i http://localhost:8082/concessao
 env:
 	echo "POSTGRES_USER=\nPOSTGRES_PASSWORD=\nPGPORT=" > .env
+
 
 
 
