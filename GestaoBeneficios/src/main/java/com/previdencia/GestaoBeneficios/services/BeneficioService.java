@@ -11,7 +11,8 @@ import com.previdencia.GestaoBeneficios.repository.BeneficioRepository;
 /**
  * Servico da classe beneficio
  * @author Leonardo Fachinello Bonetti
- * @version 1.0
+ * @version 1.1
+ * @since 1.0
  *
  */
 @Service

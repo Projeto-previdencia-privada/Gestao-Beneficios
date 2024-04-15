@@ -13,6 +13,12 @@ import com.previdencia.GestaoBeneficios.models.Beneficio;
 import com.previdencia.GestaoBeneficios.services.BeneficioService;
 import com.previdencia.GestaoBeneficios.services.ConcessaoService;
 
+/**
+ * Controller da classe Beneficios
+ * @version 1.1
+ * @since 1.0
+ * @author Leonardo Fachinello Bonetti
+ */
 @RequestMapping("/concessao")
 @RestController
 public class ConcessaoController {

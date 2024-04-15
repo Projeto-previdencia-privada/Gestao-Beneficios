@@ -1,37 +1,27 @@
 package com.previdencia.GestaoBeneficios.services;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.previdencia.GestaoBeneficios.models.Concessao;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import java.net.*;
+
 import java.time.LocalDate;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.previdencia.GestaoBeneficios.models.Beneficio;
-import com.previdencia.GestaoBeneficios.models.Concessao;
 import com.previdencia.GestaoBeneficios.repository.BeneficioRepository;
 import com.previdencia.GestaoBeneficios.repository.ConcessaoRepository;
 
 /**
  * Servico da classe Concessao
  *
- * @Version 1.0
+ * @version 1.1
  * @since 1.0
  */
 @Service
