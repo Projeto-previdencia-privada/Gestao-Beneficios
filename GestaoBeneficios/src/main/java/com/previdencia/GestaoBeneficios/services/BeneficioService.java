@@ -37,7 +37,9 @@ public class BeneficioService {
             if (b.getNome().trim().equalsIgnoreCase(beneficio.getNome().trim())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("O Beneficio ja esta cadastrado no sistema\n" +
-                        "ID : " + beneficio.getId()+"\nNome : "+beneficio.getNome()+"\n");
+                        "ID : "
+                                +beneficioRepository.findFirstByNome(beneficio.getNome())+
+                                "\nNome : "+beneficio.getNome()+"\n");
             }
         }
 
