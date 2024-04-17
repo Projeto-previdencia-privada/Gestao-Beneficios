@@ -38,7 +38,8 @@ public class BeneficioService {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("O Beneficio ja esta cadastrado no sistema\n" +
                         "ID : "
-                                +beneficioRepository.findFirstByNome(beneficio.getNome())+
+                                +beneficioRepository.findFirstByNome(beneficio.getNome())
+                                .getId()+
                                 "\nNome : "+beneficio.getNome()+"\n");
             }
         }
