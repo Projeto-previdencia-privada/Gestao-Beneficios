@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.previdencia.GestaoBeneficios.models.Concessao;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -53,16 +54,30 @@ public class ConcessaoService {
         List<Concessao> lista = concessaoRepository.findAllByRequisitante(cpf);
         double soma = 0;
         for(Concessao concessao : lista) {
-            soma = soma + concessao.getValor();
+            if(concessao.isStatus()){
+                soma = soma + concessao.getValor();
+            }
         }
         return soma;
     }
 
+    /**
+     * Desativa uma concessao ativa
+     * @param uuid Id de identificacao da concessao
+     * @return ResponseEntity com a confirmacao da desativacao
+     * @since 1.1
+     */
     public ResponseEntity<String> desativar(UUID uuid){
-        Concessao concessao = concessaoRepository.getReferenceById(uuid);
-        concessao.setStatus(false);
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Concessao desativada com sucesso!");
+        try {
+            Concessao concessao = concessaoRepository.getReferenceById(uuid);
+            concessao.setStatus(false);
+            return ResponseEntity.status(HttpStatus.ACCEPTED)
+                    .body("Concessao desativada com sucesso!");
+        }
+        catch(EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("UUID nao localizado no banco de dados\n");
+        }
     }
 
     /**

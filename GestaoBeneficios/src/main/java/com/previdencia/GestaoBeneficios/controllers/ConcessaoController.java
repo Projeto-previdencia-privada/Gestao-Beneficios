@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.previdencia.GestaoBeneficios.models.Beneficio;
-import com.previdencia.GestaoBeneficios.services.BeneficioService;
 import com.previdencia.GestaoBeneficios.services.ConcessaoService;
 
 import java.util.UUID;

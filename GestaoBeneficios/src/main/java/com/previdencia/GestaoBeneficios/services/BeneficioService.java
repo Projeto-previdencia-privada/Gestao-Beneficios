@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.previdencia.GestaoBeneficios.models.Beneficio;
 import com.previdencia.GestaoBeneficios.repository.BeneficioRepository;
 
+import java.util.List;
+
 /**
  * Servico da classe beneficio
  * @author Leonardo Fachinello Bonetti
@@ -26,13 +28,22 @@ public class BeneficioService {
 
     /**
      * Metodo que recebe o beneficio e o insere no banco de dados
-     * @param beneficio
-     * @return Http status 201
+     * @param beneficio beneficio a ser inserido
      */
     public ResponseEntity<String> adicionar(Beneficio beneficio) {
+        List<Beneficio> lista = beneficioRepository.findAll();
+
+        for (Beneficio b : lista) {
+            if (b.getNome().trim().equalsIgnoreCase(beneficio.getNome().trim())) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("O Beneficio ja esta cadastrado no sistema\n" +
+                        "ID : " + beneficio.getId()+"\nNome : "+beneficio.getNome()+"\n");
+            }
+        }
+
         beneficioRepository.save(beneficio);
         return ResponseEntity.status(HttpStatus.CREATED).body("Beneficio adicionado com sucesso!\n" +
-                "id : " + beneficio.getId()+"\nnome : "+beneficio.getNome());
+                "ID : " + beneficio.getId()+"\nNome : "+beneficio.getNome()+"\n");
     }
 
     /**
@@ -43,7 +54,7 @@ public class BeneficioService {
     public ResponseEntity<String> remover(Long id) {
         beneficioRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Beneficio removido com sucesso!");
+                .body("Beneficio removido com sucesso!\n");
     }
 
     /**
@@ -54,16 +65,18 @@ public class BeneficioService {
      * @return Http status 404
      */
     public ResponseEntity<String> alterar(Long id, Beneficio newBeneficio) {
-        if (beneficioRepository.existsById(id)) {
-            Beneficio oldBeneficio = beneficioRepository.getReferenceById(id);
-            oldBeneficio.setNome(newBeneficio.getNome());
-            oldBeneficio.setValor(newBeneficio.getValor());
-            oldBeneficio.setRequisitos(newBeneficio.getRequisitos());
-            oldBeneficio.setIndividual(newBeneficio.isIndividual());
-            beneficioRepository.saveAndFlush(oldBeneficio);
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        if (!beneficioRepository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Beneficio com ID "+id+" nao encontrado\n");
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body("Beneficio alterado com sucesso!");
+
+        Beneficio oldBeneficio = beneficioRepository.getReferenceById(id);
+        oldBeneficio.setNome(newBeneficio.getNome());
+        oldBeneficio.setValor(newBeneficio.getValor());
+        oldBeneficio.setRequisitos(newBeneficio.getRequisitos());
+        oldBeneficio.setIndividual(newBeneficio.isIndividual());
+        beneficioRepository.saveAndFlush(oldBeneficio);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("Beneficio alterado com sucesso!\n");
     }
 }

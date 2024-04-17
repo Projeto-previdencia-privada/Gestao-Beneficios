@@ -2,7 +2,6 @@ package com.previdencia.GestaoBeneficios.repository;
 import java.util.List;
 import java.util.UUID;
 
-import com.previdencia.GestaoBeneficios.models.Beneficio;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.previdencia.GestaoBeneficios.models.Concessao;
