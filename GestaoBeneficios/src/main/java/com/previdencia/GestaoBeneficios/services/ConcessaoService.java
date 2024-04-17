@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.previdencia.GestaoBeneficios.models.Concessao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -57,6 +58,13 @@ public class ConcessaoService {
         return soma;
     }
 
+    public ResponseEntity<String> desativar(UUID uuid){
+        Concessao concessao = concessaoRepository.getReferenceById(uuid);
+        concessao.setStatus(false);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("Concessao desativada com sucesso!");
+    }
+
     /**
      * Metodo que recebe um cpf requerente de um beneficio e analisa e calculo se deve ou nao conceder o beneficio
      * @param cpf
@@ -65,7 +73,7 @@ public class ConcessaoService {
      * 		Http status 202 -> Pedido autorizado
      *  	Http status 405 -> Id nao aceito
      */
-    public ResponseEntity<Object> concederIndividual(Long cpf, Long id) {
+    public ResponseEntity<String> concederIndividual(Long cpf, Long id) {
         long tempo = 0;
         double valor;
         double contribuicao = 0;
@@ -73,7 +81,8 @@ public class ConcessaoService {
 
         Boolean status= verificaBeneficio(1, id, beneficio);
         if(!status) {
-            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("O beneficio "+beneficio.getNome()+" não é apropriado para a chamada\n");
         }
 
         String url="http://192.168.37.10:8080/contribuintes/consultar/" + cpf;
@@ -93,12 +102,16 @@ public class ConcessaoService {
                     "tempo:"+tempo+"\n" +
                     "contribuicao:"+contribuicao+"\n");
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Falha na conexao com API externas\n");
         }
 
         if(beneficio.getRequisitos() > tempo){
             System.out.println("\n\n\n\nTEMPO MINIMO NAO CUMPRIDO\n\n\n\n");
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+                    .body("Tempo para "+beneficio.getNome()+" insuficiente\n" +
+                            "tempo minimo: "+ beneficio.getRequisitos()+"\n" +
+                            "tempo de contribuicao:"+tempo+"\n");
         }
 
 
@@ -106,20 +119,21 @@ public class ConcessaoService {
         Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(), cpf, cpf,
                 LocalDate.now(), valor, true, beneficio);
         concessaoRepository.save(concessaoAutorizada);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
-
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("Concessao Autorizada, UUID da operacao="
+                        +concessaoAutorizada.getId()+"\n");
     }
 
     /**
      * Metodo para conceder beneficios para outra pessoa que nao seja o requisitante
+     *
      * @param cpfRequisitante
      * @param id
      * @param cpfBeneficiado
      * @return Http status 202 -> Pedido autorizado,
      * Http status 405 -> Id nao aceito
-     *
      */
-    public ResponseEntity<Object> conceder(Long cpfRequisitante, Long id, Long cpfBeneficiado) {
+    public ResponseEntity<String> conceder(Long cpfRequisitante, Long id, Long cpfBeneficiado) {
         long tempo = 0;
         double valor = 0;
         double contribuicao = 0;
@@ -127,7 +141,8 @@ public class ConcessaoService {
 
         Boolean status= verificaBeneficio(2, id, beneficio);
         if(!status) {
-            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+            ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("O beneficio "+beneficio.getNome()+" não é apropriado para a chamada\n");
         }
 
         String url="http://192.168.37.10:8080/contribuintes/consultar/"+ cpfRequisitante;
@@ -144,12 +159,16 @@ public class ConcessaoService {
                     "tempo:"+tempo+"\n" +
                     "contribuicao:"+contribuicao+"\n");
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Falha na conexao com API externas\n");
         }
 
         if(beneficio.getRequisitos() > tempo){
             System.out.println("\n\n\n\nTEMPO MINIMO NAO CUMPRIDO\n\n\n\n");
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+                    .body("Tempo para "+beneficio.getNome()+" insuficiente\n" +
+                            "tempo minimo: "+ beneficio.getRequisitos()+"\n" +
+                            "tempo de contribuicao:"+tempo+"\n");
         }
 
         valor = ((contribuicao * beneficio.getValor())/100);
@@ -157,7 +176,10 @@ public class ConcessaoService {
                 cpfRequisitante, cpfBeneficiado,
                 LocalDate.now(), valor, true, beneficio);
         concessaoRepository.save(concessaoAutorizada);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("Concessao Autorizada, UUID da operacao="
+                        +concessaoAutorizada.getId()+
+                        "\n");
     }
 
     public boolean verificaBeneficio(int options, Long id, Beneficio beneficio) {

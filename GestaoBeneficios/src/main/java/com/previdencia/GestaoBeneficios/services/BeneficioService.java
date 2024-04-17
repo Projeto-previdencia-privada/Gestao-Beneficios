@@ -29,9 +29,10 @@ public class BeneficioService {
      * @param beneficio
      * @return Http status 201
      */
-    public ResponseEntity<Object> adicionar(Beneficio beneficio) {
+    public ResponseEntity<String> adicionar(Beneficio beneficio) {
         beneficioRepository.save(beneficio);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Beneficio adicionado com sucesso!\n" +
+                "id : " + beneficio.getId()+"\nnome : "+beneficio.getNome());
     }
 
     /**
@@ -39,9 +40,10 @@ public class BeneficioService {
      * @param id
      * @return Http status 201
      */
-    public ResponseEntity<Object> remover(Long id) {
+    public ResponseEntity<String> remover(Long id) {
         beneficioRepository.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("Beneficio removido com sucesso!");
     }
 
     /**
@@ -51,7 +53,7 @@ public class BeneficioService {
      * @return Http status 201
      * @return Http status 404
      */
-    public ResponseEntity<Object> alterar(Long id, Beneficio newBeneficio) {
+    public ResponseEntity<String> alterar(Long id, Beneficio newBeneficio) {
         if (beneficioRepository.existsById(id)) {
             Beneficio oldBeneficio = beneficioRepository.getReferenceById(id);
             oldBeneficio.setNome(newBeneficio.getNome());
@@ -61,6 +63,7 @@ public class BeneficioService {
             beneficioRepository.saveAndFlush(oldBeneficio);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Beneficio alterado com sucesso!");
     }
 }

@@ -55,7 +55,7 @@ public class TestBeneficioController {
                 true
         );
 
-        ResponseEntity<Object> resposta= beneficioController.BeneficioPost(beneficio);
+        ResponseEntity<String> resposta= beneficioController.BeneficioPost(beneficio);
 
         assertThat(beneficioRepository.findFirstByNome("Auxilio").getId()).isGreaterThan(0);
         assertThat(resposta).isEqualTo(new ResponseEntity<>(HttpStatus.CREATED));
@@ -74,7 +74,7 @@ public class TestBeneficioController {
         );
 
         beneficioController.BeneficioPost(beneficio);
-        ResponseEntity<Object> resposta=beneficioController.BeneficioDelete(beneficioRepository.findFirstByNome("Auxilio").getId());
+        ResponseEntity<String> resposta=beneficioController.BeneficioDelete(beneficioRepository.findFirstByNome("Auxilio").getId());
 
         assertThat(resposta).isEqualTo(new ResponseEntity<>(HttpStatus.ACCEPTED));
     }
@@ -96,7 +96,7 @@ public class TestBeneficioController {
         );
         beneficioController.BeneficioPost(beneficio);
         beneficioController.BeneficioPost(beneficio2);
-        ResponseEntity<Object> resposta=beneficioController.BeneficioPut(beneficioRepository.findFirstByNome("Auxilio").getId(), beneficio2);
+        ResponseEntity<String> resposta=beneficioController.BeneficioPut(beneficioRepository.findFirstByNome("Auxilio").getId(), beneficio2);
 
         assertThat(resposta).isEqualTo(new ResponseEntity<>(HttpStatus.ACCEPTED));
         assertThat(beneficioRepository.findFirstByNome("Auxilio2")).isNotEqualTo(beneficio);
