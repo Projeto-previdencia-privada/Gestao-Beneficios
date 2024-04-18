@@ -36,7 +36,11 @@ post:
 get:
 	curl -d "cpf=99999999994&beneficio_id=1" -i http://localhost:8082/concessao/individual
 	curl -d "cpf=99999999993&beneficio_id=2" -i http://localhost:8082/concessao/individual
+	curl -d "cpf=99999999994&beneficio_id=2" -i http://localhost:8082/concessao/individual
 	curl -d "cpfRequisitante=99999999994&beneficio_id=4&cpfBeneficiado=99999999993" -i http://localhost:8082/concessao
+desativar:
+
+
 env:
 	echo "POSTGRES_USER=\nPOSTGRES_PASSWORD=\nPGPORT=" > .env
 
