@@ -31,29 +31,31 @@ public class BeneficioController {
      *
      */
     @PostMapping
-    public ResponseEntity<Object> BeneficioPost(@RequestBody Beneficio beneficio)
+    public ResponseEntity<String> BeneficioPost(@RequestBody Beneficio beneficio)
     {
         return beneficioService.adicionar(beneficio);
     }
 
     /**
      * Recebe as chamadas DELETE da API e chama o metodo de deletar beneficios
+     *
      * @param id
      * @return
      */
     @DeleteMapping
-    public ResponseEntity<Object> BeneficioDelete(@RequestParam Long id) {
+    public ResponseEntity<String> BeneficioDelete(@RequestParam Long id) {
         return beneficioService.remover(id);
     }
 
     /**
      * Recebe as chamadas PUT da API e chama o metodo de alteracao de beneficios
+     *
      * @param id
      * @param beneficio
      * @return
      */
     @PutMapping
-    public ResponseEntity<Object> BeneficioPut(@RequestParam Long id,
+    public ResponseEntity<String> BeneficioPut(@RequestParam Long id,
                                                @RequestBody Beneficio beneficio){
         return beneficioService.alterar(id, beneficio);
     }

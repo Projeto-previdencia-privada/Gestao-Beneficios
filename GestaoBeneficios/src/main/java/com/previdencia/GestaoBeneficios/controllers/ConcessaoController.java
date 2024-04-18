@@ -2,16 +2,11 @@ package com.previdencia.GestaoBeneficios.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.previdencia.GestaoBeneficios.models.Beneficio;
-import com.previdencia.GestaoBeneficios.services.BeneficioService;
 import com.previdencia.GestaoBeneficios.services.ConcessaoService;
+
+import java.util.UUID;
 
 /**
  * Controller da classe Beneficios
@@ -31,13 +26,17 @@ public class ConcessaoController {
     }
 
     @PostMapping("/individual")
-    public ResponseEntity<Object> ConcessaoPost(@RequestParam Long cpf,
+    public ResponseEntity<String> ConcessaoPost(@RequestParam Long cpf,
                                                 @RequestParam Long beneficio_id){
         return concessaoService.concederIndividual(cpf, beneficio_id);
     }
     @PostMapping
-    public ResponseEntity<Object> ConcessaoPost(@RequestParam Long cpfRequisitante,
+    public ResponseEntity<String> ConcessaoPost(@RequestParam Long cpfRequisitante,
                                                 @RequestParam Long beneficio_id, @RequestParam  Long cpfBeneficiado){
         return concessaoService.conceder(cpfRequisitante, beneficio_id, cpfBeneficiado);
+    }
+    @PutMapping
+    public ResponseEntity<String> DesativarConcessao(@RequestParam UUID uuid){
+        return concessaoService.desativar(uuid);
     }
 }
