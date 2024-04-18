@@ -93,11 +93,20 @@ public class ConcessaoService {
         double valor;
         double contribuicao = 0;
         Beneficio beneficio = beneficioRepository.getReferenceById(id);
+        List<Concessao> concessaoList = concessaoRepository.findAllByRequisitante(cpf);
 
         Boolean status= verificaBeneficio(1, id, beneficio);
         if(!status) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("O beneficio "+beneficio.getNome()+" não é apropriado para a chamada\n");
+                    .body("O beneficio "+beneficio.getNome()+" não " +
+                            "é apropriado para a chamada\n");
+        }
+        for (Concessao c : concessaoList){
+            if(c.getBeneficio().getId() == id && c.isStatus()){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("O beneficio "+beneficio.getNome()+" ja esta em " +
+                                "uso pelo cpf "+cpf+"\n");
+            }
         }
 
         String url="http://192.168.37.10:8080/contribuintes/consultar/" + cpf;
@@ -129,7 +138,6 @@ public class ConcessaoService {
                             "tempo de contribuicao:"+tempo+"\n");
         }
 
-
         valor = (contribuicao * beneficio.getValor())/100;
         Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(), cpf, cpf,
                 LocalDate.now(), valor, true, beneficio);
@@ -153,12 +161,22 @@ public class ConcessaoService {
         double valor = 0;
         double contribuicao = 0;
         Beneficio beneficio = beneficioRepository.getReferenceById(id);
+        List<Concessao> concessaoList = concessaoRepository.findAllByRequisitante(cpfRequisitante);
 
         Boolean status= verificaBeneficio(2, id, beneficio);
         if(!status) {
             ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("O beneficio "+beneficio.getNome()+" não é apropriado para a chamada\n");
         }
+
+        for (Concessao c : concessaoList){
+            if(c.getBeneficio().getId() == id && c.isStatus()){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("O beneficio "+beneficio.getNome()+" ja esta em " +
+                                "uso pelo cpf "+cpfRequisitante+"\n");
+            }
+        }
+
 
         String url="http://192.168.37.10:8080/contribuintes/consultar/"+ cpfRequisitante;
         RestTemplate restTemplate = new RestTemplate();
