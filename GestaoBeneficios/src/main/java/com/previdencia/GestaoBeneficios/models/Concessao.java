@@ -3,6 +3,8 @@ package com.previdencia.GestaoBeneficios.models;
 import java.time.*;
 import java.util.UUID;
 
+import com.previdencia.GestaoBeneficios.dto.BeneficioRespostaDTO;
+import com.previdencia.GestaoBeneficios.dto.ConcessaoRespostaDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -18,6 +22,8 @@ import jakarta.persistence.Table;
  * @version 1.1
  * @since 1.0
  */
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name="Concessao")
 public class Concessao {
@@ -54,8 +60,8 @@ public class Concessao {
      * @param status
      * @param beneficio
      */
-    public Concessao(UUID id, long requisitante, long beneficiado, LocalDate data, double valor, boolean status,
-                      Beneficio beneficio) {
+    public Concessao(UUID id, long requisitante, long beneficiado, LocalDate data,
+                     double valor, boolean status, Beneficio beneficio) {
         this.id = id;
         this.requisitante = requisitante;
         this.beneficiado = beneficiado;
@@ -65,64 +71,9 @@ public class Concessao {
         this.beneficio = beneficio;
     }
 
-    public Concessao() {
-
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public long getRequisitante() {
-        return requisitante;
-    }
-
-    public void setRequisitante(long requisitante) {
-        this.requisitante = requisitante;
-    }
-
-    public long getBeneficiado() {
-        return beneficiado;
-    }
-
-    public void setBeneficiado(long beneficiado) {
-        this.beneficiado = beneficiado;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public Beneficio getBeneficio() {
-        return beneficio;
-    }
-
-    public void setBeneficio(Beneficio beneficio) {
-        this.beneficio = beneficio;
+    public ConcessaoRespostaDTO transformaDTO(){
+        return new ConcessaoRespostaDTO(id,requisitante,beneficiado,
+                data,valor,status,beneficio);
     }
 
 }

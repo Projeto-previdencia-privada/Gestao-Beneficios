@@ -68,43 +68,63 @@ public class ConcessaoService {
      * @since 1.1
      */
     public ResponseEntity<String> desativar(UUID uuid){
-        try {
-            Concessao concessao = concessaoRepository.getReferenceById(uuid);
-            concessao.setStatus(false);
-            return ResponseEntity.status(HttpStatus.ACCEPTED)
-                    .body("Concessao desativada com sucesso!");
-        }
-        catch(EntityNotFoundException e){
+        if(!concessaoRepository.existsById(uuid)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("UUID nao localizado no banco de dados\n");
         }
+
+        Concessao concessao = concessaoRepository.getReferenceById(uuid);
+        concessao.setStatus(false);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("Concessao desativada com sucesso!");
+    }
+
+    /**
+     * Remove uma concessao
+     * @param uuid Id de identificacao da concessao
+     * @return ResponseEntity confirmando o removimento
+     * @since 1.1
+     */
+    public ResponseEntity<String> remover(UUID uuid){
+        if(!concessaoRepository.existsById(uuid)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("UUID nao localizado no banco de dados\n");
+        }
+
+        concessaoRepository.deleteById(uuid);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("Concessao removida com sucesso!");
     }
 
     /**
      * Metodo que recebe um cpf requerente de um beneficio e analisa e calculo se deve ou nao conceder o beneficio
-     * @param cpf
+     * @param cpfBeneficiado
+     * @param cpfRequisitante
      * @param id
      * @return
      * 		Http status 202 -> Pedido autorizado
      *  	Http status 405 -> Id nao aceito
      */
-    public ResponseEntity<String> concederIndividual(Long cpf, Long id) {
+    public ResponseEntity<String> conceder(Long cpfRequisitante, Long id,
+                                           Long cpfBeneficiado, int op) {
         long tempo = 0;
         double valor;
         double contribuicao = 0;
         Beneficio beneficio = beneficioRepository.getReferenceById(id);
 
-        Boolean status= verificaBeneficio(1, id, beneficio);
-        if(!status) {
+        if(!beneficioRepository.existsById(id) ||
+                (beneficio.isIndividual() && op == 2) ||
+                (!beneficio.isIndividual() && op == 1)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("O beneficio "+beneficio.getNome()+" não é apropriado para a chamada\n");
+                    .body("O beneficio "+beneficio.getNome()+
+                            " não é apropriado para a chamada\n");
         }
 
-        String url="http://192.168.37.10:8080/contribuintes/consultar/" + cpf;
+        String url="${IP}/contribuintes/consultar/{cpf}";
         RestTemplate restTemplate = new RestTemplate();
 
 
-        String string = restTemplate.getForObject(url, String.class);
+        String string = restTemplate.getForObject(url, String.class, cpfRequisitante);
         JsonObject json = new Gson().fromJson(string, JsonObject.class);
 
 
@@ -117,13 +137,13 @@ public class ConcessaoService {
                     "tempo:"+tempo+"\n" +
                     "contribuicao:"+contribuicao+"\n");
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
                     .body("Falha na conexao com API externas\n");
         }
 
         if(beneficio.getRequisitos() > tempo){
             System.out.println("\n\n\n\nTEMPO MINIMO NAO CUMPRIDO\n\n\n\n");
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("Tempo para "+beneficio.getNome()+" insuficiente\n" +
                             "tempo minimo: "+ beneficio.getRequisitos()+"\n" +
                             "tempo de contribuicao:"+tempo+"\n");
@@ -131,81 +151,14 @@ public class ConcessaoService {
 
 
         valor = (contribuicao * beneficio.getValor())/100;
-        Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(), cpf, cpf,
-                LocalDate.now(), valor, true, beneficio);
+        Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(),
+                cpfRequisitante, cpfBeneficiado, LocalDate.now(), valor,
+                true, beneficio);
         concessaoRepository.save(concessaoAutorizada);
+
         return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Concessao Autorizada, UUID da operacao="
+                .body("Concessao Autorizada,\nUUID da operacao="
                         +concessaoAutorizada.getId()+"\n");
     }
 
-    /**
-     * Metodo para conceder beneficios para outra pessoa que nao seja o requisitante
-     *
-     * @param cpfRequisitante
-     * @param id
-     * @param cpfBeneficiado
-     * @return Http status 202 -> Pedido autorizado,
-     * Http status 405 -> Id nao aceito
-     */
-    public ResponseEntity<String> conceder(Long cpfRequisitante, Long id, Long cpfBeneficiado) {
-        long tempo = 0;
-        double valor = 0;
-        double contribuicao = 0;
-        Beneficio beneficio = beneficioRepository.getReferenceById(id);
-
-        Boolean status= verificaBeneficio(2, id, beneficio);
-        if(!status) {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("O beneficio "+beneficio.getNome()+" não é apropriado para a chamada\n");
-        }
-
-        String url="http://192.168.37.10:8080/contribuintes/consultar/"+ cpfRequisitante;
-        RestTemplate restTemplate = new RestTemplate();
-
-        String string = restTemplate.getForObject(url, String.class);
-        JsonObject json = new Gson().fromJson(string, JsonObject.class);
-
-        try {
-            tempo = json.get("tempoContribuicaoMeses").getAsLong();
-            contribuicao = json.get("totalContribuidoAjustado").getAsDouble();
-        } catch (Exception e) {
-            System.out.println("\n\n\n\nJSON NAO GERADO:" +
-                    "tempo:"+tempo+"\n" +
-                    "contribuicao:"+contribuicao+"\n");
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Falha na conexao com API externas\n");
-        }
-
-        if(beneficio.getRequisitos() > tempo){
-            System.out.println("\n\n\n\nTEMPO MINIMO NAO CUMPRIDO\n\n\n\n");
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
-                    .body("Tempo para "+beneficio.getNome()+" insuficiente\n" +
-                            "tempo minimo: "+ beneficio.getRequisitos()+"\n" +
-                            "tempo de contribuicao:"+tempo+"\n");
-        }
-
-        valor = ((contribuicao * beneficio.getValor())/100);
-        Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(),
-                cpfRequisitante, cpfBeneficiado,
-                LocalDate.now(), valor, true, beneficio);
-        concessaoRepository.save(concessaoAutorizada);
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Concessao Autorizada, UUID da operacao="
-                        +concessaoAutorizada.getId()+
-                        "\n");
-    }
-
-    public boolean verificaBeneficio(int options, Long id, Beneficio beneficio) {
-        if (!beneficioRepository.existsById(id)) {
-            System.out.println("\n\n\n\nBENEFICIO NAO LOCALIZADO\n\n\n\n");
-            return false;
-        }
-        if ((beneficio.isIndividual() && options == 2) || !beneficio.isIndividual() && options == 1) {
-            System.out.println("\n\n\n\nBENEFICIO INCORRETO PARA A CHAMADA\n\n\n\n");
-            return false;
-        }
-        return true;
-    }
 }

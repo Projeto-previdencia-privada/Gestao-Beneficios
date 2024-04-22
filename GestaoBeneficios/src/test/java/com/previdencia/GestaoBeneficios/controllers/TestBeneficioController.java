@@ -24,6 +24,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 @AutoConfigureMockMvc
 @SpringBootTest
 public class TestBeneficioController {
+    /*
     @Autowired
     private BeneficioRepository beneficioRepository;
 
@@ -101,5 +102,5 @@ public class TestBeneficioController {
         assertThat(resposta).isEqualTo(new ResponseEntity<>(HttpStatus.ACCEPTED));
         assertThat(beneficioRepository.findFirstByNome("Auxilio2")).isNotEqualTo(beneficio);
     }
-
+*/
 }

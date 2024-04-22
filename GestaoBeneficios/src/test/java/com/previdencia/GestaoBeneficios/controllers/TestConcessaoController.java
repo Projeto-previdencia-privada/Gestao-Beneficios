@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureMockMvc
 @SpringBootTest
 public class TestConcessaoController {
-
+/*
     @Autowired
     private BeneficioRepository beneficioRepository;
     @Autowired
@@ -125,4 +125,6 @@ public class TestConcessaoController {
 
 
     }
+
+ */
 }

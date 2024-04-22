@@ -1,4 +1,13 @@
 services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: swagger_ui_container
+    ports:
+      - 80:8080
+    volumes:
+      - ./APIDoc.yaml:/usr/share/nginx/html/doc/APIDoc.yaml
+    environment:
+      SWAGGER_JSON: /usr/share/nginx/html/doc/APIDoc.yaml
   spring:
     container_name: spring_container
     build:

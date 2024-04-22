@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Repositorio de Concessoes
  *
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
 @Repository
@@ -18,5 +18,6 @@ public interface ConcessaoRepository extends JpaRepository<Concessao, UUID> {
 
     List<Concessao> findAllByRequisitante(Long requisitante);
     Concessao findFirstByRequisitante(Long requisitante);
+    List<Concessao> findAllByStatusTrue();
 
 }

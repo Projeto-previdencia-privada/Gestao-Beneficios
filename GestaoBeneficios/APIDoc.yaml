@@ -1,0 +1,535 @@
+openapi: "3.1.0"
+info:
+  title: "Gestao_Beneficios API"
+  description: "API de gestao de benecios de um sistema de gestao privada"
+  version: "2.0.0"
+servers:
+  - url: "http://192.168.17.8"
+tags:
+  - name: "Beneficios"
+    description: "Chamadas com relacao a criacao e manipulacao de beneficios"
+  - name: "Concessoes"
+    description: "Chamadas com relacao a criacao e autorizacao de concessoes"
+paths:
+  /api/v2.0/beneficios:
+    post:
+      tags:
+        - "Beneficios"
+      summary: "Adiciona um beneficio no sistema"
+      description: "Insere um beneficio no sistema e estabelece as suas regras"
+      operationId: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BeneficioRecebidoDTO"
+              example:
+                nome: "Auxilio Comida"
+                valor: 75
+                requisitos: 12
+                individual: true
+        required: true
+      responses:
+        "200":
+          description: "Beneficio criado com sucesso"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+                example: "Beneficio adicionado com sucesso! \nID : 1\nNome : Auxilio Casa"
+
+        "400":
+          description: "Beneficio ja inserido no sistema"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+                example: "O Beneficio ja esta cadastrado no sistema\nID: 1 \nNome :Auxilio Casa\n"
+    delete:
+      tags:
+        - "Beneficios"
+      summary: "Remove um beneficio no sistema"
+      description: "Remove um beneficio do sistema baseado em seu ID"
+      operationId: ""
+      parameters:
+        - name: "id"
+          description: "ID do beneficio a ser removido"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "202":
+          description: "O beneficio foi removido do banco de dados"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+                example: "Beneficio removido com sucesso!"
+        "404":
+          description: "Erro ao procurar o beneficio"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+                example: "Beneficio com ID 3 nao encontrado\n"
+    put:
+      tags:
+        - "Beneficios"
+      summary: "Altera um beneficio no sistema"
+      description: ""
+      operationId: ""
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BeneficioRecebidoDTO"
+              example:
+                nome: "Auxilio Comida"
+                valor: 50
+                requisitos: 24
+                individual: true
+        required: true
+      responses:
+        "202":
+          description: "O beneficio foi alterado corretamente"
+          content:
+            'application/json':
+              schema:
+                type: "json"
+                example: "Beneficio alterado com sucesso!"
+
+        "400":
+          description: "O beneficio a ser alterado no sistema ja existe sob o novo nome"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+                example: "O Beneficio ja esta cadastrado no sistema\nID : 2\nNome : Pensao por Morte"
+        "404":
+          description: "ID nao levou a um beneficio no sistema"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+                example: "Beneficio com ID 2 nao encontrado\n"
+
+    get:
+      tags:
+        - "Beneficios"
+      summary: "Obtem todos os beneficios no sistema"
+      description: "Entrega em JSON todos beneficios cadastrados no banco de dados"
+      operationId: ""
+      responses:
+        "200":
+          description: "Entrega a lista de beneficios"
+          content:
+            'application/json':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/BeneficioRespostaDTO"
+                example:
+                -  id: 1
+                   nome: Auxilio Casa
+                   valor: 45
+                   requisito: 1
+                   individual: true
+                -  id: 1
+                   nome: Pensao por morte
+                   valor: 80
+                   requisito: 36
+                   individual: false
+        "404":
+          description: "Nenhum beneficio foi registrado no sistema"
+
+  /api/v2.0/beneficios/individual:
+    get:
+      tags:
+        - "Beneficios"
+      summary: "Obtem todos os beneficios individuais no sistema"
+      description: "Entrega em JSON todos os beneficios nao individuais"
+      operationId: ""
+      responses:
+        "200":
+          description: "Entrega a lista de beneficios"
+          content:
+            'application/json':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/BeneficioRespostaDTO"
+                example:
+                  - id: 1
+                    nome: Auxilio Casa
+                    valor: 45
+                    requisito: 1
+                    individual: true
+                  - id: 6
+                    nome: Auxilio Alimentacao
+                    valor: 10
+                    requisito: 1
+                    individual: true
+        "404":
+          description: "Nenhum beneficio foi registrado no sistema"
+
+  /api/v2.0/beneficios/naoindividual:
+    get:
+      tags:
+        - "Beneficios"
+      summary: "Obtem todos os beneficios nao individuais no sistema"
+      description: "Entrega em JSON todos os beneficios nao individuais"
+      operationId: ""
+      responses:
+        "200":
+          description: "Entrega a lista de beneficios"
+          content:
+            'application/json':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/BeneficioRespostaDTO"
+                example:
+                  - id: 3
+                    nome: Pensao Militar
+                    valor: 80
+                    requisito: 340
+                    individual: false
+                  - id: 5
+                    nome: Pensao por morte
+                    valor: 80
+                    requisito: 36
+                    individual: false
+        "404":
+          description: "Nenhum beneficio foi registrado no sistema"
+
+  /api/v2.0/beneficios/{id}:
+    get:
+      tags:
+        - "Beneficios"
+      summary: "Obtem um beneficio no sistema pelo id"
+      description: "Entrega em JSON o beneficio localizado pelo ID do mesmo"
+      operationId: ""
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "Entrega a lista de beneficios"
+          content:
+            'application/json':
+              schema:
+                type: "json"
+                items:
+                  $ref: "#/components/schemas/BeneficioRespostaDTO"
+                example:
+                  - id: 1
+                    nome: Auxilio Casa
+                    valor: 45
+                    requisito: 1
+                    individual: true
+        "404":
+          description: "Nenhum beneficio foi registrado no sistema"
+  /api/v2.0/concessao/soma/{cpf}:
+    get:
+      tags:
+        - "Concessoes"
+      summary: "Obtem a soma dos valores cedidos em beneficios a um cpf"
+      operationId: "GetSoma"
+      parameters:
+        - name: "cpf"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'text/plain':
+              schema:
+                type: "number"
+                format: "double"
+                example: 2000.43
+  /api/v2.0/concessao:
+    post:
+      tags:
+        - "Concessoes"
+      description: "Recebe uma solicitacao de concessao, analiza e caso esteja nos conformes autoriza o registro"
+      summary: "Analiza pedidos de concessoes e os registra"
+      operationId: "ConcessaoPost"
+      parameters:
+        - name: "cpfRequisitante"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+        - name: "beneficio_id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+        - name: "cpfBeneficiado"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+        - name: "op"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "202":
+          description: "Concessao autorizada e registrada"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+                example: "Concessao Autorizada,UUID da operacao = 5a8615fc-3b7d-4894-a7c2-f00c5b60ad1d"
+        "400":
+          description: "Concessao autorizada e registrada"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+                example: "Concessao Autorizada,UUID da operacao = 5a8615fc-3b7d-4894-a7c2-f00c5b60ad1d"
+        "502":
+          description: "Falha na comunicacao com o sistema que entrega os dados do contribuinte"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+                example: "Falha na conexao com API externas\n"
+        "403":
+          description: "O requisitante nao cumpriu os requisitos de tempo minimo do beneficio"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+                example: "Tempo para Pensao por morte insuficiente\ntempo minimo: 120\ntempo de contribuicao: 100\n"
+
+  /api/v2.0/concessao/{uuid}:
+    put:
+      tags:
+        - "Concessoes"
+      summary: "Desativa uma concessao"
+      description: "A patir do UUID cedido, desativa a concessao correspondente ao mesmo do banco de dados"
+      operationId: "DesativarConcessao"
+      parameters:
+        - name: "uuid"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "202":
+          description: "A concessao foi desativada"
+          content:
+            'plain/text':
+              schema:
+                type: "string"
+                example: "Concessao desativada com sucesso!"
+        "404":
+          description: "UUID nao bate com nenhuma concessao"
+          content:
+            'plain/text':
+              schema:
+                type: "string"
+                example: "UUID nao localizado no banco de dados"
+    delete:
+      tags:
+        - "Concessoes"
+      summary: "Remove uma concessao"
+      description: "A patir do UUID cedido, remove a concessao correspondente ao mesmo do banco de dados"
+      operationId: "ApagarConcessao"
+      parameters:
+        - name: "uuid"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "202":
+          description: "A concessao foi removida"
+          content:
+            'plain/text':
+              schema:
+                type: "string"
+                example: "Concessao desativada com sucesso!"
+        "404":
+          description: "UUID nao bate com nenhuma concessao"
+          content:
+            'plain/text':
+              schema:
+                type: "string"
+                example: "UUID nao localizado no banco de dados"
+    get:
+      tags:
+        - "Concessoes"
+      summary: "Obtem todas as concessoes no sistema"
+      description: "Entrega em JSON todas a concessoes cadastradas no banco de dados"
+      operationId: ""
+      responses:
+        "200":
+          description: "Entrega a lista de concessoes"
+          content:
+            'application/json':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Concessao"
+                example:
+                  - id: d740cd6b-09f8-4490-aea0-5d0a5ebdddd2
+                    requisitante: 10000000010
+                    beneficiado: 10000000010
+                    data: "04/01/2024"
+                    valor: 5600.14
+                    status: true
+                    beneficio: 1
+                  - id: 9826e770-70eb-461e-84fb-03467025d857
+                    requisitante: 10000000010
+                    beneficiado: 10000000011
+                    data: "20/03/2024"
+                    valor: 2600.34
+                    status: false
+                    beneficio: 3
+                  - id: 5026e770-49gh-461f-84fb-03467025d900
+                    requisitante: 10000000010
+                    beneficiado: 10000000011
+                    data: "20/03/2024"
+                    valor: 2600.34
+                    status: false
+                    beneficio: 2
+        "404":
+          description: "Nenhuma concessao foi registrada no sistema"
+
+  /api/v2.0/concessao/ativos:
+    get:
+      tags:
+        - "Concessoes"
+      summary: "Obtem todas as concessoes ativas"
+      operationId: "BeneficioGetAllAtivos"
+      responses:
+        "202":
+          description: "Entrega a lista de concessoes ativas"
+          content:
+            'application/json':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Concessao"
+                example:
+                  - id: d740cd6b-09f8-4490-aea0-5d0a5ebdddd2
+                    requisitante: 10000000010
+                    beneficiado: 10000000010
+                    data: "04/01/2024"
+                    valor: 5600.14
+                    status: true
+                    beneficio: 1
+                  - id: 9826e770-70eb-461e-84fb-03467025d857
+                    requisitante: 10000000010
+                    beneficiado: 10000000010
+                    data: "20/03/2024"
+                    valor: 2600.34
+                    status: true
+                    beneficio: 3
+        "404":
+          description: "Nenhuma concessao deste tipo foi registrada no sistema"
+
+
+components:
+  schemas:
+    BeneficioRecebidoDTO:
+      type: "object"
+      properties:
+        nome:
+          type: "string"
+        valor:
+          type: "integer"
+          format: "int32"
+        requisitos:
+          type: "integer"
+          format: "int32"
+        individual:
+          type: "boolean"
+    BeneficioRespostaDTO:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        nome:
+          type: "string"
+        valor:
+          type: "integer"
+          format: "int32"
+        requisitos:
+          type: "integer"
+          format: "int32"
+        individual:
+          type: "boolean"
+
+    Concessao:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        requisitante:
+          type: "integer"
+          format: "int64"
+        beneficiado:
+          type: "integer"
+          format: "int64"
+        data:
+          type: "string"
+          format: "date"
+        valor:
+          type: "number"
+          format: "double"
+        status:
+          type: "boolean"
+        beneficio:
+          $ref: "#/components/schemas/Beneficio"
+    Beneficio:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        nome:
+          type: "string"
+        valor_percentual:
+          type: "integer"
+          format: "int32"
+        contribuicao_minima:
+          type: "integer"
+          format: "int32"
+        individual:
+          type: "boolean"
+        concessoes:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Concessao"
+      required:
+        - "nome"
