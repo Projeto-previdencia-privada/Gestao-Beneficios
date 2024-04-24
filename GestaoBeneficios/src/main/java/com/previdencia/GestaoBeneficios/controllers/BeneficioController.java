@@ -71,8 +71,6 @@ public class BeneficioController {
      * @return
      */
     @PutMapping
-    @Operation(tags = "Beneficios",
-            summary = "Altera um beneficio no sistema")
     public ResponseEntity<String> BeneficioPut(@RequestParam Long id,
                                                @RequestBody BeneficioRecebidoDTO beneficio){
         if(beneficio.getValorPercentual()<=0 ||
@@ -86,8 +84,6 @@ public class BeneficioController {
     }
 
     @GetMapping
-    @Operation(tags = "Beneficios",
-            summary = "Obtem todos os beneficios no sistema")
     public ResponseEntity<List<BeneficioRespostaDTO>> BeneficioGetAll() {
         if(beneficioRepository.findAll().isEmpty()){
             return ResponseEntity.notFound().build();

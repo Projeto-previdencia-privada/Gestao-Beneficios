@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
@@ -110,6 +111,7 @@ public class ConcessaoService {
         long tempo = 0;
         double valor;
         double contribuicao = 0;
+        String string;
         Beneficio beneficio = beneficioRepository.getReferenceById(id);
 
         if(!beneficioRepository.existsById(id) ||
@@ -123,8 +125,15 @@ public class ConcessaoService {
         String url="${IP}/contribuintes/consultar/{cpf}";
         RestTemplate restTemplate = new RestTemplate();
 
+        try {
+            string = restTemplate.getForObject(url, String.class, cpfRequisitante);
+        }
+        catch (RestClientException e) {
+            return ResponseEntity.internalServerError()
+                    .body("Erro na chamada API\n"+e.getMessage());
+        }
 
-        String string = restTemplate.getForObject(url, String.class, cpfRequisitante);
+
         JsonObject json = new Gson().fromJson(string, JsonObject.class);
 
 
@@ -138,7 +147,7 @@ public class ConcessaoService {
                     "contribuicao:"+contribuicao+"\n");
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
-                    .body("Falha na conexao com API externas\n");
+                    .body("Falha na obtencao do JSON\n");
         }
 
         if(beneficio.getTempoMinimo() > tempo){
