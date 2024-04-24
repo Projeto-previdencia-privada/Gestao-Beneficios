@@ -11,8 +11,8 @@ public class BeneficioRespostaDTO {
 
     private long id;
     private String nome;
-    private int valor;
-    private int requisitos;
+    private int valorPercentual;
+    private int tempoMinimo;
     private boolean individual;
 
 }

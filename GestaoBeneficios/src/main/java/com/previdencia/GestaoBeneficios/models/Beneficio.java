@@ -12,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 /**
@@ -24,7 +26,7 @@ import lombok.*;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="Beneficio")
 public class Beneficio implements Serializable {
@@ -35,24 +37,19 @@ public class Beneficio implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-    @JsonProperty("nome")
     @Column(nullable=false,length=40)
-    @NonNull
+    @NotNull(message= "O nome nao deve ser nulo")
     private String nome;
 
-    @JsonProperty("valor_percentual")
     @Column(nullable=false,length=3)
-    @NonNull
-    private int valor;
+    @NotNull(message= "O valor nao deve ser nulo")
+    private int valorPercentual;
 
-    @JsonProperty("contribuicao_minima")
     @Column(nullable=false,length=4)
-    @NonNull
-    private int requisitos;
+    @NotNull(message= "O tempo nao deve ser nulo")
+    private int tempoMinimo;
 
-    @JsonProperty("individual")
     @Column(nullable=false)
-    @NonNull
     private boolean individual;
 
     @OneToMany(mappedBy = "beneficio")
@@ -61,7 +58,7 @@ public class Beneficio implements Serializable {
 
     public BeneficioRespostaDTO transformaDTO(){
         return new BeneficioRespostaDTO(id,nome,
-                valor, requisitos, individual);
+                valorPercentual, tempoMinimo, individual);
     }
 }
 

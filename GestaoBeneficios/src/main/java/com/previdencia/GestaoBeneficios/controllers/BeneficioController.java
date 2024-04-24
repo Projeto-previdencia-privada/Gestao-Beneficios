@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +28,6 @@ import java.util.*;
  */
 @RequestMapping("api/v2.0/beneficios")
 @RestController
-@Tag(name= "Beneficios",
-        description = "Chamadas com relacao a criacao e manipulacao de beneficios")
 public class BeneficioController {
     @Autowired
     private BeneficioService beneficioService;
@@ -41,11 +40,15 @@ public class BeneficioController {
      *
      */
     @PostMapping
-    @Operation(tags = "Beneficios",
-    summary = "Adiciona um beneficio no sistema",
-    description = "Insere um beneficio no sistema")
-    public ResponseEntity<String> BeneficioPost(@Parameter(description = "Beneficio a ser criado") @RequestBody BeneficioRecebidoDTO beneficio)
+    public ResponseEntity<String> BeneficioPost(@RequestBody BeneficioRecebidoDTO beneficio)
     {
+        if(beneficio.getValorPercentual()<=0 ||
+                beneficio.getNome().isBlank() ||
+                beneficio.getTempoMinimo()<=0 ||
+                beneficio.getValorPercentual()>100 ||
+                beneficio.getTempoMinimo()>1200){
+            return ResponseEntity.badRequest().body("Beneficio com valores improprios");
+        }
         return beneficioService.adicionar(beneficio);
     }
 
@@ -56,8 +59,6 @@ public class BeneficioController {
      * @return
      */
     @DeleteMapping
-    @Operation(tags = "Beneficios",
-            summary = "Remove um beneficio no sistema")
     public ResponseEntity<String> BeneficioDelete(@RequestParam Long id) {
         return beneficioService.remover(id);
     }
@@ -74,6 +75,13 @@ public class BeneficioController {
             summary = "Altera um beneficio no sistema")
     public ResponseEntity<String> BeneficioPut(@RequestParam Long id,
                                                @RequestBody BeneficioRecebidoDTO beneficio){
+        if(beneficio.getValorPercentual()<=0 ||
+                beneficio.getNome().isBlank() ||
+                beneficio.getTempoMinimo()<=0 ||
+                beneficio.getValorPercentual()>100 ||
+                beneficio.getTempoMinimo()>1200){
+            return ResponseEntity.badRequest().body("Beneficio com valores improprios");
+        }
         return beneficioService.alterar(id, beneficio);
     }
 
@@ -98,8 +106,6 @@ public class BeneficioController {
     }
 
     @GetMapping("/naoindividual")
-    @Operation(tags = "Beneficios",
-            summary = "Obtem todos os beneficios nao individuais no sistema")
     public ResponseEntity<List<BeneficioRespostaDTO>> BeneficioGetAllNaoIndividual() {
         if(beneficioRepository.findAllByIndividualIsFalse().isEmpty()){
             return ResponseEntity.notFound().build();
@@ -108,8 +114,6 @@ public class BeneficioController {
     }
 
     @GetMapping("/{id}")
-    @Operation(tags = "Beneficios",
-            summary = "Obtem um beneficio no sistema pelo id")
     public ResponseEntity<BeneficioRespostaDTO> BeneficioGetById(@PathVariable Long id) {
         try {
             return ResponseEntity

@@ -97,7 +97,7 @@ public class TestConcessaoController {
                 (concessaoRepository.findFirstByRequisitante(cpf).getRequisitante());
 
         assertThat(soma).isEqualTo(3*concessaoRepository.
-                findFirstByRequisitante(cpf).getValor());
+                findFirstByRequisitante(cpf).getValorPercentual());
 
     }
 

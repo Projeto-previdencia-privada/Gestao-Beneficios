@@ -1,5 +1,7 @@
 package com.previdencia.GestaoBeneficios.controllers;
 
+import br.com.caelum.stella.validation.CPFValidator;
+import br.com.caelum.stella.validation.InvalidStateException;
 import com.previdencia.GestaoBeneficios.dto.BeneficioRespostaDTO;
 import com.previdencia.GestaoBeneficios.models.Concessao;
 import com.previdencia.GestaoBeneficios.repository.ConcessaoRepository;
@@ -31,7 +33,15 @@ public class ConcessaoController {
     private ConcessaoRepository concessaoRepository;
 
     @GetMapping("/soma/{cpf}")
-    public double GetSoma(@PathVariable Long cpf) {
+    public ResponseEntity<String> GetSoma(@PathVariable Long cpf) {
+        CPFValidator cpfValidator = new CPFValidator();
+        try {
+            cpfValidator.assertValid(String.valueOf(cpf));
+        }
+        catch (InvalidStateException e){
+            return ResponseEntity.badRequest().body("Erro na validacao do CPF:\n"
+                    + e.getMessage()+ "\nInsira um CPF valido");
+        }
         return concessaoService.somar(cpf);
     }
 
@@ -40,15 +50,36 @@ public class ConcessaoController {
                                                 @RequestParam Long beneficio_id,
                                                 @RequestParam  Long cpfBeneficiado,
                                                 @RequestParam  int op){
+        CPFValidator cpfValidator = new CPFValidator();
+        try {
+            cpfValidator.assertValid(String.valueOf(cpfBeneficiado));
+            cpfValidator.assertValid(String.valueOf(cpfRequisitante));
+        }
+        catch (InvalidStateException e){
+            return ResponseEntity.badRequest().body("Erro na validacao do CPF:\n"
+                    + e.getMessage()+ "\nInsira um CPF valido");
+        }
         return concessaoService.conceder(cpfRequisitante, beneficio_id, cpfBeneficiado, op);
     }
     @PutMapping("/{uuid}")
-    public ResponseEntity<String> DesativarConcessao(@PathVariable UUID uuid){
-        return concessaoService.desativar(uuid);
+    public ResponseEntity<String> DesativarConcessao(@PathVariable String uuid){
+        try {
+            UUID uuid2 = UUID.fromString(uuid);
+            return concessaoService.desativar(uuid2);
+        }
+        catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body("UUID invalido\n"+e.getMessage());
+        }
     }
     @DeleteMapping("/{uuid}")
-    public ResponseEntity<String> ApagarConcessao(@PathVariable UUID uuid){
-        return concessaoService.remover(uuid);
+    public ResponseEntity<String> ApagarConcessao(@PathVariable String uuid){
+        try {
+            UUID uuid2 = UUID.fromString(uuid);
+            return concessaoService.remover(uuid2);
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("UUID invalido\n" + e.getMessage());
+        }
     }
 
     @GetMapping("/ativos")

@@ -4,7 +4,7 @@ info:
   description: "API de gestao de benecios de um sistema de gestao privada"
   version: "2.0.0"
 servers:
-  - url: "http://192.168.17.8"
+  - url: "http://192.168.17.8:8082"
 tags:
   - name: "Beneficios"
     description: "Chamadas com relacao a criacao e manipulacao de beneficios"

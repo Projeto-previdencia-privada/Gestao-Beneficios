@@ -88,8 +88,8 @@ public class BeneficioService {
 
         Beneficio oldBeneficio = beneficioRepository.getReferenceById(id);
         oldBeneficio.setNome(newBeneficio.getNome());
-        oldBeneficio.setValor(newBeneficio.getValor());
-        oldBeneficio.setRequisitos(newBeneficio.getRequisitos());
+        oldBeneficio.setValorPercentual(newBeneficio.getValorPercentual());
+        oldBeneficio.setTempoMinimo(newBeneficio.getTempoMinimo());
         oldBeneficio.setIndividual(newBeneficio.isIndividual());
         beneficioRepository.saveAndFlush(oldBeneficio);
         return ResponseEntity.status(HttpStatus.ACCEPTED)

@@ -50,7 +50,7 @@ public class ConcessaoService {
      * @return Soma das concessoes
      * @since 1.0
      */
-    public double somar(Long cpf){
+    public ResponseEntity<String> somar(Long cpf){
         List<Concessao> lista = concessaoRepository.findAllByRequisitante(cpf);
         double soma = 0;
         for(Concessao concessao : lista) {
@@ -58,7 +58,7 @@ public class ConcessaoService {
                 soma = soma + concessao.getValor();
             }
         }
-        return soma;
+        return ResponseEntity.ok().body(String.valueOf(soma));
     }
 
     /**
@@ -141,16 +141,16 @@ public class ConcessaoService {
                     .body("Falha na conexao com API externas\n");
         }
 
-        if(beneficio.getRequisitos() > tempo){
+        if(beneficio.getTempoMinimo() > tempo){
             System.out.println("\n\n\n\nTEMPO MINIMO NAO CUMPRIDO\n\n\n\n");
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("Tempo para "+beneficio.getNome()+" insuficiente\n" +
-                            "tempo minimo: "+ beneficio.getRequisitos()+"\n" +
+                            "tempo minimo: "+ beneficio.getTempoMinimo()+"\n" +
                             "tempo de contribuicao:"+tempo+"\n");
         }
 
 
-        valor = (contribuicao * beneficio.getValor())/100;
+        valor = (contribuicao * beneficio.getValorPercentual())/100;
         Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(),
                 cpfRequisitante, cpfBeneficiado, LocalDate.now(), valor,
                 true, beneficio);
