@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3e69b27c-bf71-46c2-8c07-1ccc281db087" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/controllers/BeneficioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/controllers/BeneficioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/repository/BeneficioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/repository/BeneficioRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -198,7 +199,8 @@
       <workItem from="1713914826973" duration="3327000" />
       <workItem from="1713958856164" duration="1548000" />
       <workItem from="1713974834034" duration="334000" />
-      <workItem from="1713987829379" duration="2009000" />
+      <workItem from="1713987829379" duration="3559000" />
+      <workItem from="1714064048322" duration="2418000" />
     </task>
     <servers />
   </component>

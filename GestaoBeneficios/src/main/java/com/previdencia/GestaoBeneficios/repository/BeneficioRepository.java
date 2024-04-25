@@ -18,7 +18,6 @@ import java.util.List;
 @Repository
 public interface BeneficioRepository extends JpaRepository<Beneficio, Long> {
 
-    Beneficio findFirstByNome(String nome);
     List<Beneficio> findAllByIndividualIsTrue();
     List<Beneficio> findAllByIndividualIsFalse();
 }

@@ -1,12 +1,18 @@
 package com.previdencia.GestaoBeneficios.services;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.previdencia.GestaoBeneficios.models.Concessao;
+import io.github.cdimascio.dotenv.Dotenv;
+import io.github.cdimascio.dotenv.DotenvEntriesFilter;
+import io.github.cdimascio.dotenv.DotenvEntry;
 import jakarta.persistence.EntityNotFoundException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -34,6 +40,7 @@ public class ConcessaoService {
 
     @Autowired
     private final BeneficioRepository beneficioRepository;
+
 
     public ConcessaoService(ConcessaoRepository concessaoRepository,
                              BeneficioRepository beneficioRepository) {
@@ -122,7 +129,7 @@ public class ConcessaoService {
                             " não é apropriado para a chamada\n");
         }
 
-        String url="${IP}/contribuintes/consultar/{cpf}";
+        String url= envloader("IP").concat("/contribuintes/consultar/{cpf}");
         RestTemplate restTemplate = new RestTemplate();
 
         try {
@@ -170,4 +177,9 @@ public class ConcessaoService {
                         +concessaoAutorizada.getId()+"\n");
     }
 
+    public String envloader(String key){
+        Dotenv dotenv=Dotenv.configure().directory("./../../../../../../../.env").load();
+        String resposta = dotenv.get(key);
+        return resposta;
+    }
 }
