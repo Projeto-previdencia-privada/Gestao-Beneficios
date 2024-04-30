@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e69b27c-bf71-46c2-8c07-1ccc281db087" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/repository/BeneficioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/repository/BeneficioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Beneficio.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Beneficio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Concessao.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Concessao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/services/ConcessaoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/services/ConcessaoService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +28,7 @@
       <list>
         <option value="OpenAPI" />
         <option value="Class" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>
@@ -76,18 +85,22 @@
     &quot;git-widget-placeholder&quot;: &quot;v2.0&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/leona/Documents/GitHub/Gestao-Beneficios&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/leona/Documents/GitHub/Gestao-Beneficios/GestaoBeneficios&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;swagger&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\leona\Documents\GitHub\Gestao-Beneficios\GestaoBeneficios" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\leona\Documents\GitHub\Gestao-Beneficios\GestaoBeneficios\src\main\resources" />
       <recent name="C:\Users\leona\Desktop\Previdencia Privada\Gestao-Beneficios\GestaoBeneficios" />
       <recent name="C:\Users\leona\Desktop\Previdencia Privada\Gestao-Beneficios" />
     </key>
@@ -110,6 +123,17 @@
     <configuration name="GestaoBeneficiosApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="GestaoBeneficios" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.previdencia.GestaoBeneficios.GestaoBeneficiosApplication" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="true" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+          <ENTRY IS_ENABLED="true" PARSER="env" IS_EXECUTABLE="false" PATH="GestaoBeneficios/.env" />
+        </ENTRIES>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -117,6 +141,7 @@
     <configuration name="GestaoBeneficios: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
+          <option name="envFilePath" value="" />
           <option name="sourceFilePath" value="GestaoBeneficios/docker-compose.yml" />
         </settings>
       </deployment>
@@ -125,6 +150,7 @@
     <configuration name="GestaoBeneficios.psql: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
+          <option name="envFilePath" value="" />
           <option name="services">
             <list>
               <option value="psql" />
@@ -154,6 +180,14 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Docker.GestaoBeneficios.psql: Compose Deployment" />
+      <item itemvalue="Docker.GestaoBeneficios.swagger-ui: Compose Deployment" />
+      <item itemvalue="Docker.GestaoBeneficios: Compose Deployment" />
+      <item itemvalue="HTTP Request.All in generated-requests" />
+      <item itemvalue="JAR Application.GestaoBeneficios-0.0.1-SNAPSHOT.jar" />
+      <item itemvalue="Spring Boot.GestaoBeneficiosApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Docker.GestaoBeneficios: Compose Deployment" />
@@ -200,7 +234,9 @@
       <workItem from="1713958856164" duration="1548000" />
       <workItem from="1713974834034" duration="334000" />
       <workItem from="1713987829379" duration="3559000" />
-      <workItem from="1714064048322" duration="2418000" />
+      <workItem from="1714064048322" duration="11861000" />
+      <workItem from="1714089163122" duration="1591000" />
+      <workItem from="1714149763315" duration="10619000" />
     </task>
     <servers />
   </component>

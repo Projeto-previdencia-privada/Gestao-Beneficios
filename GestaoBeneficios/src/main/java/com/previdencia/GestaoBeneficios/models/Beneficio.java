@@ -1,4 +1,5 @@
 package com.previdencia.GestaoBeneficios.models;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -28,32 +29,25 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="Beneficio")
-public class Beneficio implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class Beneficio{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     @Column(nullable=false,length=40)
-    @NotNull(message= "O nome nao deve ser nulo")
     private String nome;
 
     @Column(nullable=false,length=3)
-    @NotNull(message= "O valor nao deve ser nulo")
     private int valorPercentual;
 
     @Column(nullable=false,length=4)
-    @NotNull(message= "O tempo nao deve ser nulo")
     private int tempoMinimo;
 
     @Column(nullable=false)
     private boolean individual;
 
     @OneToMany(mappedBy = "beneficio")
-    @Column(nullable=true,length=4)
+    @Column(nullable=true)
     private List<Concessao> concessoes;
 
     public BeneficioRespostaDTO transformaDTO(){

@@ -119,17 +119,22 @@ public class ConcessaoService {
         double valor;
         double contribuicao = 0;
         String string;
-        Beneficio beneficio = beneficioRepository.getReferenceById(id);
+        Beneficio beneficio = procuraBeneficio(id);
 
-        if(!beneficioRepository.existsById(id) ||
-                (beneficio.isIndividual() && op == 2) ||
+        if(beneficio == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        if((beneficio.isIndividual() && op == 2) ||
                 (!beneficio.isIndividual() && op == 1)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("O beneficio "+beneficio.getNome()+
                             " não é apropriado para a chamada\n");
         }
 
-        String url= envloader("IP").concat("/contribuintes/consultar/{cpf}");
+        Dotenv dotenv=Dotenv.load();
+
+        String url= "http://"+ dotenv.get("IPPORT")+"/contribuintes/consultar/{cpf}";
         RestTemplate restTemplate = new RestTemplate();
 
         try {
@@ -177,9 +182,11 @@ public class ConcessaoService {
                         +concessaoAutorizada.getId()+"\n");
     }
 
-    public String envloader(String key){
-        Dotenv dotenv=Dotenv.configure().directory("./../../../../../../../.env").load();
-        String resposta = dotenv.get(key);
-        return resposta;
+
+    public Beneficio procuraBeneficio(Long id){
+        if(!beneficioRepository.existsById(id)) {
+            return null;
+        }
+        return beneficioRepository.getReferenceById(id);
     }
 }

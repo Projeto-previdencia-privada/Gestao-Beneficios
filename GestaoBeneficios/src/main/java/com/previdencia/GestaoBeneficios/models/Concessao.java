@@ -50,16 +50,7 @@ public class Concessao {
     @JoinColumn(nullable= false)
     private Beneficio beneficio;
 
-    /**
-     * Construtor da classe Concessoes
-     * @param id
-     * @param requisitante
-     * @param beneficiado
-     * @param data
-     * @param valor
-     * @param status
-     * @param beneficio
-     */
+
     public Concessao(UUID id, long requisitante, long beneficiado, LocalDate data,
                      double valor, boolean status, Beneficio beneficio) {
         this.id = id;

@@ -22,15 +22,15 @@ services:
     ports:
       - 8082:8080
     env_file:
-      - ./.env
+      .env
     depends_on:
-    - psql
+      - psql
 
   psql:
     container_name: postgres_container
-    image: postgres:alpine3.18
+    image: postgres:16.2
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -39,7 +39,7 @@ services:
     ports:
       - ${PGPORT}:${PGPORT}
     env_file:
-      - ./.env
+      .env
 
 volumes:
-  db_data:
+  db-data:
