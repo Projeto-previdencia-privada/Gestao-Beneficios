@@ -8,21 +8,22 @@ services:
       - ./APIDoc.yaml:/usr/share/nginx/html/doc/APIDoc.yaml
     environment:
       SWAGGER_JSON: /usr/share/nginx/html/doc/APIDoc.yaml
+
   spring:
     container_name: spring_container
     build:
       context: .
       dockerfile: ./Dockerfile
     environment:
-      SPRING_APPLICATION_NAME: Beneficios
+      SPRING_APPLICATION_NAME: ${SPRING_NAME}
       SPRING_JPA_HIBERNATE.DDL_AUTO: update
-      SPRING_DATASOURCE_URL: jdbc:postgresql://psql:${PGPORT}/GerenciaBeneficios
+      SPRING_DATASOURCE_URL: jdbc:postgresql://psql:${PGPORT}/GestaoBeneficios
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+    env_file:
+      - .env
     ports:
       - 8082:8080
-    env_file:
-      .env
     depends_on:
       - psql
 
@@ -34,10 +35,10 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: GerenciaBeneficios
+      POSTGRES_DB: GestaoBeneficios
       PGPORT: ${PGPORT}
     ports:
-      - ${PGPORT}:${PGPORT}
+      - ${PGPORT}:5432
     env_file:
       .env
 

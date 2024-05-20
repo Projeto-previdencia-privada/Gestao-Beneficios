@@ -2,10 +2,10 @@ package com.previdencia.GestaoBeneficios.controllers;
 
 import br.com.caelum.stella.validation.CPFValidator;
 import br.com.caelum.stella.validation.InvalidStateException;
-import com.previdencia.GestaoBeneficios.dto.BeneficioRespostaDTO;
+import com.previdencia.GestaoBeneficios.dto.ConcessaoPedidoDTO;
 import com.previdencia.GestaoBeneficios.models.Concessao;
 import com.previdencia.GestaoBeneficios.repository.ConcessaoRepository;
-import io.swagger.v3.oas.annotations.Operation;
+import com.previdencia.GestaoBeneficios.services.ContribuicaoConnection;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +22,22 @@ import java.util.UUID;
  * @since 1.0
  * @author Leonardo Fachinello Bonetti
  */
-@RequestMapping("api/v2.0/concessao")
+@RequestMapping("api/concessao")
 @RestController
 @Tag(name= "Concessoes",
         description = "Chamadas com relacao a autorizacao e criacao de concessoes")
 public class ConcessaoController {
+
+    private final ConcessaoService concessaoService;
+
+    private final ConcessaoRepository concessaoRepository;
+
     @Autowired
-    private ConcessaoService concessaoService;
-    @Autowired
-    private ConcessaoRepository concessaoRepository;
+    public ConcessaoController(ConcessaoService concessaoService,
+                                ConcessaoRepository concessaoRepository) {
+        this.concessaoService = concessaoService;
+        this.concessaoRepository = concessaoRepository;
+    }
 
     @GetMapping("/soma/{cpf}")
     public ResponseEntity<String> GetSoma(@PathVariable Long cpf) {
@@ -46,22 +53,19 @@ public class ConcessaoController {
     }
 
     @PostMapping
-    public ResponseEntity<String> ConcessaoPost(@RequestParam Long cpfRequisitante,
-                                                @RequestParam Long beneficio_id,
-                                                @RequestParam  Long cpfBeneficiado,
-                                                @RequestParam  int op){
+    public ResponseEntity<String> ConcessaoPost(@RequestBody ConcessaoPedidoDTO concessao){
         CPFValidator cpfValidator = new CPFValidator();
         try {
-            cpfValidator.assertValid(String.valueOf(cpfBeneficiado));
-            cpfValidator.assertValid(String.valueOf(cpfRequisitante));
+            cpfValidator.assertValid(String.valueOf(concessao.getRequisitante()));
+            cpfValidator.assertValid(String.valueOf(concessao.getBeneficiado()));
         }
         catch (InvalidStateException e){
             return ResponseEntity.badRequest().body("Erro na validacao do CPF:\n"
                     + e.getMessage()+ "\nInsira um CPF valido");
         }
-        return concessaoService.conceder(cpfRequisitante, beneficio_id, cpfBeneficiado, op);
+        return concessaoService.conceder(concessao);
     }
-    @PutMapping("/{uuid}")
+    @PatchMapping("/{uuid}")
     public ResponseEntity<String> DesativarConcessao(@PathVariable String uuid){
         try {
             UUID uuid2 = UUID.fromString(uuid);
@@ -69,16 +73,6 @@ public class ConcessaoController {
         }
         catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body("UUID invalido\n"+e.getMessage());
-        }
-    }
-    @DeleteMapping("/{uuid}")
-    public ResponseEntity<String> ApagarConcessao(@PathVariable String uuid){
-        try {
-            UUID uuid2 = UUID.fromString(uuid);
-            return concessaoService.remover(uuid2);
-        }
-        catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("UUID invalido\n" + e.getMessage());
         }
     }
 
@@ -96,5 +90,11 @@ public class ConcessaoController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.accepted().body(concessaoRepository.findAll());
+    }
+
+    @GetMapping("/teste")
+    public String TesteConexao(){
+        ContribuicaoConnection con = new ContribuicaoConnection();
+        return con.teste();
     }
 }

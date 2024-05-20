@@ -1,9 +1,5 @@
 package com.previdencia.GestaoBeneficios.models;
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.previdencia.GestaoBeneficios.dto.BeneficioRespostaDTO;
 import jakarta.persistence.Column;
@@ -12,9 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 /**
@@ -43,8 +36,8 @@ public class Beneficio{
     @Column(nullable=false,length=4)
     private int tempoMinimo;
 
-    @Column(nullable=false)
-    private boolean individual;
+    @Column
+    private boolean status;
 
     @OneToMany(mappedBy = "beneficio")
     @Column(nullable=true)
@@ -52,7 +45,7 @@ public class Beneficio{
 
     public BeneficioRespostaDTO transformaDTO(){
         return new BeneficioRespostaDTO(id,nome,
-                valorPercentual, tempoMinimo, individual);
+                valorPercentual, tempoMinimo, status);
     }
 }
 

@@ -3,19 +3,10 @@ package com.previdencia.GestaoBeneficios.controllers;
 import com.previdencia.GestaoBeneficios.dto.BeneficioRecebidoDTO;
 import com.previdencia.GestaoBeneficios.dto.BeneficioRespostaDTO;
 import com.previdencia.GestaoBeneficios.repository.BeneficioRepository;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.previdencia.GestaoBeneficios.models.Beneficio;
 import com.previdencia.GestaoBeneficios.services.BeneficioService;
 
 import java.util.*;
@@ -26,13 +17,19 @@ import java.util.*;
  * @since 1.0
  * @author Leonardo Fachinello Bonetti
  */
-@RequestMapping("api/v2.0/beneficios")
+@RequestMapping("api/beneficio")
 @RestController
 public class BeneficioController {
+    private final BeneficioService beneficioService;
+
+    private final BeneficioRepository beneficioRepository;
+
     @Autowired
-    private BeneficioService beneficioService;
-    @Autowired
-    private BeneficioRepository beneficioRepository;
+    public BeneficioController(BeneficioService beneficioService,
+                               BeneficioRepository beneficioRepository) {
+        this.beneficioService = beneficioService;
+        this.beneficioRepository = beneficioRepository;
+    }
 
     /**
      * Recebe as chamadas POST da API e chama o metodo de adicionar beneficio
@@ -44,23 +41,21 @@ public class BeneficioController {
     {
         if(beneficio.getValorPercentual()<=0 ||
                 beneficio.getNome().isBlank() ||
-                beneficio.getTempoMinimo()<=0 ||
-                beneficio.getValorPercentual()>100 ||
-                beneficio.getTempoMinimo()>1200){
+                beneficio.getTempoMinimo()<0){
             return ResponseEntity.badRequest().body("Beneficio com valores improprios");
         }
         return beneficioService.adicionar(beneficio);
     }
 
     /**
-     * Recebe as chamadas DELETE da API e chama o metodo de deletar beneficios
+     * Recebe as chamadas PATCH da API e chama o metodo de deletar beneficios
      *
      * @param id
      * @return
      */
-    @DeleteMapping
-    public ResponseEntity<String> BeneficioDelete(@RequestParam Long id) {
-        return beneficioService.remover(id);
+    @PatchMapping
+    public ResponseEntity<String> BeneficioDesativar(@RequestParam Long id) {
+        return beneficioService.desativar(id);
     }
 
     /**
@@ -68,16 +63,13 @@ public class BeneficioController {
      *
      * @param id
      * @param beneficio
-     * @return
      */
     @PutMapping
     public ResponseEntity<String> BeneficioPut(@RequestParam Long id,
                                                @RequestBody BeneficioRecebidoDTO beneficio){
         if(beneficio.getValorPercentual()<=0 ||
                 beneficio.getNome().isBlank() ||
-                beneficio.getTempoMinimo()<=0 ||
-                beneficio.getValorPercentual()>100 ||
-                beneficio.getTempoMinimo()>1200){
+                beneficio.getTempoMinimo()<0){
             return ResponseEntity.badRequest().body("Beneficio com valores improprios");
         }
         return beneficioService.alterar(id, beneficio);
@@ -88,25 +80,7 @@ public class BeneficioController {
         if(beneficioRepository.findAll().isEmpty()){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.accepted().body(beneficioService.listarBeneficios(1));
-    }
-
-    @GetMapping("/individual")
-    @Operation(tags = "Beneficios",
-            summary = "Obtem todos os beneficios individuais no sistema")
-    public ResponseEntity<List<BeneficioRespostaDTO>> BeneficioGetAllIndividual() {
-        if(beneficioRepository.findAllByIndividualIsTrue().isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.accepted().body(beneficioService.listarBeneficios(2));
-    }
-
-    @GetMapping("/naoindividual")
-    public ResponseEntity<List<BeneficioRespostaDTO>> BeneficioGetAllNaoIndividual() {
-        if(beneficioRepository.findAllByIndividualIsFalse().isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.accepted().body(beneficioService.listarBeneficios(3));
+        return ResponseEntity.accepted().body(beneficioService.listarBeneficios());
     }
 
     @GetMapping("/{id}")

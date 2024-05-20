@@ -1,25 +1,17 @@
 package com.previdencia.GestaoBeneficios.services;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.previdencia.GestaoBeneficios.dto.ConcessaoPedidoDTO;
 import com.previdencia.GestaoBeneficios.models.Concessao;
-import io.github.cdimascio.dotenv.Dotenv;
-import io.github.cdimascio.dotenv.DotenvEntriesFilter;
-import io.github.cdimascio.dotenv.DotenvEntry;
-import jakarta.persistence.EntityNotFoundException;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 
@@ -34,18 +26,21 @@ import com.previdencia.GestaoBeneficios.repository.ConcessaoRepository;
  * @since 1.0
  */
 @Service
-public class ConcessaoService {
-    @Autowired
+public class ConcessaoService{
+
     private final ConcessaoRepository concessaoRepository;
 
-    @Autowired
     private final BeneficioRepository beneficioRepository;
 
+    private final ContribuicaoConnection connection;
 
+    @Autowired
     public ConcessaoService(ConcessaoRepository concessaoRepository,
-                             BeneficioRepository beneficioRepository) {
+                             BeneficioRepository beneficioRepository,
+                            ContribuicaoConnection connection) {
         this.concessaoRepository = concessaoRepository;
         this.beneficioRepository = beneficioRepository;
+        this.connection = connection;
     }
 
     /**
@@ -84,102 +79,66 @@ public class ConcessaoService {
         Concessao concessao = concessaoRepository.getReferenceById(uuid);
         concessao.setStatus(false);
         return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Concessao desativada com sucesso!");
-    }
-
-    /**
-     * Remove uma concessao
-     * @param uuid Id de identificacao da concessao
-     * @return ResponseEntity confirmando o removimento
-     * @since 1.1
-     */
-    public ResponseEntity<String> remover(UUID uuid){
-        if(!concessaoRepository.existsById(uuid)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("UUID nao localizado no banco de dados\n");
-        }
-
-        concessaoRepository.deleteById(uuid);
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Concessao removida com sucesso!");
+                .build();
     }
 
     /**
      * Metodo que recebe um cpf requerente de um beneficio e analisa e calculo se deve ou nao conceder o beneficio
-     * @param cpfBeneficiado
-     * @param cpfRequisitante
-     * @param id
+     * @param concessao
      * @return
      * 		Http status 202 -> Pedido autorizado
      *  	Http status 405 -> Id nao aceito
      */
-    public ResponseEntity<String> conceder(Long cpfRequisitante, Long id,
-                                           Long cpfBeneficiado, int op) {
+    public ResponseEntity<String> conceder(@NotNull ConcessaoPedidoDTO concessao) {
         long tempo = 0;
         double valor;
+        Long cpfRequisitante= concessao.getRequisitante();
+        Long cpfBeneficiado= concessao.getBeneficiado();
         double contribuicao = 0;
-        String string;
-        Beneficio beneficio = procuraBeneficio(id);
+        Beneficio beneficio = procuraBeneficio(concessao.getBeneficio());
 
         if(beneficio == null){
             return ResponseEntity.notFound().build();
         }
 
-        if((beneficio.isIndividual() && op == 2) ||
-                (!beneficio.isIndividual() && op == 1)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("O beneficio "+beneficio.getNome()+
-                            " não é apropriado para a chamada\n");
-        }
-
-        Dotenv dotenv=Dotenv.load();
-
-        String url= "http://"+ dotenv.get("IPPORT")+"/contribuintes/consultar/{cpf}";
-        RestTemplate restTemplate = new RestTemplate();
-
-        try {
-            string = restTemplate.getForObject(url, String.class, cpfRequisitante);
-        }
-        catch (RestClientException e) {
-            return ResponseEntity.internalServerError()
-                    .body("Erro na chamada API\n"+e.getMessage());
-        }
-
-
-        JsonObject json = new Gson().fromJson(string, JsonObject.class);
-
-
+        JsonObject json = new Gson().fromJson(connection.createGetRequest(Long.toString(cpfRequisitante))
+                , JsonObject.class);
         try {
             tempo = json.get("tempoContribuicaoMeses").getAsLong();
             contribuicao = json.get("totalContribuidoAjustado").getAsDouble();
         }
         catch (Exception e) {
-            System.out.println("\n\n\n\nJSON NAO GERADO:" +
-                    "tempo:"+tempo+"\n" +
-                    "contribuicao:"+contribuicao+"\n");
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
                     .body("Falha na obtencao do JSON\n");
         }
-
-        if(beneficio.getTempoMinimo() > tempo){
-            System.out.println("\n\n\n\nTEMPO MINIMO NAO CUMPRIDO\n\n\n\n");
+        if(verificaBeneficio(beneficio, tempo)){
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("Tempo para "+beneficio.getNome()+" insuficiente\n" +
                             "tempo minimo: "+ beneficio.getTempoMinimo()+"\n" +
                             "tempo de contribuicao:"+tempo+"\n");
         }
 
+        valor = calculaValor(contribuicao, beneficio.getValorPercentual());
+        adicionar(cpfRequisitante,cpfBeneficiado,valor,beneficio);
+        return ResponseEntity.accepted().build();
+    }
 
-        valor = (contribuicao * beneficio.getValorPercentual())/100;
+    public Concessao calcularConcessao(double contribuicao){
+
+        return null;
+    }
+
+    public boolean adicionar(Long cpfRequisitante,
+                                            Long cpfBeneficiado, double valor,
+                                            Beneficio beneficio){
+
         Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(),
                 cpfRequisitante, cpfBeneficiado, LocalDate.now(), valor,
                 true, beneficio);
-        concessaoRepository.save(concessaoAutorizada);
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Concessao Autorizada,\nUUID da operacao="
-                        +concessaoAutorizada.getId()+"\n");
+        concessaoRepository.save(concessaoAutorizada);
+        return true;
     }
 
 
@@ -188,5 +147,16 @@ public class ConcessaoService {
             return null;
         }
         return beneficioRepository.getReferenceById(id);
+    }
+
+    public Double calculaValor(double contribuicao, double valorPercentual){
+        return ((contribuicao * valorPercentual)/100);
+    }
+
+    public boolean verificaBeneficio(Beneficio beneficio, Long tempo){
+        if(beneficio.getTempoMinimo() > tempo || beneficio.isStatus()== false){
+            return false;
+        }
+        return true;
     }
 }

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.previdencia.GestaoBeneficios.models.Beneficio;
 import com.previdencia.GestaoBeneficios.repository.BeneficioRepository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +24,10 @@ import java.util.List;
  */
 @Service
 public class BeneficioService {
-    @Autowired
+
     private final BeneficioRepository beneficioRepository;
 
+    @Autowired
     public BeneficioService(BeneficioRepository beneficioRepository) {
         this.beneficioRepository = beneficioRepository;
     }
@@ -46,23 +49,19 @@ public class BeneficioService {
         Beneficio beneficio = beneficioDTO.transformaBeneficio();
         beneficioRepository.save(beneficio);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Beneficio adicionado com sucesso!\n" +
-                "ID : " + beneficio.getId()+"\nNome : "+beneficio.getNome()+"\n");
+                .body("ID : " + beneficio.getId());
     }
 
-    /**
-     * Metodo que recebe um benefício a ser excluido do banco de dados
-     * @param id id do beneficio a ser removido
-     * @return Http status 201
-     */
-    public ResponseEntity<String> remover(Long id) {
+    @Transactional(propagation = Propagation.MANDATORY)
+    public ResponseEntity<String> desativar(Long id) {
         if(!beneficioRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Beneficio com ID "+id+" nao encontrado\n");
         }
-        beneficioRepository.deleteById(id);
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Beneficio removido com sucesso!\n");
+
+        Beneficio beneficio = beneficioRepository.getReferenceById(id);
+        beneficio.setStatus(false);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     /**
@@ -90,25 +89,16 @@ public class BeneficioService {
         oldBeneficio.setNome(newBeneficio.getNome());
         oldBeneficio.setValorPercentual(newBeneficio.getValorPercentual());
         oldBeneficio.setTempoMinimo(newBeneficio.getTempoMinimo());
-        oldBeneficio.setIndividual(newBeneficio.isIndividual());
         beneficioRepository.saveAndFlush(oldBeneficio);
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .body("Beneficio alterado com sucesso!\n");
     }
 
-    public List<BeneficioRespostaDTO> listarBeneficios(int op){
+    public List<BeneficioRespostaDTO> listarBeneficios(){
         List<BeneficioRespostaDTO> beneficioRespostaDTOList = new ArrayList<>();
-        List<Beneficio> beneficioList =new ArrayList<>();
+        List<Beneficio> beneficioList;
 
-        if(op == 1){
-            beneficioList = beneficioRepository.findAll();
-        }
-        if(op == 2){
-            beneficioList = beneficioRepository.findAllByIndividualIsTrue();
-        }
-        if(op == 3){
-            beneficioList = beneficioRepository.findAllByIndividualIsFalse();
-        }
+        beneficioList = beneficioRepository.findAll();
 
         for(Beneficio beneficio : beneficioList){
             beneficioRespostaDTOList.add(beneficio.transformaDTO());

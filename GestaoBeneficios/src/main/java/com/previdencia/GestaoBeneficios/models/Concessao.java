@@ -3,7 +3,6 @@ package com.previdencia.GestaoBeneficios.models;
 import java.time.*;
 import java.util.UUID;
 
-import com.previdencia.GestaoBeneficios.dto.BeneficioRespostaDTO;
 import com.previdencia.GestaoBeneficios.dto.ConcessaoRespostaDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,7 +42,7 @@ public class Concessao {
     @Column(nullable=false,length=8)
     private double valor;
 
-    @Column(nullable=false)
+    @Column
     private boolean status;
 
     @ManyToOne

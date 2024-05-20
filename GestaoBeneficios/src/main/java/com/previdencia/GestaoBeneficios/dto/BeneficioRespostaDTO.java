@@ -13,6 +13,6 @@ public class BeneficioRespostaDTO {
     private String nome;
     private int valorPercentual;
     private int tempoMinimo;
-    private boolean individual;
+    private boolean status;
 
 }

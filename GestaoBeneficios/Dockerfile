@@ -1,5 +1,16 @@
-FROM eclipse-temurin:21
-RUN mkdir /opt/app
-COPY target/GestaoBeneficios-0.0.1-SNAPSHOT.jar /opt/app
-CMD ["java", "-jar", "/opt/app/GestaoBeneficios-0.0.1-SNAPSHOT.jar"]
-EXPOSE 8082
+FROM eclipse-temurin:21 as builder
+WORKDIR /app
+
+COPY . /app
+COPY pom.xml /app
+COPY .env /app/src/main/resources/
+
+#Windows only
+RUN sed -i 's/\r$//' mvnw
+
+RUN ./mvnw clean install -DskipTests
+
+
+FROM eclipse-temurin:17-jdk-alpine as prod
+COPY --from=builder /app/target/*.jar app.jar
+CMD ["java", "-jar", "app.jar"]
