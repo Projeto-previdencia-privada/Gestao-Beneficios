@@ -54,7 +54,7 @@ public class BeneficioController {
      * @param id
      * @return
      */
-    @CrossOrigin(origins = "http://localhost:5300")
+    @CrossOrigin(origins = "http://192.168.37.16:5300")
     @PatchMapping("/{id}")
     public ResponseEntity<String> BeneficioDesativar(@PathVariable Long id) {
 
@@ -66,7 +66,7 @@ public class BeneficioController {
      * @param id
      * @param beneficio
      */
-    @CrossOrigin(origins = "http://localhost:5300")
+    @CrossOrigin(origins = "http://192.168.37.16:5300")
     @PutMapping("/{id}")
     public ResponseEntity<String> BeneficioPut(@PathVariable Long id,
                                                @RequestBody BeneficioRecebidoDTO beneficio){
@@ -78,7 +78,7 @@ public class BeneficioController {
         return beneficioService.alterar(id, beneficio);
     }
 
-    @CrossOrigin(origins = "http://localhost:5300")
+    @CrossOrigin(origins = "http://192.168.37.16:5300")
     @GetMapping
     public ResponseEntity<List<BeneficioRespostaDTO>> BeneficioGetAll() {
         if(beneficioRepository.findAll().isEmpty()){
@@ -87,7 +87,7 @@ public class BeneficioController {
         return ResponseEntity.accepted().body(beneficioService.listarBeneficios());
     }
 
-    @CrossOrigin(origins = "http://localhost:5300")
+    @CrossOrigin(origins = "http://192.168.37.16:5300")
     @GetMapping("/{id}")
     public ResponseEntity<BeneficioRespostaDTO> BeneficioGetById(@PathVariable Long id) {
         try {

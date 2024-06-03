@@ -48,12 +48,12 @@ const Concessoes = () =>{
     }
 
     const desativarConcessao=(uuid: string)=>{
-        await fetch('http://localhost:8082/api/concessao'+uuid, {
+        await fetch('http://192.168.37.8:8082/api/concessao'+uuid, {
             method: 'PATCH',
             headers: {
                 'Accept': '*/*',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'https://localhost:8082/'
+                'Access-Control-Allow-Origin': 'https://192.168.37.8:8082/'
             }
         })
             .then(response => generateMessage(response))

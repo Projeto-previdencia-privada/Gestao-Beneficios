@@ -40,7 +40,7 @@ public class ConcessaoController {
         this.concessaoRepository = concessaoRepository;
     }
 
-    @CrossOrigin(origins = "http://localhost:5300")
+    @CrossOrigin(origins = "http://192.168.37.16:5300")
     @GetMapping("/soma/{cpf}")
     public ResponseEntity<String> GetSoma(@PathVariable Long cpf) {
         CPFValidator cpfValidator = new CPFValidator();
@@ -54,7 +54,7 @@ public class ConcessaoController {
         return concessaoService.somar(cpf);
     }
 
-    @CrossOrigin(origins = "http://localhost:5300")
+    @CrossOrigin(origins = "http://192.168.37.16:5300")
     @PostMapping
     public ResponseEntity<String> ConcessaoPost(@RequestBody ConcessaoPedidoDTO concessao){
         CPFValidator cpfValidator = new CPFValidator();
@@ -69,7 +69,7 @@ public class ConcessaoController {
         return concessaoService.conceder(concessao);
     }
 
-    @CrossOrigin(origins = "http://localhost:5300")
+    @CrossOrigin(origins = "http://192.168.37.16:5300")
     @PatchMapping("/{uuid}")
     public ResponseEntity<String> DesativarConcessao(@PathVariable String uuid){
         try {
@@ -81,7 +81,7 @@ public class ConcessaoController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:5300")
+    @CrossOrigin(origins = "http://192.168.37.16:5300")
     @GetMapping("/ativos")
     public ResponseEntity<List<ConcessaoRespostaDTO>> ConcessaoGetAllAtivos() {
         List<ConcessaoRespostaDTO> lista= new ArrayList<>();
@@ -92,7 +92,7 @@ public class ConcessaoController {
         return ResponseEntity.accepted().body(lista);
     }
 
-    @CrossOrigin(origins = "http//localhost:5300")
+    @CrossOrigin(origins = "http//192.168.37.16:5300")
     @GetMapping
     public ResponseEntity<List<Concessao>> ConcessaoGetAll() {
         if(concessaoRepository.findAll().isEmpty()){

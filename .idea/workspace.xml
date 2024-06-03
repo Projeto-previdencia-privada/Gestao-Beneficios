@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="3e69b27c-bf71-46c2-8c07-1ccc281db087" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/gestao-beneficios-front.iml" afterDir="false" />
@@ -36,6 +37,9 @@
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ContribuicaoConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ContribuicaoConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/resources/application.properties" afterDir="false" />
     </list>
+=======
+    <list default="true" id="3e69b27c-bf71-46c2-8c07-1ccc281db087" name="Changes" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,6 +96,7 @@
   "keyToString": {
     "Application.GestaoBeneficiosApplication.executor": "Run",
     "Docker.GestaoBeneficios.psql: Compose Deployment.executor": "Run",
+<<<<<<< Updated upstream
     "Docker.GestaoBeneficios.swagger-ui: Compose Deployment.executor": "Run",
     "Docker.GestaoBeneficios/Dockerfile.executor": "Run",
     "Docker.GestaoBeneficios: Compose Deployment.executor": "Run",
@@ -112,10 +117,21 @@
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/leona/Documents/GitHub/Gestao-Beneficios/gestao-beneficios-front/src/components/Input",
+=======
+    "Docker.GestaoBeneficios: Compose Deployment.executor": "Run",
+    "HTTP Request.All in generated-requests.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/leona/Documents/GitHub/Gestao-Beneficios",
+>>>>>>> Stashed changes
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+<<<<<<< Updated upstream
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
     "npm.dev.executor": "Run",
@@ -137,6 +153,14 @@
       </map>
     </option>
   </component>
+=======
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+>>>>>>> Stashed changes
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\leona\Documents\GitHub\Gestao-Beneficios\gestao-beneficios-front\src\components\Input" />
@@ -194,6 +218,7 @@
       </deployment>
       <method v="2" />
     </configuration>
+<<<<<<< Updated upstream
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
       <deployment type="dockerfile">
         <settings />
@@ -241,6 +266,12 @@
       <item itemvalue="Docker.src/Dockerfile" />
       <item itemvalue="Docker.GestaoBeneficios: Compose Deployment" />
       <item itemvalue="npm.dev" />
+=======
+    <list>
+      <item itemvalue="Docker.GestaoBeneficios.psql: Compose Deployment" />
+      <item itemvalue="Docker.GestaoBeneficios: Compose Deployment" />
+      <item itemvalue="HTTP Request.All in generated-requests" />
+>>>>>>> Stashed changes
       <item itemvalue="Spring Boot.GestaoBeneficiosApplication" />
     </list>
     <recent_temporary>

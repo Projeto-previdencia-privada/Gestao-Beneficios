@@ -22,12 +22,12 @@ const FormPage = () =>{
       beneficio.nome = value.nome
       beneficio.valorPercentual= value.valorPercentual
       beneficio.tempoMinimo = value.tempoMinimo
-    fetch('http://localhost:8082/api/beneficio', {
+    fetch('http://192.168.37.8:8082/api/beneficio', {
       method: 'POST',
       headers: {
         'Accept': '*/*',
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://localhost:8082/'
+        'Access-Control-Allow-Origin': 'https://192.168.37.8:8082/'
       },
       body: JSON.stringify(beneficio)
     } ).then(response => manageMessage(response))

@@ -2,7 +2,7 @@
 const HomePage = () => {
   return (
     <div>
-      <br-item>Texto para teste da pagina home</br-item>
+      <br-item>Projeto de Previdencia Privada</br-item>
     </div>
   )
 }

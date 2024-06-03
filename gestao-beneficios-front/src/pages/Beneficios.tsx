@@ -36,7 +36,7 @@ const Beneficios = () =>{
     },[modificar])
 
     async function getBeneficios() {
-        await fetch('http://localhost:8082/api/beneficio', getRequest)
+        await fetch('http://192.168.37.8:8082/api/beneficio', getRequest)
             .then(response => response.json()).then(data => setBeneficios(data))
     }
 
@@ -44,11 +44,11 @@ const Beneficios = () =>{
 
 
     const desativarBeneficio = (id: number) =>{
-        fetch('http://localhost:8082/api/beneficio/'+id, {
+        fetch('http://192.168.37.8:8082/api/beneficio/'+id, {
             method: 'PATCH',
             headers: {
                 'Accept': '*/*',
-                'Access-Control-Allow-Origin': 'https://localhost:8082/'
+                'Access-Control-Allow-Origin': 'https://192.168.37.8:8082/'
             },
         } ).then(response => generateMessage(response))
     }
