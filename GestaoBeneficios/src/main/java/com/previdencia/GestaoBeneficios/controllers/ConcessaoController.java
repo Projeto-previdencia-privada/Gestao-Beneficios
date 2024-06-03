@@ -3,9 +3,9 @@ package com.previdencia.GestaoBeneficios.controllers;
 import br.com.caelum.stella.validation.CPFValidator;
 import br.com.caelum.stella.validation.InvalidStateException;
 import com.previdencia.GestaoBeneficios.dto.ConcessaoPedidoDTO;
+import com.previdencia.GestaoBeneficios.dto.ConcessaoRespostaDTO;
 import com.previdencia.GestaoBeneficios.models.Concessao;
 import com.previdencia.GestaoBeneficios.repository.ConcessaoRepository;
-import com.previdencia.GestaoBeneficios.services.ContribuicaoConnection;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.previdencia.GestaoBeneficios.services.ConcessaoService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,11 +35,12 @@ public class ConcessaoController {
 
     @Autowired
     public ConcessaoController(ConcessaoService concessaoService,
-                                ConcessaoRepository concessaoRepository) {
+                               ConcessaoRepository concessaoRepository) {
         this.concessaoService = concessaoService;
         this.concessaoRepository = concessaoRepository;
     }
 
+    @CrossOrigin(origins = "http://localhost:5300")
     @GetMapping("/soma/{cpf}")
     public ResponseEntity<String> GetSoma(@PathVariable Long cpf) {
         CPFValidator cpfValidator = new CPFValidator();
@@ -52,6 +54,7 @@ public class ConcessaoController {
         return concessaoService.somar(cpf);
     }
 
+    @CrossOrigin(origins = "http://localhost:5300")
     @PostMapping
     public ResponseEntity<String> ConcessaoPost(@RequestBody ConcessaoPedidoDTO concessao){
         CPFValidator cpfValidator = new CPFValidator();
@@ -65,6 +68,8 @@ public class ConcessaoController {
         }
         return concessaoService.conceder(concessao);
     }
+
+    @CrossOrigin(origins = "http://localhost:5300")
     @PatchMapping("/{uuid}")
     public ResponseEntity<String> DesativarConcessao(@PathVariable String uuid){
         try {
@@ -76,25 +81,23 @@ public class ConcessaoController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:5300")
     @GetMapping("/ativos")
-    public ResponseEntity<List<Concessao>> BeneficioGetAllAtivos() {
+    public ResponseEntity<List<ConcessaoRespostaDTO>> ConcessaoGetAllAtivos() {
+        List<ConcessaoRespostaDTO> lista= new ArrayList<>();
         if(concessaoRepository.findAllByStatusTrue().isEmpty()){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.accepted().body(concessaoRepository.findAllByStatusTrue());
+        concessaoRepository.findAllByStatusTrue().forEach(concessao -> lista.add(concessao.transformaDTO()));
+        return ResponseEntity.accepted().body(lista);
     }
 
+    @CrossOrigin(origins = "http//localhost:5300")
     @GetMapping
-    public ResponseEntity<List<Concessao>> BeneficioGetAll() {
+    public ResponseEntity<List<Concessao>> ConcessaoGetAll() {
         if(concessaoRepository.findAll().isEmpty()){
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.accepted().body(concessaoRepository.findAll());
-    }
-
-    @GetMapping("/teste")
-    public String TesteConexao(){
-        ContribuicaoConnection con = new ContribuicaoConnection();
-        return con.teste();
     }
 }

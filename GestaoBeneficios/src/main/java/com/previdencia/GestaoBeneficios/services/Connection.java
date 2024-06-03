@@ -4,4 +4,6 @@ public interface Connection {
 
     String createGetRequest(String param);
 
+    String giveHost();
+
 }

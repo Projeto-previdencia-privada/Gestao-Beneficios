@@ -5,47 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e69b27c-bf71-46c2-8c07-1ccc281db087" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/components/Breadcrumb/Breadcrumb.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/components/Breadcrumb/declarations.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/components/ContainerInput/containerInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/components/Footer/Footer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/components/Footer/declarations.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/components/Header/Header.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/components/Header/declarations.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/components/Menu/Menu.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/pages/AddBeneficios.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/pages/AddConcessoes.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/pages/Home.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestao-beneficios-front/src/pages/Signin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/.env" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/APIDoc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/APIDoc.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/controllers/BeneficioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/controllers/BeneficioController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/controllers/ConcessaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/controllers/ConcessaoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/dto/BeneficioRecebidoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/dto/BeneficioRecebidoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/dto/BeneficioRespostaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/dto/BeneficioRespostaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Beneficio.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Beneficio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/dto/ConcessaoRespostaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/dto/ConcessaoRespostaDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Concessao.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/models/Concessao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/repository/BeneficioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/repository/BeneficioRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/repository/ConcessaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/repository/ConcessaoRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/BeneficioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/BeneficioService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ContribuicaoConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ContribuicaoConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/GestaoBeneficiosApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/controllers/BeneficioController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/controllers/ConcessaoController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/dto/BeneficioRecebidoDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/dto/BeneficioRespostaDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/dto/ConcessaoRespostaDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/models/Beneficio.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/models/Concessao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/repository/BeneficioRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/repository/ConcessaoRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/services/BeneficioService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/services/ConcessaoService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/test-classes/com/previdencia/GestaoBeneficios/GestaoBeneficiosApplicationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/test-classes/com/previdencia/GestaoBeneficios/controllers/TestBeneficioController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/test-classes/com/previdencia/GestaoBeneficios/controllers/TestConcessaoController.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,10 +45,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="OpenAPI" />
-        <option value="Dockerfile" />
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>
@@ -97,46 +88,66 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.GestaoBeneficiosApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.GestaoBeneficios.psql: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.GestaoBeneficios.swagger-ui: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.GestaoBeneficios/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.GestaoBeneficios: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.All in generated-requests.executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.GestaoBeneficios-0.0.1-SNAPSHOT.jar.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.GestaoBeneficiosApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;v3.0&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/leona/Documents/GitHub/Gestao-Beneficios/GestaoBeneficios/src/main/resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.GestaoBeneficiosApplication.executor": "Run",
+    "Docker.GestaoBeneficios.psql: Compose Deployment.executor": "Run",
+    "Docker.GestaoBeneficios.swagger-ui: Compose Deployment.executor": "Run",
+    "Docker.GestaoBeneficios/Dockerfile.executor": "Run",
+    "Docker.GestaoBeneficios: Compose Deployment.executor": "Run",
+    "Docker.gestao-beneficios-front/Dockerfile.executor": "Run",
+    "Docker.gestao-beneficios-front: Compose Deployment.executor": "Run",
+    "Docker.src/Dockerfile.executor": "Run",
+    "HTTP Request.All in generated-requests.executor": "Run",
+    "JAR Application.GestaoBeneficios-0.0.1-SNAPSHOT.jar.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.GestaoBeneficiosApplication.executor": "Run",
+    "git-widget-placeholder": "v3.0",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/leona/Documents/GitHub/Gestao-Beneficios/gestao-beneficios-front/src/components/Input",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
+    "npm.preview.executor": "Run",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\leona\\Documents\\GitHub\\Gestao-Beneficios\\gestao-beneficios-front\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\leona\Documents\GitHub\Gestao-Beneficios\gestao-beneficios-front\src\components\Input" />
+      <recent name="C:\Users\leona\Documents\GitHub\Gestao-Beneficios\gestao-beneficios-front\src" />
       <recent name="C:\Users\leona\Documents\GitHub\Gestao-Beneficios\GestaoBeneficios\src\main\resources" />
       <recent name="C:\Users\leona\Documents\GitHub\Gestao-Beneficios\GestaoBeneficios" />
       <recent name="C:\Users\leona\Documents\GitHub\Gestao-Beneficios\GestaoBeneficios\src\main\java\com\previdencia\GestaoBeneficios\envs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\leona\Documents\GitHub\Gestao-Beneficios\gestao-beneficios-front" />
+      <recent name="C:\Users\leona\Documents\GitHub\Gestao-Beneficios\gestao-beneficios-front\src\components" />
       <recent name="C:\Users\leona\Documents\GitHub\Gestao-Beneficios\GestaoBeneficios\src\main\resources" />
       <recent name="C:\Users\leona\Desktop\Previdencia Privada\Gestao-Beneficios\GestaoBeneficios" />
       <recent name="C:\Users\leona\Desktop\Previdencia Privada\Gestao-Beneficios" />
@@ -150,9 +161,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Docker.GestaoBeneficios: Compose Deployment">
-    <configuration name="All in generated-requests" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http">
-      <method v="2" />
-    </configuration>
     <configuration name="GestaoBeneficiosApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="GestaoBeneficios" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.previdencia.GestaoBeneficios.GestaoBeneficiosApplication" />
@@ -180,42 +188,6 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="GestaoBeneficios/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
-      <deployment type="dockerfile">
-        <settings>
-          <option name="buildOnly" value="true" />
-          <option name="sourceFilePath" value="GestaoBeneficios/Dockerfile" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="GestaoBeneficios.psql: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="envFilePath" value="" />
-          <option name="services">
-            <list>
-              <option value="psql" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="GestaoBeneficios/docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="GestaoBeneficios.swagger-ui: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="swagger-ui" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="GestaoBeneficios/docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -228,21 +200,56 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="gestao-beneficios-front: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="gestao-beneficios-front/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="gestao-beneficios-front/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="gestao-beneficios-front/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="src/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="contextFolderPath" value="$PROJECT_DIR$/gestao-beneficios-front" />
+          <option name="sourceFilePath" value="gestao-beneficios-front/src/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/gestao-beneficios-front/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Docker.GestaoBeneficios/Dockerfile" />
+      <item itemvalue="Docker.gestao-beneficios-front/Dockerfile" />
+      <item itemvalue="Docker.gestao-beneficios-front: Compose Deployment" />
+      <item itemvalue="Docker.src/Dockerfile" />
       <item itemvalue="Docker.GestaoBeneficios: Compose Deployment" />
-      <item itemvalue="Docker.GestaoBeneficios.psql: Compose Deployment" />
-      <item itemvalue="Docker.GestaoBeneficios.swagger-ui: Compose Deployment" />
-      <item itemvalue="HTTP Request.All in generated-requests" />
+      <item itemvalue="npm.dev" />
       <item itemvalue="Spring Boot.GestaoBeneficiosApplication" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Docker.GestaoBeneficios: Compose Deployment" />
-        <item itemvalue="Docker.GestaoBeneficios/Dockerfile" />
-        <item itemvalue="Docker.GestaoBeneficios.swagger-ui: Compose Deployment" />
-        <item itemvalue="HTTP Request.All in generated-requests" />
-        <item itemvalue="Docker.GestaoBeneficios.psql: Compose Deployment" />
+        <item itemvalue="Docker.gestao-beneficios-front: Compose Deployment" />
+        <item itemvalue="Docker.gestao-beneficios-front/Dockerfile" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="Docker.src/Dockerfile" />
       </list>
     </recent_temporary>
   </component>
@@ -303,6 +310,22 @@
       <workItem from="1715968095553" duration="7906000" />
       <workItem from="1716042462227" duration="1963000" />
       <workItem from="1716222986892" duration="19000" />
+      <workItem from="1716229173769" duration="5081000" />
+      <workItem from="1716308072858" duration="12498000" />
+      <workItem from="1716480883013" duration="606000" />
+      <workItem from="1716829336977" duration="15121000" />
+      <workItem from="1716916338657" duration="14541000" />
+      <workItem from="1717000037418" duration="300000" />
+      <workItem from="1717000380985" duration="17613000" />
+      <workItem from="1717078318576" duration="3421000" />
+      <workItem from="1717160562068" duration="820000" />
+      <workItem from="1717168457547" duration="4855000" />
+      <workItem from="1717267895123" duration="14041000" />
+      <workItem from="1717295392814" duration="4955000" />
+      <workItem from="1717302777680" duration="19019000" />
+      <workItem from="1717366462602" duration="13871000" />
+      <workItem from="1717413591611" duration="3972000" />
+      <workItem from="1717431660114" duration="11144000" />
     </task>
     <servers />
   </component>

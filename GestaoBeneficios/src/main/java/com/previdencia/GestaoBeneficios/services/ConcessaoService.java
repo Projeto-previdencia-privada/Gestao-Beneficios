@@ -71,12 +71,12 @@ public class ConcessaoService{
      * @since 1.1
      */
     public ResponseEntity<String> desativar(UUID uuid){
-        if(!concessaoRepository.existsById(uuid)) {
+        if(!concessaoRepository.existsByUuid(uuid)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("UUID nao localizado no banco de dados\n");
         }
 
-        Concessao concessao = concessaoRepository.getReferenceById(uuid);
+        Concessao concessao = concessaoRepository.findByUuid(uuid);
         concessao.setStatus(false);
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .build();
@@ -124,10 +124,6 @@ public class ConcessaoService{
         return ResponseEntity.accepted().build();
     }
 
-    public Concessao calcularConcessao(double contribuicao){
-
-        return null;
-    }
 
     public boolean adicionar(Long cpfRequisitante,
                                             Long cpfBeneficiado, double valor,

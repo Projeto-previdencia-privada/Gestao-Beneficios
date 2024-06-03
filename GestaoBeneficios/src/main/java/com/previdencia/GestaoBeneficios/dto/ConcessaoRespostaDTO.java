@@ -18,5 +18,5 @@ public class ConcessaoRespostaDTO {
     private LocalDate data;
     private double valor;
     private boolean status;
-    private Beneficio beneficio;
+    private String beneficioNome;
 }

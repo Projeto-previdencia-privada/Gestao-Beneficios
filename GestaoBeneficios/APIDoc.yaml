@@ -428,7 +428,7 @@ paths:
       tags:
         - "Concessoes"
       summary: "Obtem todas as concessoes ativas"
-      operationId: "BeneficioGetAllAtivos"
+      operationId: "ConcessaoGetAllAtivos"
       responses:
         "202":
           description: "Entrega a lista de concessoes ativas"

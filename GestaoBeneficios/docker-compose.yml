@@ -15,9 +15,9 @@ services:
       context: .
       dockerfile: ./Dockerfile
     environment:
-      SPRING_APPLICATION_NAME: ${SPRING_NAME}
+      SPRING_APPLICATION_NAME: GerenciaBeneficios
       SPRING_JPA_HIBERNATE.DDL_AUTO: update
-      SPRING_DATASOURCE_URL: jdbc:postgresql://psql:${PGPORT}/GestaoBeneficios
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:${PGPORT}/GestaoBeneficios
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
     env_file:
@@ -25,10 +25,10 @@ services:
     ports:
       - 8082:8080
     depends_on:
-      - psql
+      - db
 
-  psql:
-    container_name: postgres_container
+  db:
+    container_name: spring_db_container
     image: postgres:16.2
     volumes:
       - db-data:/var/lib/postgresql/data
@@ -43,4 +43,6 @@ services:
       .env
 
 volumes:
+  db-auth:
   db-data:
+  auth-data:

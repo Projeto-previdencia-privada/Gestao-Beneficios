@@ -36,6 +36,7 @@ public class BeneficioController {
      * @param beneficio
      *
      */
+    @CrossOrigin(origins = "http://localhost:5300")
     @PostMapping
     public ResponseEntity<String> BeneficioPost(@RequestBody BeneficioRecebidoDTO beneficio)
     {
@@ -53,19 +54,21 @@ public class BeneficioController {
      * @param id
      * @return
      */
-    @PatchMapping
-    public ResponseEntity<String> BeneficioDesativar(@RequestParam Long id) {
+    @CrossOrigin(origins = "http://localhost:5300")
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> BeneficioDesativar(@PathVariable Long id) {
+
         return beneficioService.desativar(id);
     }
-
     /**
      * Recebe as chamadas PUT da API e chama o metodo de alteracao de beneficios
      *
      * @param id
      * @param beneficio
      */
-    @PutMapping
-    public ResponseEntity<String> BeneficioPut(@RequestParam Long id,
+    @CrossOrigin(origins = "http://localhost:5300")
+    @PutMapping("/{id}")
+    public ResponseEntity<String> BeneficioPut(@PathVariable Long id,
                                                @RequestBody BeneficioRecebidoDTO beneficio){
         if(beneficio.getValorPercentual()<=0 ||
                 beneficio.getNome().isBlank() ||
@@ -75,6 +78,7 @@ public class BeneficioController {
         return beneficioService.alterar(id, beneficio);
     }
 
+    @CrossOrigin(origins = "http://localhost:5300")
     @GetMapping
     public ResponseEntity<List<BeneficioRespostaDTO>> BeneficioGetAll() {
         if(beneficioRepository.findAll().isEmpty()){
@@ -83,6 +87,7 @@ public class BeneficioController {
         return ResponseEntity.accepted().body(beneficioService.listarBeneficios());
     }
 
+    @CrossOrigin(origins = "http://localhost:5300")
     @GetMapping("/{id}")
     public ResponseEntity<BeneficioRespostaDTO> BeneficioGetById(@PathVariable Long id) {
         try {

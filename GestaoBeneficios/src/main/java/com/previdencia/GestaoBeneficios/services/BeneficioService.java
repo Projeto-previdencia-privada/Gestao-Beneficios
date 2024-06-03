@@ -52,7 +52,7 @@ public class BeneficioService {
                 .body("ID : " + beneficio.getId());
     }
 
-    @Transactional(propagation = Propagation.MANDATORY)
+    @Transactional(propagation = Propagation.REQUIRED)
     public ResponseEntity<String> desativar(Long id) {
         if(!beneficioRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -96,9 +96,7 @@ public class BeneficioService {
 
     public List<BeneficioRespostaDTO> listarBeneficios(){
         List<BeneficioRespostaDTO> beneficioRespostaDTOList = new ArrayList<>();
-        List<Beneficio> beneficioList;
-
-        beneficioList = beneficioRepository.findAll();
+        List<Beneficio> beneficioList = beneficioRepository.findAll();
 
         for(Beneficio beneficio : beneficioList){
             beneficioRespostaDTOList.add(beneficio.transformaDTO());

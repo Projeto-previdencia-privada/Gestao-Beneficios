@@ -18,5 +18,7 @@ public interface ConcessaoRepository extends JpaRepository<Concessao, UUID> {
 
     List<Concessao> findAllByRequisitante(Long requisitante);
     List<Concessao> findAllByStatusTrue();
+    Concessao findByUuid(UUID uuid);
+    boolean existsByUuid(UUID uuid);
 
 }

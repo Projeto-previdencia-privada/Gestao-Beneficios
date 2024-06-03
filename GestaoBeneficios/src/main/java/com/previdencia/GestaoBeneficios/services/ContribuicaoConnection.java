@@ -23,9 +23,9 @@ public class ContribuicaoConnection implements Connection{
         }
     }
 
-    public String teste(){
+    public String giveHost(){
         Dotenv dotenv = Dotenv.load();
         String apiConnection=dotenv.get("HOST");
-        return "O resultado do teste e: "+apiConnection+" fim.";
+        return apiConnection;
     }
 }
