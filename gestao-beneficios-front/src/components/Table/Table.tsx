@@ -18,7 +18,7 @@ const Table=({title}:TableProps)=>{
                                 className="fas fa-ellipsis-v" aria-hidden="true"></i>
                             </button>
                             <div className="br-list" id="target01-3415" role="menu"
-                                 aria-labelledby="button-dropdown-density" hidden="hidden">
+                                 aria-labelledby="button-dropdown-density" hidden={true}>
                                 <button className="br-item" type="button" data-density="small" role="menuitem">Densidade
                                     alta
                                 </button>
@@ -62,7 +62,7 @@ const Table=({title}:TableProps)=>{
                                 className="fas fa-ellipsis-v" aria-hidden="true"></i>
                             </button>
                             <div className="br-list" id="target02-3415" role="menu"
-                                 aria-labelledby="button-dropdown-selection" hidden="hidden">
+                                 aria-labelledby="button-dropdown-selection" hidden={true}>
                                 <button className="br-item" type="button" data-toggle="" role="menuitem">Ação 1
                                 </button>
                                 <span className="br-divider"></span>
@@ -110,7 +110,7 @@ const Table=({title}:TableProps)=>{
                         <td data-th="Título coluna 3">Linha 1 coluna 3</td>
                     </tr>
                     <tr className="collapse">
-                        <td id="collapse-1-4-3415" aria-hidden="true" hidden="hidden" colSpan="6">Lorem ipsum dolor sit
+                        <td id="collapse-1-4-3415" aria-hidden="true" hidden={true} colSpan={6}>Lorem ipsum dolor sit
                             amet, consectetur adipiscing elit. Integer ultricies aliquet lacinia. Vestibulum in interdum
                             eros. Donec vel tempus diam. Aenean pulvinar mattis nisi in laoreet. Integer felis mi,
                             vehicula sed pretium sit amet, pellentesque vel nisl. Curabitur metus ante, pellentesque in
@@ -137,7 +137,7 @@ const Table=({title}:TableProps)=>{
                         <td data-th="Título coluna 3">Linha 2 coluna 3</td>
                     </tr>
                     <tr className="collapse">
-                        <td id="collapse-2-4-3415" aria-hidden="true" hidden="hidden" colSpan="6">Lorem ipsum dolor sit
+                        <td id="collapse-2-4-3415" aria-hidden="true" hidden={true} colSpan={6}>Lorem ipsum dolor sit
                             amet, consectetur adipiscing elit. Integer ultricies aliquet lacinia. Vestibulum in interdum
                             eros. Donec vel tempus diam. Aenean pulvinar mattis nisi in laoreet. Integer felis mi,
                             vehicula sed pretium sit amet, pellentesque vel nisl. Curabitur metus ante, pellentesque in
@@ -164,7 +164,7 @@ const Table=({title}:TableProps)=>{
                         <td data-th="Título coluna 3">Linha 3 coluna 3</td>
                     </tr>
                     <tr className="collapse">
-                        <td id="collapse-3-4-3415" aria-hidden="true" hidden="hidden" colSpan="6">Lorem ipsum dolor sit
+                        <td id="collapse-3-4-3415" aria-hidden="true" hidden={true} colSpan={6}>Lorem ipsum dolor sit
                             amet, consectetur adipiscing elit. Integer ultricies aliquet lacinia. Vestibulum in interdum
                             eros. Donec vel tempus diam. Aenean pulvinar mattis nisi in laoreet. Integer felis mi,
                             vehicula sed pretium sit amet, pellentesque vel nisl. Curabitur metus ante, pellentesque in
@@ -181,28 +181,28 @@ const Table=({title}:TableProps)=>{
                                 <div className="br-input">
                                     <label htmlFor="per-page-selection-random-90012">Exibir</label>
                                     <input id="per-page-selection-random-90012" type="text" placeholder=" "/>
-                                    <button className="br-button" type="button" aria-label="Exibir lista" tabIndex="-1"
+                                    <button className="br-button" type="button" aria-label="Exibir lista" tabIndex={-1}
                                             data-trigger="data-trigger"><i className="fas fa-angle-down"
                                                                            aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <div className="br-list" tabIndex="0">
-                                    <div className="br-item" tabIndex="-1">
+                                <div className="br-list" tabIndex={0}>
+                                    <div className="br-item" tabIndex={-1}>
                                         <div className="br-radio">
                                             <input id="per-page-10-random-90012" type="radio"
                                                    name="per-page-random-90012" value="per-page-10-random-90012"
-                                                   checked="checked"/>
+                                                   checked={true}/>
                                             <label htmlFor="per-page-10-random-90012">10</label>
                                         </div>
                                     </div>
-                                    <div className="br-item" tabIndex="-1">
+                                    <div className="br-item" tabIndex={-1}>
                                         <div className="br-radio">
                                             <input id="per-page-20-random-90012" type="radio"
                                                    name="per-page-random-90012" value="per-page-20-random-90012"/>
                                             <label htmlFor="per-page-20-random-90012">20</label>
                                         </div>
                                     </div>
-                                    <div className="br-item" tabIndex="-1">
+                                    <div className="br-item" tabIndex={-1}>
                                         <div className="br-radio">
                                             <input id="per-page-30-random-90012" type="radio"
                                                    name="per-page-random-90012" value="per-page-30-random-90012"/>
@@ -222,27 +222,27 @@ const Table=({title}:TableProps)=>{
                                 <div className="br-input">
                                     <label htmlFor="go-to-selection-random-55067">Página</label>
                                     <input id="go-to-selection-random-55067" type="text" placeholder=" "/>
-                                    <button className="br-button" type="button" aria-label="Exibir lista" tabIndex="-1"
+                                    <button className="br-button" type="button" aria-label="Exibir lista" tabIndex={-1}
                                             data-trigger="data-trigger"><i className="fas fa-angle-down"
                                                                            aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <div className="br-list" tabIndex="0">
-                                    <div className="br-item" tabIndex="-1">
+                                <div className="br-list" tabIndex={0}>
+                                    <div className="br-item" tabIndex={-1}>
                                         <div className="br-radio">
                                             <input id="go-to-1-random-55067" type="radio" name="go-to-random-55067"
-                                                   value="go-to-1-random-55067" checked="checked"/>
+                                                   value="go-to-1-random-55067" checked={true}/>
                                             <label htmlFor="go-to-1-random-55067">1</label>
                                         </div>
                                     </div>
-                                    <div className="br-item" tabIndex="-1">
+                                    <div className="br-item" tabIndex={-1}>
                                         <div className="br-radio">
                                             <input id="go-to-2-random-55067" type="radio" name="go-to-random-55067"
                                                    value="go-to-2-random-55067"/>
                                             <label htmlFor="go-to-2-random-55067">2</label>
                                         </div>
                                     </div>
-                                    <div className="br-item" tabIndex="-1">
+                                    <div className="br-item" tabIndex={-1}>
                                         <div className="br-radio">
                                             <input id="go-to-3-random-55067" type="radio" name="go-to-random-55067"
                                                    value="go-to-3-random-55067"/>

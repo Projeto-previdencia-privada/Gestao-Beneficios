@@ -7,20 +7,12 @@ type data = {
     tempoMinimo: string | ''
     valorPercentual: number | undefined
 }
-type dataConcessao = {
-    requisitante: string
-    beneficiado: string
-}
 
-const getRequest = {
-    method: "GET",
-    headers: {
-        'Accept': '*/*',
-        'Access-Control-Allow-Origin': 'https://192.168.37.8:8082/'
-    },
-    mode: "cors",
-    cache: "default",
-};
+const host: string | undefined = import.meta.env.VITE_HOST
+const port: string | undefined = import.meta.env.VITE_PORT
+const host_backend: string | undefined = import.meta.env.VITE_HOST_BACKEND
+const port_backend: string | undefined = import.meta.env.VITE_PORT_BACKEND
+
 
 const AddConcessoesPage = () =>{
     const [beneficios, setBeneficios] = useState<data[]>([])
@@ -33,12 +25,20 @@ const AddConcessoesPage = () =>{
     },[])
 
     async function getBeneficios() {
-        await fetch('http://192.168.37.8:8082/api/beneficio', getRequest)
+        await fetch('http://'+host_backend+':'+port_backend+'/api/beneficio', {
+            method: "GET",
+            headers: {
+                'Accept': '*/*',
+                'Access-Control-Allow-Origin': 'https://'+host+':'+port+'/'
+            },
+            mode: "cors",
+            cache: "default",
+        })
             .then(response => response.json()).then(data => setBeneficios(data))
     }
 
-    const handleSubmit = (event:any) =>{
-    fetch('http://192.168.37.8:8082/addConcessoes', {
+    const handleSubmit = () =>{
+    fetch('http://'+host_backend+':'+port_backend+'/addConcessoes', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -80,7 +80,7 @@ const AddConcessoesPage = () =>{
                 classname={''}
             />
 
-            <br-modal title="" show width="auto">
+            <br-modal title="" show={true} width="auto">
                 <Input
                     id={"nome-input"}
                     hasButton={true}

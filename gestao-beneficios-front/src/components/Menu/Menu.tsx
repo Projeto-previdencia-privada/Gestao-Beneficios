@@ -9,7 +9,7 @@ const Menu = () => {
       id: 1,
       icon: 'home',
       name: 'Página Inicial',
-      url: '/home',
+      url: '/',
       isSpaLinkBehavior: true,
     },
     {

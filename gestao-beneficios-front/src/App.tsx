@@ -37,7 +37,7 @@ const App = () => {
                             <Breadcrumb />
                             <div className="main-content pl-sm-3 mt-4" id="main-content">
                                 <Routes>
-                                    <Route path="/home" element={<HomePage />} />
+                                    <Route path="/" element={<HomePage />} />
                                     <Route path="/beneficio/cadastrar" element={<AddBeneficiosPage />} />
                                     <Route path="/beneficio" element={<Beneficios />} />
                                     <Route path="/concessao" element={<Concessoes />} />

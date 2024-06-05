@@ -1,9 +1,14 @@
-
+//const github = "https://github.com/Projeto-previdencia-privada/"
 const HomePage = () => {
   return (
-    <div>
-      <br-item>Projeto de Previdencia Privada</br-item>
-    </div>
+      <>
+          <div className={"home-container"}>
+              <center>
+                  <h1>Gestão de Benefícios</h1>
+                  <big>Home da Gestao de Beneficios do projeto de RPPS.</big>
+              </center>
+          </div>
+      </>
   )
 }
 

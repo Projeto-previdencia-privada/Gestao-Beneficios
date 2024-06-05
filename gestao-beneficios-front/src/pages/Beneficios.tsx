@@ -1,5 +1,5 @@
 
-import {useEffect, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import Input from "../components/Input/Input.tsx";
 
 
@@ -11,19 +11,16 @@ type data = {
     status: boolean
 }
 type beneficioMandado = {
-    nome: string
-    tempoMinimo: string
-    valorPercentual: string
+    nome?: string | undefined
+    tempoMinimo?: string | undefined
+    valorPercentual?: string | undefined
 }
-const getRequest = {
-    method: "GET",
-    headers: {
-        'Accept': '*/*',
-        'Access-Control-Allow-Origin': 'https://localhost:8082/'
-    },
-    mode: "cors",
-    cache: "default",
-};
+
+const host: string | undefined = import.meta.env.VITE_HOST
+const port: string | undefined = import.meta.env.VITE_PORT
+const host_backend: string | undefined = import.meta.env.VITE_HOST_BACKEND
+const port_backend: string | undefined = import.meta.env.VITE_PORT_BACKEND
+
 
 const Beneficios = () =>{
     const [beneficios, setBeneficios] = useState<data[]>([])
@@ -36,7 +33,15 @@ const Beneficios = () =>{
     },[modificar])
 
     async function getBeneficios() {
-        await fetch('http://192.168.37.8:8082/api/beneficio', getRequest)
+        await fetch('http://'+host_backend+':'+port_backend+'/api/beneficio', {
+            method: "GET",
+            headers: {
+                'Accept': '*/*',
+                'Access-Control-Allow-Origin': 'https://'+host+':'+port+'/'
+            },
+            mode: "cors",
+            cache: "default",
+        })
             .then(response => response.json()).then(data => setBeneficios(data))
     }
 
@@ -44,11 +49,11 @@ const Beneficios = () =>{
 
 
     const desativarBeneficio = (id: number) =>{
-        fetch('http://192.168.37.8:8082/api/beneficio/'+id, {
+        fetch('http://'+host_backend+':'+port_backend+'/api/beneficio/'+id, {
             method: 'PATCH',
             headers: {
                 'Accept': '*/*',
-                'Access-Control-Allow-Origin': 'https://192.168.37.8:8082/'
+                'Access-Control-Allow-Origin': 'https://'+host+':'+port+'/'
             },
         } ).then(response => generateMessage(response))
     }
@@ -66,16 +71,16 @@ const Beneficios = () =>{
     }
 
 
-    const handleChange = (e: any,variavel:string) =>{
+    const handleChange = (e: ChangeEvent<HTMLInputElement>,variavel:string) =>{
         setDados({...dados, [variavel]: e.target.value})
     }
 
     const handleClick = (id:number) =>{
-        fetch('http://localhost:8082/api/beneficio/'+id, {
+        fetch('http://'+host_backend+':'+port_backend+'/api/beneficio/'+id, {
             method: 'PUT',
             headers: {
                 'Accept': '*/*',
-                'Access-Control-Allow-Origin': 'https://localhost:8082/',
+                'Access-Control-Allow-Origin': 'https://'+host+':'+port+'/',
                 'Content-Type': 'application/json'
             },body: JSON.stringify(dados)
         } ).then(response => generateMessage(response)).finally(getBeneficios)
@@ -151,7 +156,7 @@ const Beneficios = () =>{
                                         label={"Tempo Minimo"}
                                         placeholder={"Tempo Minimo de Contribuicao"}
                                         type={"search"}
-                                        onChange={(e) => handleChange(e, "tempoMinimo")}
+                                        onChange={(e) => handleChange(e,"tempoMinimo")}
                                         classname={''}
                                     />
                                     <Input

@@ -7,7 +7,7 @@ const Breadcrumb = () => {
   let links: any[] = [
     {
       label: 'Página Inicial',
-      url: '/home',
+      url: '/',
       home: true,
     },
   ]

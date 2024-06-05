@@ -7,6 +7,11 @@ type data = {
   valorPercentual: number | undefined
 }
 
+const host: string= import.meta.env.VITE_HOST
+const port: string= import.meta.env.VITE_PORT
+const host_backend: string= import.meta.env.VITE_HOST_BACKEND
+const port_backend: string= import.meta.env.VITE_PORT_BACKEND
+
 const beneficio: data = {
   nome: '',
   tempoMinimo: '',
@@ -22,16 +27,18 @@ const FormPage = () =>{
       beneficio.nome = value.nome
       beneficio.valorPercentual= value.valorPercentual
       beneficio.tempoMinimo = value.tempoMinimo
-    fetch('http://192.168.37.8:8082/api/beneficio', {
+    fetch('http://'+host_backend+':'+port_backend+'/api/beneficio', {
       method: 'POST',
       headers: {
         'Accept': '*/*',
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://192.168.37.8:8082/'
+        'Access-Control-Allow-Origin': 'https://'+host+':'+port+'/'
       },
       body: JSON.stringify(beneficio)
     } ).then(response => manageMessage(response))
   }
+
+
   const manageMessage = (response: Response) =>{
         if(response.status === 201){
             setMessage({message:'Beneficio cadastrado com sucesso!', show: true, state: "success"})
@@ -80,7 +87,7 @@ const FormPage = () =>{
                   label={"Valor"}
                   placeholder={"Valor Percentual do Beneficio"}
                   type={"search"}
-                  onChange={(e)=>{setValue({...value, valorPercentual : e.target.value})}}
+                  onChange={(e)=>{setValue({...value, valorPercentual : Number(e.target.value)})}}
                   classname={''}
               />
           <div className="mt-3 d-flex justify-content-md-end">

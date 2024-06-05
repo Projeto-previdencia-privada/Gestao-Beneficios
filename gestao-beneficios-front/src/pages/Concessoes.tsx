@@ -19,21 +19,15 @@ type beneficio = {
     status: boolean
 }
 
-const getRequest = {
-    method: "GET",
-    headers: {
-        'Accept': '*/*',
-        'Access-Control-Allow-Origin': 'https://localhost:8082/'
-    },
-    mode: "cors",
-    cache: "default",
-};
+const host: string | undefined = import.meta.env.VITE_HOST
+const port: string | undefined = import.meta.env.VITE_PORT
+const host_backend: string | undefined = import.meta.env.VITE_HOST_BACKEND
+const port_backend: string | undefined = import.meta.env.VITE_PORT_BACKEND
 
 
 const Concessoes = () =>{
     const [concessoes, setConcessoes] = useState<data[]>([])
     const [message, setMessage] = useState({message:'', state: '', show: false})
-    const [dados, setDados] = useState<data>()
     const [search, setSearch] = useState('')
 
     useEffect(() => {
@@ -43,17 +37,25 @@ const Concessoes = () =>{
     const concessoesBeneficiadoFiltered = concessoes.filter((concessao)=> concessao.beneficiado.startsWith(search))
 
     async function getConcessoes() {
-        await fetch('http://localhost:8082/api/concessao', getRequest)
+        await fetch('http://'+host_backend+':'+port_backend+'/api/concessao', {
+            method: "GET",
+            headers: {
+                'Accept': '*/*',
+                'Access-Control-Allow-Origin': 'https://'+host+':'+port+'/'
+            },
+            mode: "cors",
+            cache: "default",
+        })
             .then(response => response.json()).then(data => setConcessoes(data))
     }
 
-    const desativarConcessao=(uuid: string)=>{
-        await fetch('http://192.168.37.8:8082/api/concessao'+uuid, {
+    const desativarConcessao = async (uuid: string) => {
+        await fetch('http://'+host_backend+':'+port_backend+'/api/concessao' + uuid, {
             method: 'PATCH',
             headers: {
                 'Accept': '*/*',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'https://192.168.37.8:8082/'
+                'Access-Control-Allow-Origin': 'https://'+host+':'+port+'/'
             }
         })
             .then(response => generateMessage(response))

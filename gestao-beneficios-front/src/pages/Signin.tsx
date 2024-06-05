@@ -1,5 +1,4 @@
-import  { useState} from 'react'
-import {Simulate} from "react-dom/test-utils";
+import {ChangeEvent, FormEvent, useState} from 'react'
 
 const SignInPage = () => {
   const [message, setMessage] = useState({
@@ -10,7 +9,7 @@ const SignInPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = {
       grant_type: "password",
@@ -24,7 +23,7 @@ const SignInPage = () => {
     body.append("client_id", data.client_id)
     body.append("username", data.username)
     body.append("password", data.password)
-    const token =fetch('http://localhost:9080/realms/previdencia/protocol/openid-connect/token',
+      fetch('http://localhost:9080/realms/previdencia/protocol/openid-connect/token',
         {
           method: 'POST',
           headers: {
@@ -56,14 +55,14 @@ const SignInPage = () => {
                   <div className="br-input input-inline">
                     <input
                         placeholder="Usuario"
-                        onChange={(e: any) => setUsername(e.target.value)}>
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}>
                     </input>
                   </div>
                   <div className="br-input input-inline">
                     <input
                         type="password"
                         placeholder="Senha"
-                        onChange={(e: any) => setPassword(e.target.value)}>
+                        onChange={(e:ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}>
                     </input>
                   </div>
                     <br-button
