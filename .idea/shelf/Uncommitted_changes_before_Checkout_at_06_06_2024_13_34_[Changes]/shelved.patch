@@ -1,0 +1,89 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"3e69b27c-bf71-46c2-8c07-1ccc281db087\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/GestaoBeneficios/makefile\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/GestaoBeneficios/makefile\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar.original\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar.original\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/services/ConcessaoService.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/services/ConcessaoService.class\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;LeoFacB&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/Projeto-previdencia-privada/Gestao-Beneficios&quot;,\r\n    &quot;accountId&quot;: &quot;f642b262-64b2-4e1c-82e2-8c2104172bfe&quot;\r\n  }\r\n}</component>\r\n  <component name=\"KubernetesApiPersistence\">{}</component>\r\n  <component name=\"KubernetesApiProvider\">{\r\n  &quot;isMigrated&quot;: true\r\n}</component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"DEPENDENCY_CHECKER_PROBLEMS_TAB\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;customColor&quot;: &quot;&quot;,\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2eKcZjujBmspLCWm91dAFR9yCGG\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.GestaoBeneficiosApplication.executor&quot;: &quot;Run&quot;,\r\n    &quot;Docker.GestaoBeneficios.psql: Compose Deployment.executor&quot;: &quot;Run&quot;,\r\n    &quot;Docker.GestaoBeneficios: Compose Deployment.executor&quot;: &quot;Run&quot;,\r\n    &quot;HTTP Request.All in generated-requests.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;v1.1&quot;,\r\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/leona/Documents/GitHub/Gestao-Beneficios&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\leona\\Desktop\\Previdencia Privada\\Gestao-Beneficios\\GestaoBeneficios\" />\r\n      <recent name=\"C:\\Users\\leona\\Desktop\\Previdencia Privada\\Gestao-Beneficios\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunDashboard\">\r\n    <option name=\"excludedTypes\">\r\n      <set>\r\n        <option value=\"HttpClient.HttpRequestRunConfigurationType\" />\r\n      </set>\r\n    </option>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Docker.GestaoBeneficios: Compose Deployment\">\r\n    <configuration name=\"All in generated-requests\" type=\"HttpClient.HttpRequestRunConfigurationType\" factoryName=\"HTTP Request\" temporary=\"true\" path=\"$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"GestaoBeneficiosApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"GestaoBeneficios\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.previdencia.GestaoBeneficios.GestaoBeneficiosApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"GestaoBeneficios: Compose Deployment\" type=\"docker-deploy\" factoryName=\"docker-compose.yml\" temporary=\"true\" server-name=\"Docker\">\r\n      <deployment type=\"docker-compose.yml\">\r\n        <settings>\r\n          <option name=\"sourceFilePath\" value=\"GestaoBeneficios/docker-compose.yml\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"GestaoBeneficios.psql: Compose Deployment\" type=\"docker-deploy\" factoryName=\"docker-compose.yml\" temporary=\"true\" server-name=\"Docker\">\r\n      <deployment type=\"docker-compose.yml\">\r\n        <settings>\r\n          <option name=\"services\">\r\n            <list>\r\n              <option value=\"psql\" />\r\n            </list>\r\n          </option>\r\n          <option name=\"sourceFilePath\" value=\"GestaoBeneficios/docker-compose.yml\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"docker-deploy\" factoryName=\"docker-compose.yml\" temporary=\"true\">\r\n      <deployment type=\"docker-compose.yml\">\r\n        <settings />\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Docker.GestaoBeneficios: Compose Deployment\" />\r\n        <item itemvalue=\"HTTP Request.All in generated-requests\" />\r\n        <item itemvalue=\"Docker.GestaoBeneficios.psql: Compose Deployment\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240\" />\r\n        <option value=\"bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"3e69b27c-bf71-46c2-8c07-1ccc281db087\" name=\"Changes\" comment=\"\" />\r\n      <created>1711656767411</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1711656767411</updated>\r\n      <workItem from=\"1712870455110\" duration=\"2364000\" />\r\n      <workItem from=\"1712938589792\" duration=\"17967000\" />\r\n      <workItem from=\"1713197738411\" duration=\"2065000\" />\r\n      <workItem from=\"1713200479392\" duration=\"11745000\" />\r\n      <workItem from=\"1713286750855\" duration=\"1217000\" />\r\n      <workItem from=\"1713373584009\" duration=\"14699000\" />\r\n      <workItem from=\"1713433035485\" duration=\"1236000\" />\r\n      <workItem from=\"1713447168300\" duration=\"603000\" />\r\n      <workItem from=\"1713457134726\" duration=\"53000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"HEAD\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -6,11 +6,7 @@
+   <component name="ChangeListManager">
+     <list default="true" id="3e69b27c-bf71-46c2-8c07-1ccc281db087" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/makefile" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/services/ConcessaoService.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/target/GestaoBeneficios-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/services/ConcessaoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/target/classes/com/previdencia/GestaoBeneficios/services/ConcessaoService.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/controllers/BeneficioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestaoBeneficios/src/main/java/com/previdencia/GestaoBeneficios/controllers/BeneficioController.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -51,27 +47,27 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.GestaoBeneficiosApplication.executor&quot;: &quot;Run&quot;,
+-    &quot;Docker.GestaoBeneficios.psql: Compose Deployment.executor&quot;: &quot;Run&quot;,
+-    &quot;Docker.GestaoBeneficios: Compose Deployment.executor&quot;: &quot;Run&quot;,
+-    &quot;HTTP Request.All in generated-requests.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;v1.1&quot;,
+-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/leona/Documents/GitHub/Gestao-Beneficios&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.GestaoBeneficiosApplication.executor": "Run",
++    "Docker.GestaoBeneficios.psql: Compose Deployment.executor": "Run",
++    "Docker.GestaoBeneficios: Compose Deployment.executor": "Run",
++    "HTTP Request.All in generated-requests.executor": "Run",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "git-widget-placeholder": "v1.1",
++    "ignore.virus.scanning.warn.message": "true",
++    "kotlin-language-version-configured": "true",
++    "last_opened_file_path": "C:/Users/leona/Documents/GitHub/Gestao-Beneficios",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "settings.editor.selected.configurable": "configurable.group.appearance",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
++}]]></component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="C:\Users\leona\Desktop\Previdencia Privada\Gestao-Beneficios\GestaoBeneficios" />
+@@ -156,6 +152,8 @@
+       <workItem from="1713433035485" duration="1236000" />
+       <workItem from="1713447168300" duration="603000" />
+       <workItem from="1713457134726" duration="53000" />
++      <workItem from="1717614313955" duration="4370000" />
++      <workItem from="1717691081874" duration="402000" />
+     </task>
+     <servers />
+   </component>
+@@ -173,7 +171,7 @@
+                   <entry key="branch">
+                     <value>
+                       <list>
+-                        <option value="HEAD" />
++                        <option value="v3.0" />
+                       </list>
+                     </value>
+                   </entry>

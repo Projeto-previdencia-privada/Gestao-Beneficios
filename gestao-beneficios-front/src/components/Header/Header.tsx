@@ -13,31 +13,12 @@ const Header = () => {
     alt: 'Logo de exemplo',
   }
 
-  const links = [
-    {
-      name: 'Web Components',
-      href: 'https://www.gov.br/ds/webcomponents',
-      title: 'Web Components',
-      target: '_blank',
-    },
-    {
-      name: 'Padrão Digital de Governo',
-      href: 'https://gov.br/ds',
-      title: 'Padrão Digital de Governo',
-      target: '_blank',
-    },
+  const links = [{}
   ]
 
   const functions = [
     {
-      icon: 'code',
-      name: 'Repositórios de Web Components',
-      url: 'https://gitlab.com/govbr-ds/bibliotecas/wc/',
-      tooltipText: 'Contribua com os projetos de Web Components',
-      tooltipPlace: 'bottom',
-    },
-    {
-      icon: 'discord',
+      icon: 'home',
       iconFamily: 'fab',
       name: 'Github do projeto',
       url: 'https://github.com/Projeto-previdencia-privada',

@@ -1,11 +1,14 @@
+import { MouseEventHandler} from "react";
+
 interface RadioProps{
     title: string
     list: {nome: string }[]
     subText: string
     groupName: string
+    onClick: MouseEventHandler<HTMLInputElement>
 }
 
-const Radio=({ title, list, subText, groupName}:RadioProps)=>{
+const Radio=({ onClick,title, list, subText, groupName}:RadioProps)=>{
 
     return (
         <>
@@ -13,7 +16,7 @@ const Radio=({ title, list, subText, groupName}:RadioProps)=>{
             <p className="help-text">{subText}</p>
             {list.map((list, index) => (
                 <div className="br-radio">
-                    <input id={list.nome+""+index} type="radio" name={groupName} value={list.nome}/>
+                    <input id={list.nome+""+index} type="radio" name={groupName} value={list.nome} onClick={onClick}/>
                     <label htmlFor={list.nome+""+index}>{list.nome}</label>
                 </div>
             ))

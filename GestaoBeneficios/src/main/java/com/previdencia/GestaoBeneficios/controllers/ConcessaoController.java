@@ -92,10 +92,12 @@ public class ConcessaoController {
 
     @CrossOrigin(origins = "*")
     @GetMapping
-    public ResponseEntity<List<Concessao>> ConcessaoGetAll() {
+    public ResponseEntity<List<ConcessaoRespostaDTO>> ConcessaoGetAll() {
+        List<ConcessaoRespostaDTO> lista= new ArrayList<>();
         if(concessaoRepository.findAll().isEmpty()){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.accepted().body(concessaoRepository.findAll());
+        concessaoRepository.findAll().forEach(concessao -> lista.add(concessao.transformaDTO()));
+        return ResponseEntity.accepted().body(lista);
     }
 }

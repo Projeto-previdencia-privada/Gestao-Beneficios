@@ -13,6 +13,8 @@ import AddConcessoesPage from './pages/AddConcessoes'
 import { useEffect, useState } from 'react'
 import Concessoes from "./pages/Concessoes.tsx";
 
+
+
 const App = () => {
     const [login, setLogin] = useState(true)
     const location = useLocation()

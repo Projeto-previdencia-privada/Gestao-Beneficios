@@ -17,7 +17,7 @@ services:
     environment:
       SPRING_APPLICATION_NAME: Spring_Beneficios
       SPRING_JPA_HIBERNATE.DDL_AUTO: update
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db-beneficios:${PGPORT}/DatabaseBeneficios
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-beneficios:${PGPORT}/${DB_NAME}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
     env_file:
@@ -35,7 +35,7 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: DatabaseBeneficios
+      POSTGRES_DB: ${DB_NAME}
       PGPORT: ${PGPORT}
     ports:
       - ${PGPORT}:5432

@@ -2,22 +2,15 @@ import Input from "../components/Input/Input.tsx";
 import {useEffect, useState} from "react";
 
 type data = {
-    uuid: string
+    id: string
     requisitante: string
     beneficiado: string
     data: string
     valor: number
     status: boolean
-    beneficios: beneficio
+    beneficioNome: string
 }
 
-type beneficio = {
-    id: number
-    nome: string
-    tempoMinimo: string
-    valorPercentual: string
-    status: boolean
-}
 
 const host: string | undefined = import.meta.env.VITE_HOST
 const port: string | undefined = import.meta.env.VITE_PORT
@@ -29,12 +22,13 @@ const Concessoes = () =>{
     const [concessoes, setConcessoes] = useState<data[]>([])
     const [message, setMessage] = useState({message:'', state: '', show: false})
     const [search, setSearch] = useState('')
+    const [isConcessaoVazia, setIsConcessaoVazia] = useState(false)
 
     useEffect(() => {
         getConcessoes()
     }, []);
 
-    const concessoesBeneficiadoFiltered = concessoes.filter((concessao)=> concessao.beneficiado.startsWith(search))
+    const concessoesBeneficiadoFiltered = concessoes.filter((data) => data.beneficiado.toString().startsWith(search))
 
     async function getConcessoes() {
         await fetch('http://'+host_backend+':'+port_backend+'/api/concessao', {
@@ -46,11 +40,11 @@ const Concessoes = () =>{
             mode: "cors",
             cache: "default",
         })
-            .then(response => response.json()).then(data => setConcessoes(data))
+            .then(response => handleResponse(response)).then(data => setConcessoes(data))
     }
 
     const desativarConcessao = async (uuid: string) => {
-        await fetch('http://'+host_backend+':'+port_backend+'/api/concessao' + uuid, {
+        await fetch('http://'+host_backend+':'+port_backend+'/api/concessao/' + uuid, {
             method: 'PATCH',
             headers: {
                 'Accept': '*/*',
@@ -59,6 +53,14 @@ const Concessoes = () =>{
             }
         })
             .then(response => generateMessage(response))
+    }
+
+    const handleResponse = (response: Response) =>{
+        if(response.status === 404){
+            setIsConcessaoVazia(true)
+        }
+
+        return response.json()
     }
 
     const generateMessage = (response: Response) => {
@@ -89,18 +91,20 @@ const Concessoes = () =>{
                     setSearch(e.target.value)
                 }}
                 classname={''}
+                mask={''}
             />
             <br-list title="Lista de Concessoes" id="submited-users" data-toggle="true">
                 {concessoesBeneficiadoFiltered.map((concessao) => (
-                    (concessao.status && <br-item title={concessao.requisitante + concessao.uuid} hover key={concessao.uuid}>
+                    (concessao.status && <br-item title={'CPF '+concessao.requisitante+ ' --->  '+ concessao.beneficioNome} hover key={concessao.id}>
                         <br-list>
                             <br-item hover>
                                 <div className="row align-items-center">
                                     <div className="col-11">
-                                        <p><strong>Requisitante:</strong>: {concessao.requisitante} meses</p>
-                                        <p><strong>Beneficiado</strong>: {concessao.beneficiado}%</p>
-                                        <p><strong>Valor</strong>: {concessao.valor}%</p>
-                                        <p><strong>Beneficio</strong>: {concessao.beneficios.nome}%</p>
+                                        <p><strong>Requisitante:</strong>: {concessao.requisitante}</p>
+                                        <p><strong>Beneficiado</strong>: {concessao.beneficiado}</p>
+                                        <p><strong>Valor</strong>: {concessao.valor}</p>
+                                        <p><strong>Beneficio</strong>: {concessao.beneficioNome}</p>
+                                        <p><strong>Data do Pedido</strong>: {concessao.data}</p>
                                     </div>
                                     <div className="">
                                     <br-button
@@ -108,7 +112,7 @@ const Concessoes = () =>{
                                             label="Desativar"
                                             icon="minus"
                                             type="primary"
-                                            onClick={() => desativarConcessao(concessao.uuid)}
+                                            onClick={() => desativarConcessao(concessao.id)}
                                             aria-labelledby="Desativar Concessao"
                                         ></br-button>
                                     </div>
@@ -119,6 +123,10 @@ const Concessoes = () =>{
 
                 ))}
             </br-list>
+
+            {isConcessaoVazia && <br-message state={"warning"}>
+                <center>Nao ha concessoes cadastradas!</center>
+            </br-message>}
         </>
     )
 }

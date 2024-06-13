@@ -1,15 +1,23 @@
-//const github = "https://github.com/Projeto-previdencia-privada/"
+import {useEffect, useState} from "react";
+import ReactMarkdown from 'react-markdown'
+
+
 const HomePage = () => {
-  return (
-      <>
-          <div className={"home-container"}>
-              <center>
-                  <h1>Gestão de Benefícios</h1>
-                  <big>Home da Gestao de Beneficios do projeto de RPPS.</big>
-              </center>
-          </div>
-      </>
-  )
+    const [markdownContent, setMarkdownContent] = useState('')
+    useEffect(() => {
+        fetch('./../../README.md')
+            .then((response) => response.text())
+            .then((data) => setMarkdownContent(data))
+            .catch((error) => console.error('Erro ao carregar o arquivo Markdown Read.me:', error))
+    }, [])
+
+
+    return (
+        <div>
+            <ReactMarkdown>{markdownContent}</ReactMarkdown>
+        </div>
+    )
+
 }
 
 export default HomePage

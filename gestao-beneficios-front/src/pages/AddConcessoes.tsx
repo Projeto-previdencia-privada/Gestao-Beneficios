@@ -2,11 +2,25 @@ import {useEffect, useState} from "react";
 import Radio from "../components/Radio/Radio.tsx";
 import Input from "../components/Input/Input.tsx";
 
-type data = {
+type dataBeneficio = {
     nome: string | ''
-    tempoMinimo: string | ''
-    valorPercentual: number | undefined
 }
+
+type dataConcessao = {
+    requisitante: string | ''
+    beneficiado: string | ''
+}
+
+const concessoes: dataConcessao={
+    requisitante:'',
+    beneficiado:'',
+}
+const inputError: dataConcessao={
+    requisitante:'',
+    beneficiado:'',
+}
+
+
 
 const host: string | undefined = import.meta.env.VITE_HOST
 const port: string | undefined = import.meta.env.VITE_PORT
@@ -15,8 +29,12 @@ const port_backend: string | undefined = import.meta.env.VITE_PORT_BACKEND
 
 
 const AddConcessoesPage = () =>{
-    const [beneficios, setBeneficios] = useState<data[]>([])
+    const [beneficios, setBeneficios] = useState<dataBeneficio[]>([])
+    const [concessao, setConcessao] = useState<dataConcessao>(concessoes)
     const [search, setSearch] = useState('')
+    const [err, setErr] = useState<dataConcessao>(inputError)
+    const [beneficioEscolhido, setBeneficioEscolhido] = useState()
+
 
     const beneficiosFiltered = beneficios.filter((beneficio)=> beneficio.nome.startsWith(search))
 
@@ -44,10 +62,35 @@ const AddConcessoesPage = () =>{
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({})
+      body: JSON.stringify(concessao)
     })
     }
 
+    const handleChange=(variable: string, data: string) => {
+        validateFields(variable, data)
+        setConcessao({...concessao, [variable]: data})
+    }
+
+    const validateFields=(variable: string, input: string)=>{
+        if(variable === 'requisitante'){
+            if(input.length==0){
+                setErr({...err, requisitante:'Campo Requisitante Vazio'})
+            }
+            else {
+                setErr({...err, requisitante:''})
+            }
+        }
+
+        if(variable === 'beneficiado'){
+            if(input.length==0){
+                setErr({...err,  beneficiado:'Campo Beneficiado Vazio'})
+            }
+            else {
+                setErr({...err, beneficiado:''})
+            }
+        }
+
+    }
     return(
         <>
 
@@ -62,10 +105,17 @@ const AddConcessoesPage = () =>{
                 placeholder={"CPF do Requisitante"}
                 type={"search"}
                 onChange={(e) => {
-                    setSearch(e.target.value)
+                    handleChange('requisitante', e.target.value)
                 }}
                 classname={''}
+                mask={''}
             />
+            {err.requisitante && (<br-message
+                feedback
+                state={"danger"}
+                show-icon="true"
+                message={err.requisitante}
+            ></br-message>)}
 
             <Input
                 id={"beneficiado-input"}
@@ -75,10 +125,17 @@ const AddConcessoesPage = () =>{
                 placeholder={"CPF do Beneficiado"}
                 type={"search"}
                 onChange={(e) => {
-                    setSearch(e.target.value)
+                    handleChange('beneficiado', e.target.value)
                 }}
                 classname={''}
+                mask={''}
             />
+            {err.beneficiado && (<br-message
+                feedback
+                state={"danger"}
+                show-icon="true"
+                message={err.beneficiado}
+            ></br-message>)}
 
             <br-modal title="" show={true} width="auto">
                 <Input
@@ -92,12 +149,14 @@ const AddConcessoesPage = () =>{
                         setSearch(e.target.value)
                     }}
                     classname={''}
+                    mask={''}
                 />
                 <Radio
                     title={"Beneficios"}
                     list={beneficiosFiltered}
                     subText={"Escolha somente um beneficio:"}
                     groupName={"beneficios"}
+                    onClick={e => {setBeneficioEscolhido()}}
                 />
             </br-modal>
 

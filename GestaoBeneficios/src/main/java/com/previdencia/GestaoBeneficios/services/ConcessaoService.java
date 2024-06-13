@@ -75,9 +75,9 @@ public class ConcessaoService{
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("UUID nao localizado no banco de dados\n");
         }
-
         Concessao concessao = concessaoRepository.findByUuid(uuid);
         concessao.setStatus(false);
+        concessaoRepository.save(concessao);
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .build();
     }

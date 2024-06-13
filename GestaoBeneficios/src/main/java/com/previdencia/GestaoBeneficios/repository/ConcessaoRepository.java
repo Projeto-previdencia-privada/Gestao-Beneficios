@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @since 1.0
  */
 @Repository
-public interface ConcessaoRepository extends JpaRepository<Concessao, UUID> {
+public interface ConcessaoRepository extends JpaRepository<Concessao, Long> {
 
     List<Concessao> findAllByRequisitante(Long requisitante);
     List<Concessao> findAllByStatusTrue();

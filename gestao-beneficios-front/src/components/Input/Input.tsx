@@ -1,4 +1,7 @@
 import { ChangeEventHandler} from "react";
+import InputMask from 'react-input-mask'
+
+
 
 interface InputProps{
     id:string
@@ -9,19 +12,22 @@ interface InputProps{
     type: string
     classname: string
     onChange: ChangeEventHandler<HTMLInputElement>
+    mask: string
 }
 
-const Input = ({hasButton,buttonClass,label,placeholder,id,type, classname,onChange}:InputProps) =>{
+const Input = ({mask,hasButton,buttonClass,label,placeholder,id,type, classname,onChange}:InputProps) =>{
 
     return(
         <>
             <div className={classname}>
                 <div className="br-input large input-button">
                     <label htmlFor={id}>{label}</label>
-                    <input id={id} type={type} placeholder={placeholder} onChange={onChange}/>
+                    <InputMask id={id} type={type} placeholder={placeholder} onChange={onChange} mask={mask} alwaysShowMask={false} maskPlaceholder={' '}/>
                     {hasButton && <button className="br-button" type="button" aria-label="Buscar">
                         <i className={buttonClass} aria-hidden="true"></i>
                     </button>}
+
+
                 </div>
             </div>
         </>

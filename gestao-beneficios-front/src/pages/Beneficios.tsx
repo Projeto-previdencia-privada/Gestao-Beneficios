@@ -23,14 +23,21 @@ const port_backend: string | undefined = import.meta.env.VITE_PORT_BACKEND
 
 
 const Beneficios = () =>{
+
+    //UseStates da pagina
     const [beneficios, setBeneficios] = useState<data[]>([])
     const [message, setMessage] = useState({message:'', state: '', show: false})
     const [modificar, setModificar] = useState(false)
     const [dados, setDados] = useState<beneficioMandado>()
     const [search, setSearch] = useState('')
+    const [isBeneficiosVazio, setIsBeneficiosVazio] = useState(false)
+
+    const beneficiosFiltered = beneficios.filter((beneficio)=> beneficio.nome.startsWith(search))
+
     useEffect(() => {
         getBeneficios()
     },[modificar])
+
 
     async function getBeneficios() {
         await fetch('http://'+host_backend+':'+port_backend+'/api/beneficio', {
@@ -42,11 +49,8 @@ const Beneficios = () =>{
             mode: "cors",
             cache: "default",
         })
-            .then(response => response.json()).then(data => setBeneficios(data))
+            .then(response => handleResponse(response)).then(data => setBeneficios(data))
     }
-
-    const beneficiosFiltered = beneficios.filter((beneficio)=> beneficio.nome.startsWith(search))
-
 
     const desativarBeneficio = (id: number) =>{
         fetch('http://'+host_backend+':'+port_backend+'/api/beneficio/'+id, {
@@ -57,6 +61,27 @@ const Beneficios = () =>{
             },
         } ).then(response => generateMessage(response))
     }
+
+    const handleClick = (id:number) =>{
+        fetch('http://'+host_backend+':'+port_backend+'/api/beneficio/'+id, {
+            method: 'PUT',
+            headers: {
+                'Accept': '*/*',
+                'Access-Control-Allow-Origin': 'https://'+host+':'+port+'/',
+                'Content-Type': 'application/json'
+            },body: JSON.stringify(dados)
+        } ).then(response => generateMessage(response)).finally(getBeneficios)
+    }
+
+
+    const handleResponse = (response: Response) =>{
+        if(response.status === 404){
+            setIsBeneficiosVazio(true)
+        }
+
+        return response.json()
+    }
+
 
     const generateMessage = (response: Response) => {
         if(response.status === 202 || response.status=== 200){
@@ -73,17 +98,6 @@ const Beneficios = () =>{
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>,variavel:string) =>{
         setDados({...dados, [variavel]: e.target.value})
-    }
-
-    const handleClick = (id:number) =>{
-        fetch('http://'+host_backend+':'+port_backend+'/api/beneficio/'+id, {
-            method: 'PUT',
-            headers: {
-                'Accept': '*/*',
-                'Access-Control-Allow-Origin': 'https://'+host+':'+port+'/',
-                'Content-Type': 'application/json'
-            },body: JSON.stringify(dados)
-        } ).then(response => generateMessage(response)).finally(getBeneficios)
     }
 
 
@@ -107,6 +121,7 @@ const Beneficios = () =>{
                     setSearch(e.target.value)
                 }}
                 classname={''}
+                mask={''}
             />
             <br-list title="Lista de Beneficios" id="submited-users" data-toggle="true">
                 {beneficiosFiltered.map((beneficio) => (
@@ -148,6 +163,7 @@ const Beneficios = () =>{
                                         type={"search"}
                                         onChange={(e) => handleChange(e, "nome")}
                                         classname={''}
+                                        mask={''}
                                     />
                                     <Input
                                         id={"tempo_input"}
@@ -158,6 +174,7 @@ const Beneficios = () =>{
                                         type={"search"}
                                         onChange={(e) => handleChange(e,"tempoMinimo")}
                                         classname={''}
+                                        mask={''}
                                     />
                                     <Input
                                         id={"nome_input"}
@@ -168,6 +185,7 @@ const Beneficios = () =>{
                                         type={"search"}
                                         onChange={(e) => handleChange(e, "valorPercentual")}
                                         classname={''}
+                                        mask={''}
                                     />
                                     <div className="">
                                         <br-button
@@ -194,6 +212,10 @@ const Beneficios = () =>{
 
                 ))}
             </br-list>
+
+            {isBeneficiosVazio && <br-message state={"warning"}>
+                <center>Nao ha beneficios cadastrados!</center>
+            </br-message>}
 
 
         </>
