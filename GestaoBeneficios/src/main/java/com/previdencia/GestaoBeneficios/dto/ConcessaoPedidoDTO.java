@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class ConcessaoPedidoDTO {
     private long requisitante;
     private long beneficiado;
-    private long beneficio;
+    private String beneficioNome;
 }

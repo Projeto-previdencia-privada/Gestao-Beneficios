@@ -1,23 +1,23 @@
-import { MouseEventHandler} from "react";
+import {ChangeEventHandler} from "react";
 
 interface RadioProps{
     title: string
     list: {nome: string }[]
     subText: string
     groupName: string
-    onClick: MouseEventHandler<HTMLInputElement>
+    onChange: ChangeEventHandler<HTMLInputElement>
 }
 
-const Radio=({ onClick,title, list, subText, groupName}:RadioProps)=>{
+const Radio=({onChange,title, list, subText, groupName}:RadioProps)=>{
 
     return (
         <>
             <p className="label mb-0">{title}</p>
             <p className="help-text">{subText}</p>
-            {list.map((list, index) => (
+            {list.map((list) => (
                 <div className="br-radio">
-                    <input id={list.nome+""+index} type="radio" name={groupName} value={list.nome} onClick={onClick}/>
-                    <label htmlFor={list.nome+""+index}>{list.nome}</label>
+                    <input id={list.nome} type="radio" name={groupName} value={list.nome} onChange={onChange} />
+                    <label htmlFor={list.nome}>{list.nome}</label>
                 </div>
             ))
             }

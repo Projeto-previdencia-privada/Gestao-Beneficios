@@ -17,5 +17,8 @@ import java.util.List;
  */
 @Repository
 public interface BeneficioRepository extends JpaRepository<Beneficio, Long> {
-
+    Beneficio findByNome(String nome);
+    List<Beneficio> findByNomeContaining(String nome);
+    List<Beneficio> findByNomeContainingIgnoreCase(String nome);
+    boolean existsByNome(String nome);
 }

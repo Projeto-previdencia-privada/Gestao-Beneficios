@@ -10,6 +10,11 @@ type dataConcessao = {
     requisitante: string | ''
     beneficiado: string | ''
 }
+type concessaoEnvio = {
+    requisitante: string | ''
+    beneficiado: string | ''
+    beneficioNome: string | ''
+}
 
 const concessoes: dataConcessao={
     requisitante:'',
@@ -19,6 +24,12 @@ const inputError: dataConcessao={
     requisitante:'',
     beneficiado:'',
 }
+const concessaoEnvios: concessaoEnvio={
+    requisitante: '',
+    beneficiado: '',
+    beneficioNome: '',
+}
+
 
 
 
@@ -33,7 +44,8 @@ const AddConcessoesPage = () =>{
     const [concessao, setConcessao] = useState<dataConcessao>(concessoes)
     const [search, setSearch] = useState('')
     const [err, setErr] = useState<dataConcessao>(inputError)
-    const [beneficioEscolhido, setBeneficioEscolhido] = useState()
+    const [beneficioEscolhido, setBeneficioEscolhido] = useState('')
+    const [concessaoEnvio, setConcessaoEnvio] = useState<concessaoEnvio>(concessaoEnvios)
 
 
     const beneficiosFiltered = beneficios.filter((beneficio)=> beneficio.nome.startsWith(search))
@@ -56,13 +68,14 @@ const AddConcessoesPage = () =>{
     }
 
     const handleSubmit = () =>{
-    fetch('http://'+host_backend+':'+port_backend+'/addConcessoes', {
+        setConcessaoEnvio({requisitante: concessao.requisitante, beneficiado: concessao.beneficiado, beneficioNome: beneficioEscolhido})
+        fetch('http://'+host_backend+':'+port_backend+'/addConcessoes', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(concessao)
+      body: JSON.stringify(concessaoEnvio)
     })
     }
 
@@ -156,7 +169,7 @@ const AddConcessoesPage = () =>{
                     list={beneficiosFiltered}
                     subText={"Escolha somente um beneficio:"}
                     groupName={"beneficios"}
-                    onClick={e => {setBeneficioEscolhido()}}
+                    onChange={e => setBeneficioEscolhido(e.target.value)}
                 />
             </br-modal>
 

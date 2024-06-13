@@ -95,7 +95,7 @@ public class ConcessaoService{
         Long cpfRequisitante= concessao.getRequisitante();
         Long cpfBeneficiado= concessao.getBeneficiado();
         double contribuicao = 0;
-        Beneficio beneficio = procuraBeneficio(concessao.getBeneficio());
+        Beneficio beneficio = procuraBeneficio(concessao.getBeneficioNome());
 
         if(beneficio == null){
             return ResponseEntity.notFound().build();
@@ -138,11 +138,11 @@ public class ConcessaoService{
     }
 
 
-    public Beneficio procuraBeneficio(Long id){
-        if(!beneficioRepository.existsById(id)) {
+    public Beneficio procuraBeneficio(String nome){
+        if(!beneficioRepository.existsByNome(nome)) {
             return null;
         }
-        return beneficioRepository.getReferenceById(id);
+        return beneficioRepository.findByNome(nome);
     }
 
     public Double calculaValor(double contribuicao, double valorPercentual){

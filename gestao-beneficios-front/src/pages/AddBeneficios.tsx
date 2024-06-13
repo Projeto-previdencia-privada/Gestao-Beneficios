@@ -136,7 +136,7 @@ const FormPage = () =>{
                   type={"search"}
                   onChange={(e)=>{handleChange("tempoMinimo", e.target.value)}}
                   classname={''}
-                  mask={'99999 meses'}
+                  mask={''}
               />
               {err.tempoMinimo && (<br-message
                   feedback
@@ -153,7 +153,7 @@ const FormPage = () =>{
                   type={"search"}
                   onChange={(e)=>{handleChange("valorPercentual", e.target.value)}}
                   classname={''}
-                  mask={'999,99%'}
+                  mask={''}
               />
               {err.valorPercentual && (<br-message
                   feedback
