@@ -104,6 +104,9 @@ public class ConcessaoService{
         String json_connection = connection.createGetRequest(cpfRequisitante);
         System.out.println("JSON CONNECTION ======= "+json_connection);
         JsonObject json = new Gson().fromJson(json_connection, JsonObject.class);
+        if(json == null){
+            return ResponseEntity.internalServerError().build();
+        }
         try {
             tempo = json.get("tempoContribuicaoMeses").getAsLong();
             contribuicao = json.get("totalContribuidoAjustado").getAsDouble();

@@ -20,6 +20,8 @@ public class ContribuicaoConnection implements Connection{
             return restTemplate.getForObject(url, String.class);
         }
         catch (RestClientException e) {
+            System.out.println("\n\n\n\n\n\n ERRO NA CONEXAO COM API EXTERNA");
+            e.printStackTrace();
             return null;
         }
     }
