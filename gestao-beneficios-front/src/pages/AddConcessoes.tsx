@@ -69,7 +69,7 @@ const AddConcessoesPage = () =>{
     const handleSubmit = () =>{
         setConcessaoEnvio({requisitante: concessao.requisitante, beneficiado: concessao.beneficiado, beneficioNome: beneficioEscolhido})
         console.log(concessaoEnvio)
-        fetch('http://'+host_backend+':'+port_backend+'/api/concessao', {
+        fetch('http://'+host_backend+':'+port_backend+'/api/concessao'+concessaoEnvio.requisitante, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
