@@ -116,7 +116,7 @@ public class ConcessaoService{
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
                     .body("Falha na obtencao do JSON\n");
         }
-        if(verificaBeneficio(beneficio, tempo)){
+        if(!verificaBeneficio(beneficio, tempo)){
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("Tempo para "+beneficio.getNome()+" insuficiente\n" +
                             "tempo minimo: "+ beneficio.getTempoMinimo()+"\n" +
