@@ -92,8 +92,8 @@ public class ConcessaoService{
     public ResponseEntity<String> conceder(@NotNull ConcessaoPedidoDTO concessao) {
         long tempo = 0;
         double valor;
-        Long cpfRequisitante= concessao.getRequisitante();
-        Long cpfBeneficiado= concessao.getBeneficiado();
+        String cpfRequisitante= concessao.getRequisitante();
+        String cpfBeneficiado= concessao.getBeneficiado();
         double contribuicao = 0;
         Beneficio beneficio = procuraBeneficio(concessao.getBeneficioNome());
 
@@ -101,8 +101,9 @@ public class ConcessaoService{
             return ResponseEntity.notFound().build();
         }
 
-        JsonObject json = new Gson().fromJson(connection.createGetRequest(Long.toString(cpfRequisitante))
-                , JsonObject.class);
+        String json_connection = connection.createGetRequest(cpfRequisitante);
+        System.out.println("JSON CONNECTION ======= "+json_connection);
+        JsonObject json = new Gson().fromJson(json_connection, JsonObject.class);
         try {
             tempo = json.get("tempoContribuicaoMeses").getAsLong();
             contribuicao = json.get("totalContribuidoAjustado").getAsDouble();
@@ -125,12 +126,12 @@ public class ConcessaoService{
     }
 
 
-    public boolean adicionar(Long cpfRequisitante,
-                                            Long cpfBeneficiado, double valor,
+    public boolean adicionar(String cpfRequisitante,
+                                            String cpfBeneficiado, double valor,
                                             Beneficio beneficio){
 
         Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(),
-                cpfRequisitante, cpfBeneficiado, LocalDate.now(), valor,
+                Long.valueOf(cpfRequisitante), Long.valueOf(cpfBeneficiado), LocalDate.now(), valor,
                 true, beneficio);
 
         concessaoRepository.save(concessaoAutorizada);

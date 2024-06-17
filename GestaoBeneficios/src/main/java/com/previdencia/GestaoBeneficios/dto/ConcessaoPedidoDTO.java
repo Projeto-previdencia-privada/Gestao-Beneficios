@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConcessaoPedidoDTO {
-    private long requisitante;
-    private long beneficiado;
+    private String requisitante;
+    private String beneficiado;
     private String beneficioNome;
 }

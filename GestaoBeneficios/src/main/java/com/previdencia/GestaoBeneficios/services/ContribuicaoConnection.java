@@ -16,6 +16,7 @@ public class ContribuicaoConnection implements Connection{
         String apiConnection=dotenv.get("HOST");
         String url= "http://"+apiConnection+"/contribuintes/consultar/"+requisitante;
         try {
+            System.out.println("\n\n\n\n\n\n URL ========"+url);
             return restTemplate.getForObject(url, String.class);
         }
         catch (RestClientException e) {

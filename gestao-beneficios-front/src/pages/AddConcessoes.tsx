@@ -59,7 +59,7 @@ const AddConcessoesPage = () =>{
             method: "GET",
             headers: {
                 'Accept': '*/*',
-                'Access-Control-Allow-Origin': 'https://'+host+':'+port+'/'
+                'Access-Control-Allow-Origin': 'http://'+host+':'+port+'/'
             },
             mode: "cors",
             cache: "default",
@@ -69,12 +69,12 @@ const AddConcessoesPage = () =>{
     const handleSubmit = () =>{
         setConcessaoEnvio({requisitante: concessao.requisitante, beneficiado: concessao.beneficiado, beneficioNome: beneficioEscolhido})
         console.log(concessaoEnvio)
-        fetch('http://'+host_backend+':'+port_backend+'/api/concessao/'+concessaoEnvio.requisitante, {
+        fetch('http://'+host_backend+':'+port_backend+'/api/concessao', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'https://'+host+':'+port+'/'
+                'Access-Control-Allow-Origin': 'http://'+host+':'+port+'/'
             }, mode: "cors", cache: "default", body: JSON.stringify(concessaoEnvio)
         })
     }
