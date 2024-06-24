@@ -1,0 +1,13 @@
+services:
+  develop:
+    container_name: develop_front
+    build:
+      context: .
+      target: development
+    ports:
+      - "5300:5300"
+    volumes:
+      - node_modules:/app/node_modules
+
+volumes:
+  node_modules:

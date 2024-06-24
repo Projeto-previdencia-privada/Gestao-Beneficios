@@ -9,7 +9,7 @@ const Menu = () => {
       id: 1,
       icon: 'home',
       name: 'Página Inicial',
-      url: '/',
+      url: 'http://localhost:8090/',
       isSpaLinkBehavior: true,
     },
     {
@@ -55,6 +55,13 @@ const Menu = () => {
           url: '/concessao',
         }
       ]
+    },
+    {
+      id:9,
+      icon: 'info',
+      name: 'Info',
+      isSpaLinkBehavior: true,
+      url: '/',
     }
   ]
 

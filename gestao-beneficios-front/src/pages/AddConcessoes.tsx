@@ -15,11 +15,6 @@ type concessaoEnvio = {
     beneficiado: string | ''
     beneficioNome: string | ''
 }
-
-const concessoes: dataConcessao={
-    requisitante:'',
-    beneficiado:'',
-}
 const inputError: dataConcessao={
     requisitante:'',
     beneficiado:'',
@@ -30,25 +25,29 @@ const concessaoEnvios: concessaoEnvio={
     beneficioNome: '',
 }
 
-
-
-
 const host: string | undefined = import.meta.env.VITE_HOST
 const port: string | undefined = import.meta.env.VITE_PORT
 const host_backend: string | undefined = import.meta.env.VITE_HOST_BACKEND
 const port_backend: string | undefined = import.meta.env.VITE_PORT_BACKEND
 
-
 const AddConcessoesPage = () =>{
     const [beneficios, setBeneficios] = useState<dataBeneficio[]>([])
-    const [concessao, setConcessao] = useState<dataConcessao>(concessoes)
     const [search, setSearch] = useState('')
     const [err, setErr] = useState<dataConcessao>(inputError)
-    const [beneficioEscolhido, setBeneficioEscolhido] = useState('')
     const [concessaoEnvio, setConcessaoEnvio] = useState<concessaoEnvio>(concessaoEnvios)
+    const [message, setMessage] = useState({message:'', state: '', show: false})
 
 
     const beneficiosFiltered = beneficios.filter((beneficio)=> beneficio.nome.startsWith(search))
+
+    const manageMessage = (response: Response) =>{
+        if(response.status === 202){
+            setMessage({message:'Concessao registrada nos sistema', show: true, state: "success"})
+        }
+        else {
+            setMessage({message: 'Erro no cadastro da concessao', show: true, state: "danger"})
+        }
+    }
 
     useEffect(()=>{
         getBeneficios()
@@ -66,22 +65,20 @@ const AddConcessoesPage = () =>{
         }).then(response => response.json()).then(data => setBeneficios(data))
     }
 
-    const handleSubmit = () =>{
-        setConcessaoEnvio({requisitante: concessao.requisitante, beneficiado: concessao.beneficiado, beneficioNome: beneficioEscolhido})
-        console.log(concessaoEnvio)
-        fetch('http://'+host_backend+':'+port_backend+'/api/concessao', {
+    const handleSubmit =() => {
+        fetch('http://' + host_backend + ':' + port_backend + '/api/concessao', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'http://'+host+':'+port+'/'
+                'Access-Control-Allow-Origin': 'http://' + host + ':' + port + '/'
             }, mode: "cors", cache: "default", body: JSON.stringify(concessaoEnvio)
-        })
+        }).then(response => manageMessage(response))
     }
 
     const handleChange=(variable: string, data: string) => {
         validateFields(variable, data)
-        setConcessao({...concessao, [variable]: data})
+        setConcessaoEnvio({...concessaoEnvio, [variable]: data})
     }
 
     const validateFields=(variable: string, input: string)=>{
@@ -106,9 +103,14 @@ const AddConcessoesPage = () =>{
     }
     return(
         <>
-
             <h1>Concessoes</h1>
             <h3>Solicitar Concessao</h3>
+            {message.show && (<br-message
+                state={message.state}
+                closable={"true"}
+                show-icon="true"
+                message={message.message}
+            ></br-message>)}
 
             <Input
                 id={"requisitante-input"}
@@ -169,7 +171,7 @@ const AddConcessoesPage = () =>{
                     list={beneficiosFiltered}
                     subText={"Escolha somente um beneficio:"}
                     groupName={"beneficios"}
-                    onChange={e => setBeneficioEscolhido(e.target.value)}
+                    onChange={e => handleChange("beneficioNome", e.target.value)}
                 />
             </br-modal>
 

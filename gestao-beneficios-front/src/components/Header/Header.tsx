@@ -1,4 +1,7 @@
 import { useState } from 'react'
+
+const home: string = "http://localhost:8090/"
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(true)
 
@@ -6,11 +9,12 @@ const Header = () => {
     setIsOpen(!isOpen)
   }
 
+
   const title = 'Regime Próprio de Previdência Social'
   const signature = 'Sistema de Gestao de Beneficios'
   const image = {
-    src: '/bibliotecas/wc/govbr-ds-wc-quickstart-react/logo-react.png',
-    alt: 'Logo de exemplo',
+    src: '//upload.wikimedia.org/wikipedia/commons/thumb/1/11/Gov.br_logo.svg/250px-Gov.br_logo.svg.png',
+    alt: 'Logo de Gov.br',
   }
 
   const links = [{}
@@ -35,9 +39,9 @@ const Header = () => {
       has-menu="true"
       has-title-link="true"
       id="header"
-      image= 'https://play-lh.googleusercontent.com/1C3J4NDQbo3k8BBZswaPcaW_8IGouIsXvUVPBR_Bp7mVFplOXMtGGGF3W4o5V0g5DO0M'
+      image= '//upload.wikimedia.org/wikipedia/commons/thumb/1/11/Gov.br_logo.svg/250px-Gov.br_logo.svg.png'
       signature={signature}
-      title-link-url="/bibliotecas/wc/govbr-ds-wc-quickstart-react/"
+      title-link-url={home}
       title={title}
     >
       <div slot="headerMenu">
