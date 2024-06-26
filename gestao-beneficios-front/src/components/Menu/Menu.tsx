@@ -9,7 +9,7 @@ const Menu = () => {
       id: 1,
       icon: 'home',
       name: 'Página Inicial',
-      url: 'http://192.168.17.8:8090/',
+      url: 'http://192.168.37.8:8090/',
       isSpaLinkBehavior: true,
     },
     {

@@ -44,9 +44,13 @@ const AddConcessoesPage = () =>{
         if(response.status === 202){
             setMessage({message:'Concessao registrada nos sistema', show: true, state: "success"})
         }
-        else {
-            setMessage({message: 'Erro no cadastro da concessao', show: true, state: "danger"})
+        else if(response.status === 403) {
+            setMessage({message: 'Tempo insuficiente de contribuição para o benefício', show: true, state: "danger"})
         }
+        else {
+            setMessage({message: 'Erro no cadastro da concessão', show: true, state: "danger"})
+        }
+
     }
 
     useEffect(()=>{
