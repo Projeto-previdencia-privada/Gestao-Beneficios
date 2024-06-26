@@ -40,10 +40,10 @@ public class ConcessaoController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/soma/{cpf}")
-    public ResponseEntity<String> GetSoma(@PathVariable Long cpf) {
+    public ResponseEntity<String> GetSoma(@PathVariable String cpf) {
         CPFValidator cpfValidator = new CPFValidator();
         try {
-            cpfValidator.assertValid(String.valueOf(cpf));
+            cpfValidator.assertValid(cpf);
         }
         catch (InvalidStateException e){
             return ResponseEntity.badRequest().body("Erro na validacao do CPF:\n"

@@ -4,7 +4,7 @@ const Breadcrumb = () => {
 
   let isHome = false
   let label
-  let links: any[] = [
+  const links: any[] = [
     {
       label: 'Página Inicial',
       url: '/',
@@ -24,7 +24,7 @@ const Breadcrumb = () => {
     active: true,
   })
 
-  if (location.pathname === '/bibliotecas/wc/govbr-ds-wc-quickstart-react/') isHome = true
+  if (location.pathname === '/') isHome = true
 
   return !isHome ? <br-breadcrumb label="Breadcrumb" links={JSON.stringify(links)}></br-breadcrumb> : null
 }

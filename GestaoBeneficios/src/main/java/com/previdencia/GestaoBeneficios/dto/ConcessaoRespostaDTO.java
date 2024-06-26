@@ -13,8 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ConcessaoRespostaDTO {
     private UUID id;
-    private long requisitante;
-    private long beneficiado;
+    private String requisitante;
+    private String beneficiado;
     private LocalDate data;
     private double valor;
     private boolean status;

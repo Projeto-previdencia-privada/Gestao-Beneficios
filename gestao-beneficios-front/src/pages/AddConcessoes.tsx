@@ -86,6 +86,9 @@ const AddConcessoesPage = () =>{
             if(input.length==0){
                 setErr({...err, requisitante:'Campo Requisitante Vazio'})
             }
+            else if(!/^\d+$/.test(input)){
+                setErr({...err, requisitante:'Coloque apenas números no campo'})
+            }
             else {
                 setErr({...err, requisitante:''})
             }
@@ -95,6 +98,9 @@ const AddConcessoesPage = () =>{
             if(input.length==0){
                 setErr({...err,  beneficiado:'Campo Beneficiado Vazio'})
             }
+            else if(!/^\d+$/.test(input)){
+                setErr({...err, requisitante:'Coloque apenas números no campo'})
+            }
             else {
                 setErr({...err, beneficiado:''})
             }
@@ -103,8 +109,8 @@ const AddConcessoesPage = () =>{
     }
     return(
         <>
-            <h1>Concessoes</h1>
-            <h3>Solicitar Concessao</h3>
+            <h1>Concessões</h1>
+            <h3>Solicitar Concessão</h3>
             {message.show && (<br-message
                 state={message.state}
                 closable={"true"}
@@ -157,8 +163,8 @@ const AddConcessoesPage = () =>{
                     id={"nome-input"}
                     hasButton={true}
                     buttonClass={"fas fa-search"}
-                    label={"Procurar Beneficio"}
-                    placeholder={"Nome do Beneficio"}
+                    label={"Procurar Benefício"}
+                    placeholder={"Nome do Benefício"}
                     type={"search"}
                     onChange={(e) => {
                         setSearch(e.target.value)
@@ -167,9 +173,9 @@ const AddConcessoesPage = () =>{
                     mask={''}
                 />
                 <Radio
-                    title={"Beneficios"}
+                    title={"Benefícios"}
                     list={beneficiosFiltered}
-                    subText={"Escolha somente um beneficio:"}
+                    subText={"Escolha somente um benefício:"}
                     groupName={"beneficios"}
                     onChange={e => handleChange("beneficioNome", e.target.value)}
                 />

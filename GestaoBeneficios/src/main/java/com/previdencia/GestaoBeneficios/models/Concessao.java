@@ -30,10 +30,10 @@ public class Concessao {
     private UUID uuid;
 
     @Column(nullable=false,length=11)
-    private long requisitante;
+    private String requisitante;
 
     @Column(nullable=false,length=11)
-    private long beneficiado;
+    private String beneficiado;
 
     @Column(nullable=false,length=10)
     private LocalDate data;
@@ -49,7 +49,7 @@ public class Concessao {
     private Beneficio beneficio;
 
 
-    public Concessao(UUID uuid, long requisitante, long beneficiado, LocalDate data,
+    public Concessao(UUID uuid, String requisitante, String beneficiado, LocalDate data,
                      double valor, boolean status, Beneficio beneficio) {
         this.uuid = uuid;
         this.requisitante = requisitante;

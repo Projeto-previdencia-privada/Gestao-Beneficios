@@ -53,7 +53,7 @@ public class ConcessaoService{
      * @return Soma das concessoes
      * @since 1.0
      */
-    public ResponseEntity<String> somar(Long cpf){
+    public ResponseEntity<String> somar(String cpf){
         List<Concessao> lista = concessaoRepository.findAllByRequisitante(cpf);
         double soma = 0;
         for(Concessao concessao : lista) {
@@ -134,7 +134,7 @@ public class ConcessaoService{
                                             Beneficio beneficio){
 
         Concessao concessaoAutorizada = new Concessao(UUID.randomUUID(),
-                Long.valueOf(cpfRequisitante), Long.valueOf(cpfBeneficiado), LocalDate.now(), valor,
+                cpfRequisitante, cpfBeneficiado, LocalDate.now(), valor,
                 true, beneficio);
 
         concessaoRepository.save(concessaoAutorizada);

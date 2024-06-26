@@ -84,8 +84,8 @@ const Concessoes = () =>{
                 id={"nome-input"}
                 hasButton={true}
                 buttonClass={"fas fa-search"}
-                label={"Procurar Concessao"}
-                placeholder={"Nome do Requisitante"}
+                label={"Procurar Concessão"}
+                placeholder={"CPF do Requisitante"}
                 type={"search"}
                 onChange={(e) => {
                     setSearch(e.target.value)
@@ -93,7 +93,7 @@ const Concessoes = () =>{
                 classname={''}
                 mask={''}
             />
-            <br-list title="Lista de Concessoes" id="submited-users" data-toggle="true">
+            <br-list title="Lista de Concessões" id="submited-users" data-toggle="true">
                 {concessoesBeneficiadoFiltered.map((concessao) => (
                     (concessao.status && <br-item title={'CPF '+concessao.requisitante+ ' --->  '+ concessao.beneficioNome} hover key={concessao.id}>
                         <br-list>

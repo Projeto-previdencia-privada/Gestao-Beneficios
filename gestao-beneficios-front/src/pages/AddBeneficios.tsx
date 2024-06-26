@@ -75,6 +75,9 @@ const FormPage = () =>{
             if(input.length==0){
                 setErr({...err, tempoMinimo:'Tempo Vazio'})
             }
+            else if(!/^\d+$/.test(input)){
+                setErr({...err, tempoMinimo:'Coloque apenas números no campo'})
+            }
             else {
                 setErr({...err, tempoMinimo:''})
             }
@@ -83,6 +86,9 @@ const FormPage = () =>{
         if(variable === 'valorPercentual'){
             if(input.length==0){
                 setErr({...err, valorPercentual:'Valor Vazio'})
+            }
+            else if(isNaN(parseFloat(input))){
+                setErr({...err, valorPercentual:'Coloque apenas números no campo'})
             }
             else {
                 setErr({...err, valorPercentual:''})
@@ -101,8 +107,8 @@ const FormPage = () =>{
 
     return (
         <>
-            <h1>Beneficios</h1>
-            <h3>Cadastrar Beneficios</h3>
+            <h1>Benefícios</h1>
+            <h3>Cadastrar Benefícios</h3>
             {message.show && (<br-message
                 state={message.state}
                 closable={"true"}
@@ -115,7 +121,7 @@ const FormPage = () =>{
                   hasButton={false}
                   buttonClass={""}
                   label={"Nome"}
-                  placeholder={"Nome do Beneficio"}
+                  placeholder={"Nome do Benefício"}
                   type={"search"}
                   onChange={(e)=>{handleChange("nome", e.target.value)}}
                   classname={''}
@@ -131,8 +137,8 @@ const FormPage = () =>{
                   id={"tempo-input"}
                   hasButton={false}
                   buttonClass={""}
-                  label={"Tempo Minimo"}
-                  placeholder={"Tempo Minimo de Contribuicao"}
+                  label={"Tempo Mínimo"}
+                  placeholder={"Tempo Minimo de Contribuição"}
                   type={"search"}
                   onChange={(e)=>{handleChange("tempoMinimo", e.target.value)}}
                   classname={''}
@@ -149,7 +155,7 @@ const FormPage = () =>{
                   hasButton={false}
                   buttonClass={""}
                   label={"Valor"}
-                  placeholder={"Valor Percentual do Beneficio"}
+                  placeholder={"Valor Percentual do Benefício"}
                   type={"search"}
                   onChange={(e)=>{handleChange("valorPercentual", e.target.value)}}
                   classname={''}

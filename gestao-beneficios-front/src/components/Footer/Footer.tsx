@@ -6,18 +6,44 @@ const Footer = () => {
   }
   const categorias =[
     {
-      title: 'Outras Gestoes RPPS',
+      title: 'Navegação',
       items: [
         {
-          title: 'Gestao de Contribuintes',
+          title: 'Adicionar Benefícios',
+          href: '/beneficio/cadastrar'
+        },
+        {
+          title: 'Listar Benefícios',
+          href: '/beneficio'
+        },
+        {
+          title: 'Conceder Concessão',
+          href: '/concessao/cadastrar'
+        },
+        {
+          title: 'Listar Concessões',
+          href: '/concessao'
+        },
+        {
+          title: 'Info',
+          href: '/'
+        }
+
+      ]
+    },
+    {
+      title: 'Serviços',
+      items: [
+        {
+          title: 'Gestão de Contribuintes',
           href: 'http://192.168.37.8:8090/login'
         },
         {
-          title: 'Gestao de Contribuicoes',
+          title: 'Gestão de Contribuições',
           href: 'http://192.168.37.8:3000'
         },
         {
-          title: 'Gestao de Emprestimos',
+          title: 'Gestão de Empréstimos',
           href: 'http://192.168.37.8:8080'
         }
       ]
